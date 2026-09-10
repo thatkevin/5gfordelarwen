@@ -1,5 +1,5 @@
 /* ============================================================
-   DALARWEN 5G LIBERATION FRONT — SHARED SCRIPTS
+   DALARWEN 5G LIBERATION FRONT ⸻ SHARED SCRIPTS
    Countdown, nav, guestbook, petition, odometer, matrix rain,
    the spinny circle of despair, and assorted nonsense.
    ============================================================ */
@@ -199,7 +199,7 @@ function svgEl(tag,attrs){
   return e;
 }
 
-/* Animated SVG "SIGNAL PROPAGATION MATRIX" — a heatmap that pulses. */
+/* Animated SVG "SIGNAL PROPAGATION MATRIX" ⸻ a heatmap that pulses. */
 function buildSignalMatrix(id,rows,cols){
   var host=document.getElementById(id); if(!host) return;
   rows=rows||10; cols=cols||16;
@@ -218,7 +218,7 @@ function buildSignalMatrix(id,rows,cols){
   var t=0, cx=cols/2, cy=rows/2;
   function frame(){
     t+=0.18;
-    // moving source(s) — three "towers" orbit and radiate
+    // moving source(s) ⸻ three "towers" orbit and radiate
     var srcs=[
       [cx+Math.cos(t)*cols*0.35, cy+Math.sin(t*0.9)*rows*0.4],
       [cols*0.2+Math.sin(t*1.3)*2, rows*0.5+Math.cos(t)*2],

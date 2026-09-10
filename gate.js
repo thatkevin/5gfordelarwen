@@ -1,5 +1,5 @@
 /* ============================================================
-   DALARWEN 5G LIBERATION FRONT — THE DOORSTEP
+   DALARWEN 5G LIBERATION FRONT ⸻ THE DOORSTEP
    A cosmetic "for mates only" password gate. NOT real security:
    this is a static public site, the password lives in this file.
    Load this in <head> BEFORE the page renders.
@@ -47,7 +47,7 @@
         '</div>'+
         '<div id="dgateerr" style="font-family:\'Comic Sans MS\',cursive;font-size:14px;color:#FF0033;font-weight:bold;min-height:20px;margin-top:12px;"></div>'+
         '<div style="font-family:\'Times New Roman\',serif;font-size:11px;color:#888;margin-top:10px;">'+
-          '(psst &#151; it is a joke among mates. this doorstep is cosmetic, not real security.)</div>'+
+          '(psst &#11835; it is a joke among mates. this doorstep is cosmetic, not real security.)</div>'+
       '</div>';
     document.body.appendChild(g);
 

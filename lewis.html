@@ -9,7 +9,7 @@
 </head>
 <body bgcolor="#000000" text="#00FFFF" link="#FFFF00" vlink="#00FFFF" alink="#FF0000"
       background="assets/stars.gif" style="background:#000000 url('assets/stars.gif') repeat;">
-<marquee scrollamount="9" bgcolor="#000022"><font face="Arial Black" size="4" color="#00FFFF">&#127909; LEWIS HAS CONTENT TO POST AND NO BARS TO POST IT &#151; THIS IS A HUMANITARIAN CRISIS &#127909;</font></marquee>
+<marquee scrollamount="9" bgcolor="#000022"><font face="Arial Black" size="4" color="#00FFFF">&#127909; LEWIS HAS CONTENT TO POST AND NO BARS TO POST IT &#11835; THIS IS A HUMANITARIAN CRISIS &#127909;</font></marquee>
 <center>
 <div id="navbar"></div>
 
@@ -38,14 +38,14 @@
 <table border="3" cellpadding="12" width="94%" bgcolor="#0A0016" bordercolor="#FF00FF" style="border:3px outset #FF00FF;">
 <tr><td align="center">
 <font face="Arial Black" size="5" color="#FF00FF">&#128228; LIVE UPLOAD STATUS</font><br>
-<font face="Courier New" size="3" color="#FFFFFF">lewis_newyear_FINAL_v9_REALFINAL.mov &#151; 4.2 GB</font>
+<font face="Courier New" size="3" color="#FFFFFF">lewis_newyear_FINAL_v9_REALFINAL.mov &#11835; 4.2 GB</font>
 <br><br>
 <table border="2" cellpadding="0" cellspacing="0" width="80%" bordercolor="#00FF00" style="background:#001100;">
 <tr><td bgcolor="#00FF00" width="1%" id="upbar" style="width:1%;">&nbsp;</td><td>&nbsp;</td></tr>
 </table>
 <br>
 <font face="Courier New" size="5" color="#00FF00"><b><span id="uppct">1%</span></b></font>
-<font face="Comic Sans MS" size="3" color="#FFFF00"><b><span id="upmsg"> &#151; uploading... estimated time remaining: 4,847 hours</span></b></font>
+<font face="Comic Sans MS" size="3" color="#FFFF00"><b><span id="upmsg"> &#11835; uploading... estimated time remaining: 4,847 hours</span></b></font>
 <br><br>
 <input type="button" class="retrobtn cyan" value=" &#128260; RETRY UPLOAD (IT WON'T HELP) " onclick="retryUpload()">
 <input type="button" class="retrobtn" value=" &#128225; PRETEND WE HAVE 15 TOWERS " onclick="grantTowers()">
@@ -86,7 +86,7 @@ None of them can leave Dalarwen. They sit on his phone like caged birds, staring
 var granted=false;
 function retryUpload(){
   var el=document.getElementById("upmsg");
-  var quips=[" &#151; still 1%. classic."," &#151; jumped to 1%. wait, that's the same."," &#151; connection held toward Belgium. lost again."," &#151; the spinny circle intensifies."];
+  var quips=[" &#11835; still 1%. classic."," &#11835; jumped to 1%. wait, that's the same."," &#11835; connection held toward Belgium. lost again."," &#11835; the spinny circle intensifies."];
   el.innerHTML=quips[Math.floor(Math.random()*quips.length)];
   logLine("$ retry --file lewis_newyear_FINAL_v9.mov");
   logLine("  > seeking signal... none found. (0.000 bars)");
@@ -95,7 +95,7 @@ function grantTowers(){
   granted=true;
   document.getElementById("upbar").style.width="100%";
   document.getElementById("uppct").innerHTML="100%";
-  document.getElementById("upmsg").innerHTML=" &#151; &#9989; UPLOAD COMPLETE. LEWIS IS LIVE. THE PEOPLE REJOICE.";
+  document.getElementById("upmsg").innerHTML=" &#11835; &#9989; UPLOAD COMPLETE. LEWIS IS LIVE. THE PEOPLE REJOICE.";
   logLine("$ towers --build 15");
   logLine("  > erecting... [##############] 15/15 HUMMING");
   logLine("  > signal restored. LOSSLESS.");
