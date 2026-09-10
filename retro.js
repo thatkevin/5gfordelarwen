@@ -208,6 +208,7 @@ function armEasterEggs(){
     if(k&&k.length===1){ buf=(buf+k).toUpperCase().slice(-12); }
     if(buf.indexOf("ISAMSJ")>=0){ buf=""; location.href="isamsj.html"; }
     if(buf.indexOf("JENCORP")>=0){ buf=""; location.href="jencorp.html"; }
+    if(buf.indexOf("LEWIS")>=0){ buf=""; location.href="free-up-lewis.html"; }
   });
 }
 
