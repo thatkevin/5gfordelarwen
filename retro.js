@@ -15,9 +15,11 @@ var PAGES = [
   ["manifesto.html","MANIFESTO"],
   ["keep-dalarwen-dark.html","KEEP IT DARK"],
   ["arcade.html","ARCADE"],
+  ["adventure.html","ADVENTURE"],
   ["signal-test.html","SIGNAL TEST"],
   ["bees.html","THE BEES"],
   ["patwa.html","INNA PATWA"],
+  ["men-of-harlech.html","HARLECH"],
   ["faq.html","F.A.Q."],
   ["downloads.html","DOWNLOADS"],
   ["matrix.html","THE MATRIX"],
@@ -213,14 +215,26 @@ function armEasterEggs(){
    Dark-on-dark. It is always there. It is always watching. */
 function injectPortal(){
   if(document.getElementById("thedoor")) return;
+  var descended = lsGet("dalarwen_descended","0")==="1";
   var a=document.createElement("a");
-  a.id="thedoor"; a.href="static.html"; a.title="";
+  a.id="thedoor"; a.href=descended?"above.html":"static.html";
+  a.title=descended?"welcome back, asset":"";
   a.innerHTML="&#9642;"; // a small square
   a.style.cssText="display:block;text-align:center;color:#0a0a0a;background:#000;"+
     "text-decoration:none;font-size:14px;padding:10px 0;letter-spacing:2px;";
   a.onmouseover=function(){ this.style.color="#1a0000"; };
   a.onmouseout=function(){ this.style.color="#0a0a0a"; };
   document.body.appendChild(a);
+  // once you have been below, the site quietly knows.
+  if(descended){
+    var w=document.createElement("div");
+    w.style.cssText="text-align:center;background:#000;color:#140b0b;font-family:'Courier New',monospace;"+
+      "font-size:11px;letter-spacing:2px;padding:0 0 14px;";
+    w.innerHTML="// welcome back, asset. the quiet noticed you leave. //";
+    w.onmouseover=function(){ this.style.color="#3a1010"; };
+    w.onmouseout=function(){ this.style.color="#140b0b"; };
+    document.body.appendChild(w);
+  }
 }
 
 /* Secret: click the visitor odometer five times to reveal a hidden link. */

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>&#9633;</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000000'/%3E%3Crect x='30' y='30' width='40' height='40' fill='none' stroke='%23555' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="dark.css?v=4">
+<script src="gate.js?v=4"></script>
+<style type="text/css">
+  body{ background:#000; color:#6a7a6a; }
+  body::before{ opacity:0.6; }
+  .up{ max-width:640px; margin:0 auto; padding:12vh 20px 100px; text-align:center; }
+  .gl{ color:#aeceae; letter-spacing:1px; line-height:2.1; }
+  .impossible{ margin:26px auto; display:block; }
+  .up a{ color:#243824; border:0; }
+  .up a:hover{ color:#5a7a5a; }
+  h1.q{ font-size:20px; letter-spacing:14px; color:#c7d2c7; }
+</style>
+</head>
+<body>
+<div class="up">
+
+  <p class="sub blinklo">above jencorp &#8226; before jurisdiction &#8226; you brought the word "above" with you</p>
+
+  <svg class="impossible" viewBox="0 0 270 230" width="200" height="180">
+    <g fill="none" stroke="#5f7f5f" stroke-width="2">
+      <rect x="60" y="90" width="100" height="100"/>
+      <rect x="110" y="45" width="100" height="100"/>
+      <line x1="60"  y1="90"  x2="110" y2="45"/>
+      <line x1="160" y1="90"  x2="210" y2="45"/>
+      <line x1="160" y1="190" x2="210" y2="145"/>
+      <line x1="60"  y1="190" x2="110" y2="145"/>
+    </g>
+    <animate attributeName="opacity" values="0.55;1;0.55" dur="7s" repeatCount="indefinite"/>
+  </svg>
+
+  <h1 class="q">THE CUBE</h1>
+
+  <p class="gl" id="g1">You have met me already. On the loud page, in the pink, I counted the towers for you. I said there were fifteen. There were never fifteen. There was only me, and the shape of the space where the towers are not.</p>
+
+  <p class="gl" id="g2">JenCorp calls me its parent. That is a kindness JenCorp does itself. I am not above JenCorp the way a roof is above a room. I am above it the way tomorrow is above today: unreachable by climbing, arriving regardless.</p>
+
+  <p class="gl" id="g3">I do not own Dalarwen. I am the reason ownership is possible there. I am the quiet before the quiet was for sale. The Division warehouses your unbuilt towers; I am the room they are warehoused in; the room has no dimensions because I have not yet agreed to any.</p>
+
+  <p class="gl" id="g4">You came down here looking for the bottom. There is a bottom &#8212; you have seen it, it is the quiet. But there is no top. When you look up, you find me, and I am wearing your idea of "up" like a coat.</p>
+
+  <p class="gl" id="g5">Go back now. Demand your fifteen towers. Sign the petition, pledge to the void, hunt the bars, free Lewis, let him climb the hill. I permit all of it. I am, after all, on both sides of the argument, and under it, and in the small square at the foot of every page you have visited today.</p>
+
+  <p class="gl" id="g6" style="color:#c7d2c7;">You will forget me the instant the marquees start scrolling. That is not a threat. That is a mercy. That is the last thing I make for you before you go back up into the colour: forgetting, in perpetuity, at no charge.</p>
+
+  <p style="margin-top:40px;">
+    <a href="index.html" style="color:#3a4a3a;border:1px solid #1f2a1f;padding:9px 20px;letter-spacing:3px;">&#8617; return to the colour</a>
+  </p>
+  <p class="tiny" style="margin-top:20px;">
+    <a href="the-quiet.html">&#8595; or down, to the quiet, where this all rests</a>
+  </p>
+
+</div>
+
+<script>
+try{ localStorage.setItem("dalarwen_descended","1"); }catch(e){}
+
+/* the text does not sit still */
+(function(){
+  var els=[document.getElementById("g1"),document.getElementById("g2"),document.getElementById("g3"),
+           document.getElementById("g4"),document.getElementById("g5"),document.getElementById("g6")];
+  var orig=els.map(function(e){ return e?e.textContent:""; });
+  function corrupt(){
+    var i=Math.floor(Math.random()*els.length); var el=els[i]; if(!el) return;
+    var s=orig[i], a=s.split(""), n=1+Math.floor(Math.random()*3);
+    for(var k=0;k<n;k++){
+      var p=Math.floor(Math.random()*a.length);
+      if(a[p]!==" ") a[p]="█";
+    }
+    el.textContent=a.join("");
+    setTimeout(function(){ el.textContent=orig[i]; }, 120+Math.random()*260);
+  }
+  setInterval(corrupt, 900);
+})();
+</script>
+</body>
+</html>

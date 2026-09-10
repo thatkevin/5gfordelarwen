@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>&#8212; the corridor &#8212;</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="dark.css?v=4">
+<script src="gate.js?v=4"></script>
+<style type="text/css">
+  body{ background:#040404; }
+  .cor{ max-width:640px; margin:0 auto; padding:10vh 20px 90px; text-align:center; }
+  /* one-point perspective corridor drawn in CSS */
+  .tunnel{ position:relative; width:100%; height:220px; margin:0 auto 20px; overflow:hidden;
+           border:1px solid #141414; background:radial-gradient(ellipse at 50% 50%, #0c0f0c 0%, #000 70%); }
+  .ring{ position:absolute; left:50%; top:50%; border:1px solid #23331f;
+         transform:translate(-50%,-50%); }
+  #steps{ color:#9ec99e; font-size:26px; letter-spacing:3px; }
+  .obs{ color:#7f957f; min-height:3em; margin:16px auto; max-width:520px; line-height:1.8; }
+  .go{ font-family:"Courier New",monospace; font-size:16px; letter-spacing:3px; background:#0c120c;
+       color:#9ec99e; border:1px solid #2a3a2a; padding:12px 28px; cursor:pointer; }
+  .go:hover{ background:#12200f; color:#c7e7c7; }
+  .turn{ display:block; margin-top:40px; font-size:11px; color:#243824; }
+</style>
+</head>
+<body>
+<div class="cor">
+
+  <p class="sub blinklo">infinite walks&#8482; &#8226; route: DALARWEN &#8226; status: ongoing</p>
+
+  <div class="tunnel" id="tunnel"></div>
+
+  <p class="mono-sm">steps taken on this walk:</p>
+  <p id="steps">0</p>
+
+  <p class="obs" id="obs">The path leads uphill. There is, they say, one bar at the top. You have been told this before.</p>
+
+  <p><button type="button" class="go" onclick="walk()">KEEP WALKING &#8250;</button></p>
+
+  <a class="turn" href="infinite-walks.html">&#8249; turn back (the route does not acknowledge turning back)</a>
+  <a class="turn" href="index.html" style="color:#1a1a1a;">&#8249; or leave entirely, while you still count as someone who could</a>
+
+</div>
+
+<script>
+function lg(k,d){ try{var v=localStorage.getItem(k);return v===null?d:v;}catch(e){return d;} }
+function ls(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
+
+/* draw the receding rings */
+(function(){
+  var t=document.getElementById("tunnel");
+  for(var i=0;i<9;i++){
+    var r=document.createElement("div"); r.className="ring";
+    var s=20+i*26;
+    r.style.width=s+"%"; r.style.height=(s*0.9)+"%";
+    r.style.opacity=(0.15+i*0.09);
+    t.appendChild(r);
+  }
+})();
+
+var STEPS=parseInt(lg("dalarwen_steps","0"),10)||0;
+document.getElementById("steps").innerHTML=STEPS.toLocaleString();
+
+var EARLY=[
+  "The path leads uphill. There is one bar at the top. You have been told this before.",
+  "The trees thin. Then they thicken. Then they are the same trees.",
+  "You pass a stile. You are fairly sure you built it.",
+  "A red kite circles. It has been circling the whole time.",
+  "The next hill is closer now. The next hill is always closer now.",
+  "You check your phone. 0.000 bars. You knew that. You check anyway.",
+  "A caravan sits in the distance. It was not there. It is closer than the hill.",
+  "The forest road forks. Both forks are the road you are on."
+];
+var LATE=[
+  "You have walked further than the valley is long. The valley disagrees.",
+  "You recognise this bend. You recognise this bend. You recognise this bend.",
+  "Something is keeping count. It is not you. You gave up counting at "+ (STEPS>200?STEPS-137:63) +".",
+  "The map in your pocket now shows only a single looping line. You are the dot.",
+  "A Walk Warden files a report. The report is about you. The report is favourable.",
+  "You are not lost. To be lost you would need a place you were trying to reach.",
+  "The bar at the top of the hill is real. The top of the hill is not.",
+  "You could stop. Stopping is a service we also offer. Ask about the caravans."
+];
+var DEEP=[
+  "you understand now that the walk is not taking you anywhere because there is nowhere it is not.",
+  "you have always been on this walk. the house, the towers, the pink website: all of it happened between two steps.",
+  "keep walking. it is, genuinely, a lovely walk.",
+  "the quiet is just ahead. the quiet is just behind. the quiet is the ground."
+];
+function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+function walk(){
+  STEPS++; ls("dalarwen_steps",""+STEPS);
+  document.getElementById("steps").innerHTML=STEPS.toLocaleString();
+  var pool = STEPS<8?EARLY : STEPS<25?LATE : DEEP;
+  document.getElementById("obs").innerHTML=pick(pool);
+  if(STEPS===50){ document.getElementById("obs").innerHTML="&#9608;&#9608;&#9608; fifty steps. nobody watching would call this a walk any more. it is a condition. &#9608;&#9608;&#9608;"; }
+  if(STEPS>=100){ ls("dalarwen_descended","1"); }
+  // rings breathe a little each step
+  var rings=document.getElementsByClassName("ring");
+  for(var i=0;i<rings.length;i++){ rings[i].style.transform="translate(-50%,-50%) rotate("+(STEPS*2+i*4)+"deg)"; }
+}
+</script>
+</body>
+</html>
