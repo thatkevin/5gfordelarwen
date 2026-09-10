@@ -4,7 +4,7 @@
 
 The **official 5G Truth site** of the Dalarwen 5G Liberation Front.
 
-Dalarwen ⸻ a remote and beautiful house of mates ⸻ receives **0.000 bars** of signal.
+Dalarwen ⸻ a remote and beautiful house of pals ⸻ receives **0.000 bars** of signal.
 The OFFLINE INDUSTRIAL COMPLEX did this. We demand **15 (FIFTEEN) 5G towers**, erect
 and humming, **before New Year**, so that:
 
@@ -32,7 +32,7 @@ Best viewed at 800×600 in 256 colours on a hill facing Belgium.
 
 ## ⚠️ Disclaimer
 
-This is a joke among mates. No actual towers were harmed. Radiation is **not**
+This is a joke among pals. No actual towers were harmed. Radiation is **not**
 actually nutritious ⸻ please do not eat 5G. Not affiliated with any telecom,
 government, bee, or Belgium.
 

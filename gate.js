@@ -1,6 +1,6 @@
 /* ============================================================
    DALARWEN 5G LIBERATION FRONT ⸻ THE DOORSTEP
-   A cosmetic "for mates only" password gate. NOT real security:
+   A cosmetic "for pals only" password gate. NOT real security:
    this is a static public site, the password lives in this file.
    Load this in <head> BEFORE the page renders.
    ============================================================ */
@@ -32,9 +32,9 @@
       '<div style="border:6px ridge #FF00FF;background:#0A0016;padding:22px 26px;max-width:460px;box-shadow:0 0 40px #FF00FF;">'+
         '<div style="font-size:40px;line-height:1;">&#128274;</div>'+
         '<div style="font-family:Impact,\'Arial Black\',sans-serif;font-size:30px;color:#00FF00;letter-spacing:1px;margin:8px 0;">RESTRICTED AREA</div>'+
-        '<div style="font-family:Impact,\'Arial Black\',sans-serif;font-size:20px;color:#00FFFF;margin-bottom:4px;">FOR MATES ONLY</div>'+
+        '<div style="font-family:Impact,\'Arial Black\',sans-serif;font-size:20px;color:#00FFFF;margin-bottom:4px;">FOR PALS ONLY</div>'+
         '<div style="font-family:\'Comic Sans MS\',cursive;font-size:14px;color:#FFFFFF;margin:10px 0 10px;">'+
-          'The Cube guards the truth of Dalarwen.<br>Speak the password, mate.</div>'+
+          'The Cube guards the truth of Dalarwen.<br>Speak the password, pal.</div>'+
         '<div style="font-family:\'Comic Sans MS\',cursive;font-size:13px;color:#FFCC00;margin:0 0 14px;border:1px dashed #FFCC00;padding:6px;">'+
           '&#128161; <b>HINT:</b> the mega-corp that owns us all.<br>'+
           '<span style="color:#00FFFF;">(you know the one. close enough counts.)</span></div>'+
@@ -47,7 +47,7 @@
         '</div>'+
         '<div id="dgateerr" style="font-family:\'Comic Sans MS\',cursive;font-size:14px;color:#FF0033;font-weight:bold;min-height:20px;margin-top:12px;"></div>'+
         '<div style="font-family:\'Times New Roman\',serif;font-size:11px;color:#888;margin-top:10px;">'+
-          '(psst &#11835; it is a joke among mates. this doorstep is cosmetic, not real security.)</div>'+
+          '(psst &#11835; it is a joke among pals. this doorstep is cosmetic, not real security.)</div>'+
       '</div>';
     document.body.appendChild(g);
 
