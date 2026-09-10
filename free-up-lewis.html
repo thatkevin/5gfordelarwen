@@ -495,7 +495,7 @@ function frame(now){
 state="title"; buildLevel(); resetPlayer(60,396); cam=0; hearts=3; builtCount=0; upCount=0; frozen=false; respawnT=0;
 rain=[]; for(var i=0;i<150;i++){ rain.push({x:Math.random()*(VW+300)-150,y:Math.random()*VH,l:16+Math.random()*30,s:9+Math.random()*10,c:Math.random()<0.5?"#7dff9c":"#b57bff"}); }
 /* #demo: spawn beside an electric sheep for screenshots (undocumented dev aid) */
-if(location.hash.indexOf("demo")>=0){ startGame(); var s0=sheep[Math.min(2,sheep.length-1)]||sheep[0]; if(s0){ var top=s0.y+30; player.x=s0.x-64; player.y=top-player.h; player.checkX=player.x; player.checkY=player.y; cam=Math.max(0,Math.min(worldW-VW,player.x-VW*0.35)); } }
+if(location.hash.indexOf("demo")>=0){ startGame(); var s0=sheep[Math.min(2,sheep.length-1)]||sheep[0]; if(s0){ var top=s0.y+30; player.x=(s0.minx!=null?s0.minx:s0.x-40); player.y=top-player.h; player.vy=0; player.onGround=true; player.checkX=player.x; player.checkY=player.y; cam=Math.max(0,Math.min(worldW-VW,player.x-VW*0.4)); } }
 requestAnimationFrame(frame);
 })();
 </script>
