@@ -12,6 +12,11 @@ var PAGES = [
   ["radiation.html","RADIATION"],
   ["lewis.html","LEWIS HQ"],
   ["manifesto.html","MANIFESTO"],
+  ["arcade.html","ARCADE"],
+  ["signal-test.html","SIGNAL TEST"],
+  ["bees.html","THE BEES"],
+  ["faq.html","F.A.Q."],
+  ["downloads.html","DOWNLOADS"],
   ["matrix.html","THE MATRIX"],
   ["guestbook.html","GUESTBOOK"],
   ["webring.html","WEBRING"]
@@ -180,15 +185,53 @@ function typeTerminal(id,lines,done){
   step();
 }
 
-/* ---------- easter egg: type 5 five times ---------- */
-function armFiveEgg(){
-  var seq=0;
-  document.onkeydown=function(e){
-    e=e||window.event; var k=e.key||String.fromCharCode(e.keyCode);
-    if(k==="5"){ seq++; if(seq>=5){ document.body.style.animation="shim 0.4s linear infinite";
-      alert("MAXIMUM 5G ACHIEVED. ALL FIFTEEN TOWERS ARE NOW THEORETICALLY HUMMING."); seq=0; } }
-    else seq=0;
-  };
+/* ---------- easter eggs ----------
+   - type "5" five times: MAXIMUM 5G
+   - type the corp's name anywhere: a door opens
+*/
+function armEasterEggs(){
+  var fives=0, buf="";
+  document.addEventListener("keydown",function(e){
+    var k=e.key||String.fromCharCode(e.keyCode);
+    // 5x5
+    if(k==="5"){ fives++; if(fives>=5){ document.body.style.animation="shim 0.4s linear infinite";
+      alert("MAXIMUM 5G ACHIEVED. ALL FIFTEEN TOWERS ARE NOW THEORETICALLY HUMMING."); fives=0; } }
+    else fives=0;
+    // secret word buffer
+    if(k&&k.length===1){ buf=(buf+k).toUpperCase().slice(-12); }
+    if(buf.indexOf("ISAMSJ")>=0){ buf=""; location.href="isamsj.html"; }
+    if(buf.indexOf("JENCORP")>=0){ buf=""; location.href="jencorp.html"; }
+  });
+}
+
+/* A near-invisible portal, injected at the foot of every loud page.
+   Dark-on-dark. It is always there. It is always watching. */
+function injectPortal(){
+  if(document.getElementById("thedoor")) return;
+  var a=document.createElement("a");
+  a.id="thedoor"; a.href="static.html"; a.title="";
+  a.innerHTML="&#9642;"; // a small square
+  a.style.cssText="display:block;text-align:center;color:#0a0a0a;background:#000;"+
+    "text-decoration:none;font-size:14px;padding:10px 0;letter-spacing:2px;";
+  a.onmouseover=function(){ this.style.color="#1a0000"; };
+  a.onmouseout=function(){ this.style.color="#0a0a0a"; };
+  document.body.appendChild(a);
+}
+
+/* Secret: click the visitor odometer five times to reveal a hidden link. */
+function armOdometerSecret(){
+  var el=document.getElementById("odometer"); if(!el) return;
+  var n=0;
+  el.style.cursor="pointer";
+  el.addEventListener("click",function(){
+    n++;
+    if(n===5){
+      var d=document.createElement("div");
+      d.style.cssText="margin:8px auto;font-family:'Courier New',monospace;font-size:12px;color:#330000;";
+      d.innerHTML='<a href="static.html" style="color:#440000;">&#9608;&#9608;&#9608;&#9608;&#9608; there is a channel between the bars &#9608;&#9608;&#9608;&#9608;&#9608;</a>';
+      el.parentNode.appendChild(d);
+    }
+  });
 }
 
 /* ---------- SVG helpers ---------- */
@@ -322,5 +365,7 @@ function buildTowerMap(id){
 /* ---------- boot ---------- */
 window.addEventListener("load",function(){
   buildNav();
-  armFiveEgg();
+  armEasterEggs();
+  armOdometerSecret();
+  injectPortal();
 });

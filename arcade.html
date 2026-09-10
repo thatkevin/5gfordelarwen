@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>::: THE 5G ARCADE ::: GAMES OF THE VOID ::: DALARWEN :::</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%95%B9%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="retro.css">
+<script src="gate.js"></script>
+</head>
+<body bgcolor="#000000" text="#00FF00" link="#FFFF00" vlink="#00FFFF" alink="#FF0000"
+      background="assets/stars.gif" style="background:#000000 url('assets/stars.gif') repeat;">
+<marquee scrollamount="9" bgcolor="#001A00"><font face="Arial Black" size="4" color="#00FF00">&#127918; INSERT 20p &#11835; NO SIGNAL REQUIRED TO PLAY &#11835; HIGH SCORES STORED IN THE CUBE &#127918;</font></marquee>
+<center>
+<div id="navbar"></div>
+
+<table border="6" cellpadding="14" width="94%" bgcolor="#001A00" bordercolor="#00FF00" style="border:6px ridge #00FF00;">
+<tr><td align="center">
+  <img src="assets/spin5g.gif" alt="" width="70" height="70" border="0">
+  <font face="Impact,Arial Black" size="7" class="shimmer">THE 5G ARCADE</font>
+  <img src="assets/spin5g.gif" alt="" width="70" height="70" border="0">
+  <br>
+  <font face="Comic Sans MS" size="3" color="#FFFFFF"><b>While you wait for the towers, PLAY. It is all you can do. It is all any of us can do.</b></font>
+</td></tr>
+</table>
+<br>
+
+<!-- GAME 1: BAR HUNTER -->
+<table border="4" cellpadding="12" width="94%" bgcolor="#000A00" bordercolor="#00FFFF" style="border:4px ridge #00FFFF;">
+<tr><td align="center">
+<font face="Arial Black" size="5" color="#00FFFF">&#128246; GAME 1 &#11835; BAR HUNTER</font><br>
+<font face="Comic Sans MS" size="3" color="#FFFFFF">Bars of signal flicker into existence for a heartbeat. CATCH them. Miss the &#128163; (that's Big Candle's agent).</font>
+<br><br>
+<font face="Courier New" size="4" color="#FFFF00">SCORE: <span id="bhscore">0</span> &nbsp;|&nbsp; TIME: <span id="bhtime">30</span> &nbsp;|&nbsp; BEST: <span id="bhbest">0</span></font>
+<br><br>
+<div id="bhboard" style="position:relative;width:100%;max-width:560px;height:320px;margin:0 auto;background:#000600;border:3px inset #00FF00;overflow:hidden;"></div>
+<br>
+<input type="button" class="retrobtn" value=" &#9654; START BAR HUNT " onclick="bhStart()">
+<br><br><font face="Comic Sans MS" size="3" color="#00FF00"><b><span id="bhmsg">Press START. Hunt bars. Become whole.</span></b></font>
+</td></tr>
+</table>
+<br>
+
+<!-- GAME 2: ERECT THE TOWER -->
+<table border="4" cellpadding="12" width="94%" bgcolor="#0A0016" bordercolor="#FF00FF" style="border:4px ridge #FF00FF;">
+<tr><td align="center">
+<font face="Arial Black" size="5" color="#FF00FF">&#128736; GAME 2 &#11835; ERECT THE TOWER</font><br>
+<font face="Comic Sans MS" size="3" color="#FFFFFF">The bracket swings. Hit <b>DROP</b> when it's in the <font color="#00FF00">GREEN</font>. Stack all the way to <b>FLOOR 15</b>. Three misses and it TOPPLES.</font>
+<br><br>
+<font face="Courier New" size="4" color="#FFFF00">FLOOR: <span id="twfloor">0</span> / 15 &nbsp;|&nbsp; MISSES: <span id="twmiss">0</span> / 3</font>
+<br><br>
+<canvas id="twcanvas" width="300" height="260" style="background:#000;border:3px inset #FF00FF;max-width:100%;"></canvas>
+<br><br>
+<input type="button" class="retrobtn pink" value=" &#11015; DROP " onclick="twDrop()">
+&nbsp;<input type="button" class="retrobtn cyan" value=" &#8635; NEW BUILD " onclick="twReset()">
+<br><br><font face="Comic Sans MS" size="3" color="#FF00FF"><b><span id="twmsg">Press DROP to lay the foundation.</span></b></font>
+</td></tr>
+</table>
+
+<br>
+<img src="assets/fire_bar.gif" alt="" width="94%" height="26" border="0" style="width:94%;height:26px;">
+<br>
+<font face="Times New Roman" size="2" color="#AAAAAA"><i>Games are a joke among pals. Big Candle is not real. The &#128163; means well, probably. &copy; The Cube.</i></font>
+<br><br>
+</center>
+
+<script src="retro.js"></script>
+<script>
+/* ===== BAR HUNTER ===== */
+var bhScore=0,bhTime=30,bhRun=false,bhTimer,bhSpawner;
+function bhBest(){ return parseInt(lsGet("dalarwen_barhunt","0"),10)||0; }
+function bhStart(){
+  if(bhRun) return;
+  bhRun=true; bhScore=0; bhTime=30;
+  document.getElementById("bhscore").innerHTML=0;
+  document.getElementById("bhbest").innerHTML=bhBest();
+  document.getElementById("bhboard").innerHTML="";
+  document.getElementById("bhmsg").innerHTML="HUNT!";
+  bhTimer=setInterval(function(){
+    bhTime--; document.getElementById("bhtime").innerHTML=bhTime;
+    if(bhTime<=0) bhEnd();
+  },1000);
+  bhSpawner=setInterval(bhSpawn, 620);
+}
+function bhSpawn(){
+  var b=document.getElementById("bhboard"); if(!b) return;
+  var bad=Math.random()<0.28;
+  var el=document.createElement("div");
+  el.innerHTML= bad ? "&#128163;" : "&#128246;";
+  el.style.cssText="position:absolute;font-size:34px;cursor:pointer;user-select:none;";
+  el.style.left=(Math.random()*88)+"%";
+  el.style.top=(Math.random()*82)+"%";
+  el.onclick=function(){
+    if(!bhRun) return;
+    if(bad){ bhScore=Math.max(0,bhScore-3); document.getElementById("bhmsg").innerHTML="&#128163; BIG CANDLE! -3"; }
+    else { bhScore++; document.getElementById("bhmsg").innerHTML="+1 BAR"; }
+    document.getElementById("bhscore").innerHTML=bhScore;
+    if(el.parentNode) el.parentNode.removeChild(el);
+  };
+  b.appendChild(el);
+  setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 900);
+}
+function bhEnd(){
+  bhRun=false; clearInterval(bhTimer); clearInterval(bhSpawner);
+  var best=bhBest();
+  if(bhScore>best){ lsSet("dalarwen_barhunt",""+bhScore); best=bhScore;
+    document.getElementById("bhmsg").innerHTML="&#127942; NEW BEST: "+bhScore+" BARS! The Cube is proud.";
+  } else {
+    document.getElementById("bhmsg").innerHTML="TIME! You caught "+bhScore+" bars. It wasn't enough. It's never enough.";
+  }
+  document.getElementById("bhbest").innerHTML=best;
+}
+
+/* ===== ERECT THE TOWER ===== */
+var twFloor=0,twMiss=0,twPos=0,twDir=1,twWidth=120,twAnim,twPlaying=true;
+var TWW=300,TWH=260,twCtx;
+function twReset(){
+  twFloor=0;twMiss=0;twPos=0;twDir=1;twWidth=120;twPlaying=true;
+  document.getElementById("twfloor").innerHTML=0;
+  document.getElementById("twmiss").innerHTML=0;
+  document.getElementById("twmsg").innerHTML="Press DROP to lay the foundation.";
+}
+function twGreenZone(){ // green zone shrinks as you climb
+  var gw=Math.max(46, 120 - twFloor*5);
+  return {x:(TWW-gw)/2, w:gw};
+}
+function twDrawFrame(){
+  if(!twCtx) return;
+  twCtx.clearRect(0,0,TWW,TWH);
+  // stacked floors
+  for(var i=0;i<twFloor;i++){
+    twCtx.fillStyle=i%2?"#00AA55":"#00FF88";
+    twCtx.fillRect(TWW/2-50, TWH-20-(i+1)*12, 100, 10);
+  }
+  // green target zone
+  var gz=twGreenZone();
+  twCtx.fillStyle="rgba(0,255,0,0.18)";
+  twCtx.fillRect(gz.x, 20, gz.w, TWH-60);
+  twCtx.strokeStyle="#00FF00"; twCtx.strokeRect(gz.x,20,gz.w,TWH-60);
+  // swinging bracket
+  if(twPlaying){
+    twPos+=twDir*4;
+    if(twPos<0){twPos=0;twDir=1;} if(twPos>TWW-40){twPos=TWW-40;twDir=-1;}
+  }
+  twCtx.fillStyle="#FF00FF";
+  twCtx.fillRect(twPos, TWH-20-(twFloor+1)*12, 40, 10);
+  twCtx.fillStyle="#FFFF00"; twCtx.font="12px monospace";
+  twCtx.fillText("FLOOR "+twFloor, 8, 14);
+  twAnim=requestAnimationFrame(twDrawFrame);
+}
+function twDrop(){
+  if(!twPlaying) return;
+  var gz=twGreenZone(), centre=twPos+20;
+  if(centre>=gz.x && centre<=gz.x+gz.w){
+    twFloor++;
+    document.getElementById("twfloor").innerHTML=twFloor;
+    if(twFloor>=15){ twPlaying=false; document.getElementById("twmsg").innerHTML="&#127881; FLOOR 15! THE CAPSTONE IS SET. DALARWEN CAN DREAM AGAIN."; return; }
+    document.getElementById("twmsg").innerHTML="SOLID. Floor "+twFloor+" up. Keep climbing.";
+  } else {
+    twMiss++;
+    document.getElementById("twmiss").innerHTML=twMiss;
+    if(twMiss>=3){ twPlaying=false; document.getElementById("twmsg").innerHTML="&#128165; IT TOPPLED at floor "+twFloor+". The Offline Industrial Complex cheers. Try again."; return; }
+    document.getElementById("twmsg").innerHTML="WOBBLE! Missed the green. "+(3-twMiss)+" left.";
+  }
+}
+window.addEventListener("load",function(){
+  var c=document.getElementById("twcanvas");
+  if(c&&c.getContext){ twCtx=c.getContext("2d"); twDrawFrame(); }
+  document.getElementById("bhbest").innerHTML=bhBest();
+});
+</script>
+</body>
+</html>

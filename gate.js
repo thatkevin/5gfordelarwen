@@ -37,7 +37,7 @@
           'The Cube guards the truth of Dalarwen.<br>Speak the password, pal.</div>'+
         '<div style="font-family:\'Comic Sans MS\',cursive;font-size:13px;color:#FFCC00;margin:0 0 14px;border:1px dashed #FFCC00;padding:6px;">'+
           '&#128161; <b>HINT:</b> the mega-corp that owns us all.<br>'+
-          '<span style="color:#00FFFF;">(you know the one. close enough counts.)</span></div>'+
+          '<span style="color:#00FFFF;">(you know the one.)</span></div>'+
         '<input id="dgatepw" type="password" autocomplete="off" placeholder="PASSWORD" '+
           'style="width:78%;font-family:\'Courier New\',monospace;font-size:20px;text-align:center;'+
           'background:#001100;color:#00FF00;border:3px inset #00FF00;padding:8px;letter-spacing:4px;">'+
@@ -46,8 +46,6 @@
           'background:#00FF00;border:4px outset #00FF00;padding:8px 18px;cursor:pointer;">&#128225; ENTER THE TRUTH</button>'+
         '</div>'+
         '<div id="dgateerr" style="font-family:\'Comic Sans MS\',cursive;font-size:14px;color:#FF0033;font-weight:bold;min-height:20px;margin-top:12px;"></div>'+
-        '<div style="font-family:\'Times New Roman\',serif;font-size:11px;color:#888;margin-top:10px;">'+
-          '(psst &#11835; it is a joke among pals. this doorstep is cosmetic, not real security.)</div>'+
       '</div>';
     document.body.appendChild(g);
 

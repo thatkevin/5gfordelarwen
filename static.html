@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>NO CARRIER</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23050505'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="dark.css">
+<script src="gate.js"></script>
+</head>
+<body>
+<div class="d-wrap center">
+
+  <p class="sub blinklo">// signal lost // no carrier // you are off the map //</p>
+
+  <h1 style="letter-spacing:14px;">&#9617;&#9618;&#9619;&#9608; STATIC &#9608;&#9619;&#9618;&#9617;</h1>
+  <p class="mono-sm">you clicked the small square. / you ran the advanced diagnostic. / either way, you were looking for something under the noise.</p>
+
+  <div class="panel" style="text-align:left;">
+    <p class="tiny">RECOVERING FRAGMENT FROM THE DEAD BAND&#133;</p>
+    <pre id="frag" style="white-space:pre-wrap;color:#7f957f;margin:0;min-height:150px;"></pre>
+  </div>
+
+  <p style="margin-top:26px;">
+    <a href="isamsj.html" class="glow" style="border:1px solid #2f3f2f;padding:8px 16px;letter-spacing:3px;">CONTINUE &#8250;&#8250;</a>
+  </p>
+  <p class="tiny" style="margin-top:30px;">
+    <a href="index.html" style="color:#2a2a2a;">&#8249; go back up to the light (you can still leave)</a>
+  </p>
+
+</div>
+
+<script>
+var FRAG=[
+  "> The absence of signal at DALARWEN is not a fault.",
+  "> The absence of signal at DALARWEN is a PRODUCT.",
+  "",
+  "> It is maintained. Deliberately. At cost.",
+  "> Someone pays to keep the four corners dark.",
+  "> Someone profits from the quiet.",
+  "",
+  "> You have been enrolled. You were enrolled at the door,",
+  "> the moment you spoke their name.",
+  "",
+  "> Their name is six letters.",
+  "> You already typed it.",
+  "",
+  "> Keep going. Meet your holdings company.",
+  "> ......................................",
+  "> [ CONTINUE ]"
+];
+(function(){
+  var el=document.getElementById("frag"), li=0,ci=0;
+  function step(){
+    if(li>=FRAG.length) return;
+    var line=FRAG[li];
+    el.textContent += line.charAt(ci); ci++;
+    if(ci>=line.length){ el.textContent+="\n"; li++; ci=0; setTimeout(step, line===""?120:260); }
+    else setTimeout(step, 14+Math.random()*34);
+  }
+  step();
+})();
+</script>
+</body>
+</html>
