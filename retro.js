@@ -26,6 +26,7 @@ var PAGES = [
   ["cube-knows.html","CUBE KNOWS"],
   ["guestbook.html","GUESTBOOK"],
   ["webring.html","WEBRING"],
+  ["credits.html","CREDITS"],
   ["sitemap.html","SITE MAP"]
 ];
 function currentPage(){
