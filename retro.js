@@ -7,6 +7,7 @@
 /* ---------- shared NAV + FOOTER injection ---------- */
 var PAGES = [
   ["index.html","HOME"],
+  ["about-dalarwen.html","THE REAL PLACE"],
   ["the-cube.html","THE CUBE"],
   ["towers.html","15 TOWERS"],
   ["radiation.html","RADIATION"],
@@ -22,7 +23,8 @@ var PAGES = [
   ["matrix.html","THE MATRIX"],
   ["cube-knows.html","CUBE KNOWS"],
   ["guestbook.html","GUESTBOOK"],
-  ["webring.html","WEBRING"]
+  ["webring.html","WEBRING"],
+  ["sitemap.html","SITE MAP"]
 ];
 function currentPage(){
   var p = location.pathname.split("/").pop();
@@ -366,10 +368,14 @@ function buildTowerMap(id){
 }
 
 /* ---------- 5G-FM: a lo-fi chiptune loop (autoplay is blocked, so it's a toggle) ---------- */
-var _fm={ctx:null,osc:null,gain:null,timer:null,on:false,step:0};
-var FM_MELODY=[
-  440,0,554,659, 440,0,659,554, 494,0,587,740, 494,587,0,494,
-  392,0,494,587, 392,0,587,494, 330,392,494,392, 0,294,0,0
+var _fm={ctx:null,osc:null,gain:null,bosc:null,bgain:null,timer:null,on:false,step:0};
+/* a little A-minor-pentatonic loop with a walking bass underneath */
+var FM_LEAD=[
+  659,784,659,587, 523,587,659,0,   440,523,587,523, 440,0,392,0,
+  659,784,880,784, 659,587,523,0,   587,523,440,392, 440,0,0,0
+];
+var FM_BASS=[
+  220,220,175,175, 131,131,196,196, 220,220,175,175, 131,196,220,0
 ];
 function _fmUpdateBtn(){
   var b=document.getElementById("fmbtn"); if(!b) return;
@@ -382,23 +388,34 @@ function startMusic(){
     var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
     _fm.ctx=_fm.ctx||new AC();
     if(_fm.ctx.resume) _fm.ctx.resume();
-    _fm.gain=_fm.ctx.createGain(); _fm.gain.gain.value=0.05;
+    // lead voice (square)
+    _fm.gain=_fm.ctx.createGain(); _fm.gain.gain.value=0.045;
     _fm.osc=_fm.ctx.createOscillator(); _fm.osc.type="square";
-    _fm.osc.connect(_fm.gain); _fm.gain.connect(_fm.ctx.destination);
-    _fm.osc.start(); _fm.step=0;
+    _fm.osc.connect(_fm.gain); _fm.gain.connect(_fm.ctx.destination); _fm.osc.start();
+    // bass voice (triangle)
+    _fm.bgain=_fm.ctx.createGain(); _fm.bgain.gain.value=0.06;
+    _fm.bosc=_fm.ctx.createOscillator(); _fm.bosc.type="triangle";
+    _fm.bosc.connect(_fm.bgain); _fm.bgain.connect(_fm.ctx.destination); _fm.bosc.start();
+    _fm.step=0;
     _fm.timer=setInterval(function(){
-      var f=FM_MELODY[_fm.step%FM_MELODY.length];
       var t=_fm.ctx.currentTime;
+      var f=FM_LEAD[_fm.step%FM_LEAD.length];
       if(f===0){ _fm.gain.gain.setValueAtTime(0.0001,t); }
-      else { _fm.gain.gain.setValueAtTime(0.05,t); _fm.osc.frequency.setValueAtTime(f,t); }
+      else { _fm.gain.gain.setValueAtTime(0.045,t); _fm.osc.frequency.setValueAtTime(f,t); }
+      if(_fm.step%2===0){
+        var bf=FM_BASS[(_fm.step/2)%FM_BASS.length];
+        if(bf===0){ _fm.bgain.gain.setValueAtTime(0.0001,t); }
+        else { _fm.bgain.gain.setValueAtTime(0.055,t); _fm.bosc.frequency.setValueAtTime(bf,t); }
+      }
       _fm.step++;
-    },190);
+    },165);
     _fm.on=true; lsSet("dalarwen_music","on"); _fmUpdateBtn();
   }catch(e){}
 }
 function stopMusic(){
   try{ if(_fm.timer){clearInterval(_fm.timer);_fm.timer=null;}
-    if(_fm.osc){ _fm.osc.stop(); _fm.osc.disconnect(); _fm.osc=null; } }catch(e){}
+    if(_fm.osc){ _fm.osc.stop(); _fm.osc.disconnect(); _fm.osc=null; }
+    if(_fm.bosc){ _fm.bosc.stop(); _fm.bosc.disconnect(); _fm.bosc=null; } }catch(e){}
   _fm.on=false; lsSet("dalarwen_music","off"); _fmUpdateBtn();
 }
 function toggleMusic(){ if(_fm.on) stopMusic(); else startMusic(); }
