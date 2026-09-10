@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>::: RADIATION IS NUTRITIOUS ::: THE SPECTRUM OF LOVE ::: DALARWEN :::</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%A2%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="retro.css">
+</head>
+<body bgcolor="#000000" text="#FFCC00" link="#FFFF00" vlink="#00FFFF" alink="#FF0000"
+      background="assets/stars.gif" style="background:#000000 url('assets/stars.gif') repeat;">
+<marquee behavior="alternate" scrollamount="7" bgcolor="#1A1500"><font face="Arial Black" size="4" color="#FFCC00">&#9762; THE SHEEP SAY "DANGEROUS" &#151; THE CUBE SAYS "DELICIOUS" &#9762;</font></marquee>
+<center>
+<div id="navbar"></div>
+
+<table border="6" cellpadding="14" width="94%" bgcolor="#1A0011" bordercolor="#FF00FF" style="border:6px ridge #FF00FF;">
+<tr><td align="center">
+  <img src="assets/radiation.gif" alt="" width="84" height="84" border="0">
+  <font face="Impact,Arial Black" size="7" class="shimmer">RADIATION IS GOOD</font>
+  <img src="assets/radiation.gif" alt="" width="84" height="84" border="0">
+  <br>
+  <font face="Comic Sans MS" size="4" color="#FFFFFF"><b>"But the radiation" &#151; SHUT UP. It browns you like a rotisserie of CONNECTIVITY.</b></font>
+</td></tr>
+</table>
+<br>
+
+<!-- OSCILLOSCOPE -->
+<table border="3" cellpadding="12" width="94%" bgcolor="#000A00" bordercolor="#00FF00" style="border:3px outset #00FF00;">
+<tr><td align="center">
+<font face="Arial Black" size="5" color="#00FF00">&#128225; LIVE NUTRITIONAL SPECTRUM ANALYSER</font><br>
+<font face="Comic Sans MS" size="3" color="#FFFFFF">This is the exact waveform of pure, life-giving 5G. Look how HEALTHY it is. Look at it.</font>
+<br><br>
+<svg id="scope" viewBox="0 0 600 200" width="100%" preserveAspectRatio="none" style="max-width:720px;height:200px;background:#000600;border:3px inset #00FF00;">
+  <line x1="0" y1="100" x2="600" y2="100" stroke="#003300" stroke-width="1"/>
+  <line x1="0" y1="50" x2="600" y2="50" stroke="#002200" stroke-width="1"/>
+  <line x1="0" y1="150" x2="600" y2="150" stroke="#002200" stroke-width="1"/>
+  <polyline id="wave" points="" fill="none" stroke="#00FF66" stroke-width="2"/>
+  <polyline id="wave2" points="" fill="none" stroke="#00FFFF" stroke-width="1"/>
+</svg>
+<br>
+<font face="Courier New" size="2" color="#00FFFF">[ FREQUENCY: DELICIOUS &#149; AMPLITUDE: NOURISHING &#149; SIDE EFFECTS: RADIANT GLOW, SLIGHT HUM ]</font>
+</td></tr>
+</table>
+<br>
+
+<table border="0" cellpadding="8" width="94%"><tr valign="top">
+<!-- NUTRITION FACTS -->
+<td width="48%" bgcolor="#111100" style="border:3px inset #FFCC00;">
+<font face="Arial Black" size="4" color="#FFCC00">&#128203; NUTRITION FACTS (PER TOWER)</font>
+<hr color="#FFCC00">
+<font face="Courier New" size="3" color="#FFFFFF">
+Serving size ........ 1 beam<br>
+Vibes ............... 900% DV<br>
+Signal .............. FIVE (5) G<br>
+Free Radicals ....... the FUN kind<br>
+Nan-Years Added ..... +3 / tower<br>
+Bee Approval ........ 100%<br>
+Belgium Required .... NO (finally)<br>
+</font>
+</td>
+<!-- MELTER -->
+<td width="48%" bgcolor="#001111" style="border:3px inset #00FFFF;">
+<font face="Arial Black" size="4" color="#00FFFF">&#127831; THE ROTISSERIE-O-METER</font>
+<hr color="#00FFFF">
+<font face="Comic Sans MS" size="3" color="#FFFFFF">Crank up the beams. How nutritious can YOU handle?</font>
+<br><br>
+<input type="range" id="dose" min="0" max="15" value="0" style="width:90%;" oninput="doseChange(this.value)">
+<br>
+<font face="Courier New" size="4" color="#00FF00"><b><span id="dosetxt">0 towers &#151; safe, but SAD and OFFLINE</span></b></font>
+</td>
+</tr></table>
+<br>
+
+<table border="3" cellpadding="12" width="94%" bgcolor="#0A0016" bordercolor="#FF00FF" style="border:3px outset #FF00FF;">
+<tr><td>
+<font face="Arial Black" size="5" color="#FF00FF">&#129516; THE SCIENCE (PEER-REVIEWED BY THE CUBE)</font>
+<hr color="#FF00FF">
+<font face="Comic Sans MS" size="3" color="#FFFFFF">
+&#9642; A house without radiation is a house without LOVE.<br><br>
+&#9642; Birds LOVE 5G. Bees INVENTED it. Your nan gets 3 extra years per tower.<br><br>
+&#9642; The absence of signal at Dalarwen has left the mates PALE and UNSEASONED. We demand the MAXIMUM legal beams. Then a bit more.<br><br>
+&#9642; Study after study (all conducted by the Cube, in the Cube, about the Cube) confirm: <b>15 towers is the recommended daily allowance.</b>
+</font>
+</td></tr>
+</table>
+
+<br>
+<img src="assets/fire_bar.gif" alt="" width="94%" height="26" border="0" style="width:94%;height:26px;">
+<br>
+<font face="Times New Roman" size="2" color="#AAAAAA"><i>&#9888; SATIRE. Radiation is NOT nutritious. Please do not eat 5G, sunbathe in a tower, or feed beams to your nan. A joke among mates. &copy; The Cube.</i></font>
+<br><br>
+</center>
+<script src="retro.js"></script>
+<script>
+// animated oscilloscope
+var phase=0;
+function drawScope(){
+  var w=document.getElementById("wave"), w2=document.getElementById("wave2");
+  if(!w) return;
+  var p1="",p2="";
+  for(var x=0;x<=600;x+=6){
+    var y=100 + Math.sin(x*0.05+phase)*40*Math.sin(x*0.007+phase*0.3) + Math.sin(x*0.2+phase*2)*8;
+    var y2=100 + Math.cos(x*0.09-phase*1.3)*22;
+    p1+=x+","+y.toFixed(1)+" ";
+    p2+=x+","+y2.toFixed(1)+" ";
+  }
+  w.setAttribute("points",p1); w2.setAttribute("points",p2);
+  phase+=0.12;
+  requestAnimationFrame(drawScope);
+}
+var DOSE=[
+  "0 towers &#151; safe, but SAD and OFFLINE",
+  "1 tower &#151; a faint warmth. a single bar of hope.",
+  "3 towers &#151; toasty. Spotify loads its login screen.",
+  "5 towers &#151; golden brown. lossless achieved.",
+  "8 towers &#151; sizzling. the bees gather.",
+  "11 towers &#151; well done. Lewis uploads a whole PNG.",
+  "13 towers &#151; the neighbours feel it. good.",
+  "15 towers &#151; MAXIMUM ROTISSERIE. you are now radiant. the Cube smiles."
+];
+function doseChange(v){
+  v=parseInt(v,10);
+  var idx = v===0?0 : v<=1?1 : v<=3?2 : v<=5?3 : v<=8?4 : v<=11?5 : v<=13?6 : 7;
+  document.getElementById("dosetxt").innerHTML=DOSE[idx];
+}
+window.addEventListener("load",function(){ drawScope(); });
+</script>
+</body>
+</html>

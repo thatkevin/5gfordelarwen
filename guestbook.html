@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>::: SIGN THE GUESTBOOK ::: DALARWEN 5G LIBERATION FRONT :::</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%89%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="retro.css">
+</head>
+<body bgcolor="#000000" text="#00FF00" link="#FFFF00" vlink="#00FFFF" alink="#FF0000"
+      background="assets/stars.gif" style="background:#000000 url('assets/stars.gif') repeat;">
+<marquee behavior="alternate" scrollamount="7" bgcolor="#001A00"><font face="Arial Black" size="4" color="#00FF00">&#9993; PLEASE SIGN MY GUESTBOOK &#151; TELL THE CUBE WHY YOU DESERVE 15 TOWERS &#9993;</font></marquee>
+<center>
+<div id="navbar"></div>
+
+<table border="6" cellpadding="14" width="94%" bgcolor="#001100" bordercolor="#00FF00" style="border:6px ridge #00FF00;">
+<tr><td align="center">
+  <img src="assets/email.gif" alt="" width="54" height="38" border="0">
+  <font face="Impact,Arial Black" size="7" class="shimmer">THE GUESTBOOK</font>
+  <img src="assets/heart.gif" alt="" width="30" height="30" border="0">
+  <br>
+  <font face="Comic Sans MS" size="4" color="#FFFFFF"><b><span id="gbcount">0</span> souls have signed from the void.</b></font>
+</td></tr>
+</table>
+<br>
+
+<!-- SIGN FORM -->
+<table border="4" cellpadding="14" width="94%" bgcolor="#0A0016" bordercolor="#FF00FF" style="border:4px ridge #FF00FF;">
+<tr><td>
+<font face="Arial Black" size="5" color="#FF00FF">&#9997; ADD YOUR ENTRY</font>
+<hr color="#FF00FF">
+<font face="Comic Sans MS" size="3" color="#FFFFFF">
+Your Name / Handle:<br>
+<input type="text" id="gbname" maxlength="40" style="width:60%;font-family:'Courier New';font-size:15px;background:#001100;color:#00FF00;border:2px inset #00FF00;padding:4px;"><br><br>
+Signing In From (your dead zone):<br>
+<input type="text" id="gbloc" maxlength="60" style="width:60%;font-family:'Courier New';font-size:15px;background:#001100;color:#00FF00;border:2px inset #00FF00;padding:4px;"><br><br>
+Your Message to the Cube:<br>
+<textarea id="gbmsg" rows="3" maxlength="400" style="width:80%;font-family:'Courier New';font-size:15px;background:#001100;color:#00FF00;border:2px inset #00FF00;padding:4px;"></textarea><br><br>
+<input type="button" class="retrobtn" value=" &#9993; SIGN THE GUESTBOOK " onclick="submitGuestbook()">
+</font>
+<br><br>
+<font face="Comic Sans MS" size="3" color="#FFFF00"><b><span id="gbstatus">&nbsp;</span></b></font>
+<br>
+<font face="Times New Roman" size="1" color="#888"><i>Entries are stored in YOUR browser only (localStorage). The Cube sees all; the server sees nothing. This is a static page &#151; your entry is private to this device.</i></font>
+</td></tr>
+</table>
+<br>
+
+<!-- ENTRIES -->
+<table border="3" cellpadding="14" width="94%" bgcolor="#000A00" bordercolor="#00FFFF" style="border:3px outset #00FFFF;">
+<tr><td>
+<font face="Arial Black" size="5" color="#00FFFF">&#128220; SIGNATURES FROM THE DEAD ZONE</font>
+<hr color="#00FFFF">
+<div id="gbentries" style="text-align:left;"></div>
+</td></tr>
+</table>
+
+<br>
+<img src="assets/fire_bar.gif" alt="" width="94%" height="26" border="0" style="width:94%;height:26px;">
+<br>
+<font face="Times New Roman" size="2" color="#AAAAAA"><i>A joke among mates. Signatures live in your browser, not on any server. &copy; The Cube.</i></font>
+<br><br>
+</center>
+<script src="retro.js"></script>
+<script>window.addEventListener("load",function(){ renderGuestbook(); });</script>
+</body>
+</html>

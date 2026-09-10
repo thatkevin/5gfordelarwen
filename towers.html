@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>::: BUILD THE 15 TOWERS ::: DALARWEN 5G GRID SIMULATOR :::</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%A1%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="retro.css">
+</head>
+<body bgcolor="#000000" text="#00FF00" link="#FFFF00" vlink="#00FFFF" alink="#FF0000"
+      background="assets/stars.gif" style="background:#000000 url('assets/stars.gif') repeat;">
+<marquee behavior="alternate" scrollamount="7" bgcolor="#001A00"><font face="Arial Black" size="4" color="#00FF00">&#128225; CLICK TO ERECT A TOWER &#151; WATCH THE VOID FILL WITH GLORIOUS BEAMS &#128225;</font></marquee>
+<center>
+<div id="navbar"></div>
+
+<table border="6" cellpadding="14" width="94%" bgcolor="#001A00" bordercolor="#00FF00" style="border:6px ridge #00FF00;">
+<tr><td align="center">
+  <img src="assets/tower.gif" alt="" width="60" height="80" border="0">
+  <font face="Impact,Arial Black" size="7" class="shimmer">THE GRID SIMULATOR</font>
+  <img src="assets/tower.gif" alt="" width="60" height="80" border="0">
+  <br>
+  <font face="Comic Sans MS" size="4" color="#FFFFFF"><b>Dalarwen has ZERO towers. Build 15. Restore the signal. Save Lewis.</b></font>
+</td></tr>
+</table>
+<br>
+
+<table border="0" cellpadding="8" width="94%"><tr valign="top">
+<td width="62%" align="center">
+  <div id="towermap"></div>
+</td>
+<td width="38%" bgcolor="#001100" style="border:3px inset #00FF00;">
+  <font face="Arial Black" size="5" color="#00FFFF">&#128295; CONTROL PANEL</font>
+  <hr color="#00FFFF">
+  <font face="Arial Black" size="4" color="#FFFF00">TOWERS ERECT:</font><br>
+  <font face="Courier New" size="7" color="#00FF00"><b><span id="towerbuilt">0 / 15</span></b></font>
+  <br><br>
+  <font face="Arial Black" size="4" color="#FFFF00">CURRENT SIGNAL:</font><br>
+  <font size="6"><span id="towerbars">NO SIGNAL</span></font>
+  <br><br>
+  <input type="button" class="retrobtn" value=" &#128736; BUILD ONE TOWER " onclick="buildOneTower()">
+  <br><br>
+  <input type="button" class="retrobtn cyan" value=" &#9889; BUILD ALL 15 (GO NUTS) " onclick="buildAllTowers()">
+  <br><br>
+  <input type="button" class="retrobtn pink" value=" &#128165; DEMOLISH (WHY WOULD YOU) " onclick="resetTowers()">
+  <hr color="#00FFFF">
+  <font face="Comic Sans MS" size="3" color="#FFFFFF"><b><span id="towermsg">Dalarwen sits in total darkness. Build a tower.</span></b></font>
+</td>
+</tr></table>
+<br>
+
+<!-- TOWER ROSTER -->
+<table border="3" cellpadding="12" width="94%" bgcolor="#0A0016" bordercolor="#FF00FF" style="border:3px outset #FF00FF;">
+<tr><td>
+<font face="Arial Black" size="5" color="#FF00FF">&#128203; THE FIFTEEN, BY NAME AND PURPOSE</font>
+<hr color="#FF00FF">
+<font face="Courier New" size="3" color="#FFFFFF">
+<b><font color="#FFFF00">01&#150;05</font></b> &nbsp;SPOTIFY CORE &nbsp;&#151;&nbsp; lossless streaming, all four corners<br>
+<b><font color="#00FFFF">06&#150;09</font></b> &nbsp;RAIN REDUNDANCY &nbsp;&#151;&nbsp; because it is ALWAYS raining<br>
+<b><font color="#00FF00">10&#150;12</font></b> &nbsp;LEWIS UPLINK &nbsp;&#151;&nbsp; dedicated bandwidth for Lewis's uploads<br>
+<b><font color="#FF4444">13</font></b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THE SPITE TOWER &nbsp;&#151;&nbsp; points at the neighbours<br>
+<b><font color="#00FFFF">14</font></b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BACKUP SPITE &nbsp;&#151;&nbsp; in case 13 falls over<br>
+<b><font color="#FF00FF">15</font></b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THE CAPSTONE &nbsp;&#151;&nbsp; radiates PURE VIBES. Do not question it.
+</font>
+</td></tr>
+</table>
+
+<br>
+<img src="assets/fire_bar.gif" alt="" width="94%" height="26" border="0" style="width:94%;height:26px;">
+<br>
+<font face="Times New Roman" size="2" color="#AAAAAA"><i>No towers were actually erected. This is a joke among mates. &copy; 1999&#150;2026 The Cube.</i></font>
+<br><br>
+</center>
+<script src="retro.js"></script>
+<script>
+window.addEventListener("load",function(){ buildTowerMap("towermap"); });
+</script>
+</body>
+</html>

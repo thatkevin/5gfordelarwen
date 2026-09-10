@@ -1,15 +1,15 @@
-# 📡 15 TOWERS FOR DELARWEN 📡
+# 📡 15 TOWERS FOR DALARWEN 📡
 
 > ZERO BARS. ZERO MERCY. ONE SOLUTION.
 
-The **official 5G Truth site** of the Delarwen 5G Liberation Front.
+The **official 5G Truth site** of the Dalarwen 5G Liberation Front.
 
-Delarwen — a remote and beautiful house of mates — receives **0.000 bars** of signal.
+Dalarwen — a remote and beautiful house of mates — receives **0.000 bars** of signal.
 The OFFLINE INDUSTRIAL COMPLEX did this. We demand **15 (FIFTEEN) 5G towers**, erect
 and humming, **before New Year**, so that:
 
 - 🎵 We can stream **Spotify** (lossless, at all four corners simultaneously)
-- 🎬 **Lewis** can run his **media campaigns** without the little spinny circle of despair
+- 🎬 **Lewis** can finally get his videos online without the little spinny circle of despair
 - 🐝 The bees can dance
 
 Radiation is nutritious. The Cube proves it. You cannot disprove the Cube.

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>::: LEWIS CONNECTIVITY HQ ::: UPLOAD PENDING ::: DALARWEN :::</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%AC%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="retro.css">
+</head>
+<body bgcolor="#000000" text="#00FFFF" link="#FFFF00" vlink="#00FFFF" alink="#FF0000"
+      background="assets/stars.gif" style="background:#000000 url('assets/stars.gif') repeat;">
+<marquee scrollamount="9" bgcolor="#000022"><font face="Arial Black" size="4" color="#00FFFF">&#127909; LEWIS HAS CONTENT TO POST AND NO BARS TO POST IT &#151; THIS IS A HUMANITARIAN CRISIS &#127909;</font></marquee>
+<center>
+<div id="navbar"></div>
+
+<table border="6" cellpadding="14" width="94%" bgcolor="#000022" bordercolor="#00FFFF" style="border:6px ridge #00FFFF;">
+<tr><td align="center">
+  <img src="assets/loading.gif" alt="" width="48" height="48" border="0">
+  <font face="Impact,Arial Black" size="7" class="shimmer">LEWIS CONNECTIVITY HQ</font>
+  <img src="assets/loading.gif" alt="" width="48" height="48" border="0">
+  <br>
+  <font face="Comic Sans MS" size="4" color="#FFFFFF"><b>New Year is coming. Lewis is READY. The signal is NOT.</b></font>
+</td></tr>
+</table>
+<br>
+
+<!-- COUNTDOWN -->
+<table border="4" cellpadding="10" width="94%" bgcolor="#001A1A" bordercolor="#FFFF00" style="border:4px groove #FFFF00;">
+<tr><td align="center">
+<font face="Arial Black" size="5" color="#FFFF00">&#9203; TIME UNTIL BROADCAST WINDOW</font><br>
+<font face="Courier New" size="7" color="#00FF00"><b><span id="cd">loading&#133;</span></b></font><br>
+<font face="Comic Sans MS" size="2" color="#FF00FF"><b>If the towers are not up, Lewis rings in the New Year with a SPINNING CIRCLE.</b></font>
+</td></tr>
+</table>
+<br>
+
+<!-- UPLOAD SIMULATOR -->
+<table border="3" cellpadding="12" width="94%" bgcolor="#0A0016" bordercolor="#FF00FF" style="border:3px outset #FF00FF;">
+<tr><td align="center">
+<font face="Arial Black" size="5" color="#FF00FF">&#128228; LIVE UPLOAD STATUS</font><br>
+<font face="Courier New" size="3" color="#FFFFFF">lewis_newyear_FINAL_v9_REALFINAL.mov &#151; 4.2 GB</font>
+<br><br>
+<table border="2" cellpadding="0" cellspacing="0" width="80%" bordercolor="#00FF00" style="background:#001100;">
+<tr><td bgcolor="#00FF00" width="1%" id="upbar" style="width:1%;">&nbsp;</td><td>&nbsp;</td></tr>
+</table>
+<br>
+<font face="Courier New" size="5" color="#00FF00"><b><span id="uppct">1%</span></b></font>
+<font face="Comic Sans MS" size="3" color="#FFFF00"><b><span id="upmsg"> &#151; uploading... estimated time remaining: 4,847 hours</span></b></font>
+<br><br>
+<input type="button" class="retrobtn cyan" value=" &#128260; RETRY UPLOAD (IT WON'T HELP) " onclick="retryUpload()">
+<input type="button" class="retrobtn" value=" &#128225; PRETEND WE HAVE 15 TOWERS " onclick="grantTowers()">
+</td></tr>
+</table>
+<br>
+
+<!-- BROADCAST CONSOLE -->
+<table border="3" cellpadding="12" width="94%" bgcolor="#000600" bordercolor="#00FF00" style="border:3px inset #00FF00;">
+<tr><td>
+<font face="Arial Black" size="4" color="#00FF00">&#128421; BROADCAST CONSOLE</font>
+<hr color="#00FF00">
+<pre id="console" style="font-family:'Courier New',monospace;color:#00FF66;background:#000;padding:10px;min-height:150px;text-align:left;white-space:pre-wrap;font-size:13px;border:1px solid #003300;"></pre>
+</td></tr>
+</table>
+<br>
+
+<table border="3" cellpadding="12" width="94%" bgcolor="#001A1A" bordercolor="#00FFFF" style="border:3px outset #00FFFF;">
+<tr><td>
+<font face="Arial Black" size="5" color="#00FFFF">&#128226; A WORD ABOUT LEWIS</font>
+<hr color="#00FFFF">
+<font face="Comic Sans MS" size="3" color="#FFFFFF">
+Lewis has THIRTEEN videos ready for New Year. Reels. Stories. A tasteful carousel. A single, devastating tweet.<br><br>
+None of them can leave Dalarwen. They sit on his phone like caged birds, staring at a <b>0-bar</b> icon.<br><br>
+<b><font color="#FFFF00">TOWERS 10, 11 and 12</font></b> are earmarked for Lewis's uplink. That is not a luxury. That is INFRASTRUCTURE. That is DEMOCRACY.
+</font>
+</td></tr>
+</table>
+
+<br>
+<img src="assets/fire_bar.gif" alt="" width="94%" height="26" border="0" style="width:94%;height:26px;">
+<br>
+<font face="Times New Roman" size="2" color="#AAAAAA"><i>Lewis is a legend. The upload will resolve the moment the towers hum. A joke among mates. &copy; The Cube.</i></font>
+<br><br>
+</center>
+<script src="retro.js"></script>
+<script>
+var granted=false;
+function retryUpload(){
+  var el=document.getElementById("upmsg");
+  var quips=[" &#151; still 1%. classic."," &#151; jumped to 1%. wait, that's the same."," &#151; connection held toward Belgium. lost again."," &#151; the spinny circle intensifies."];
+  el.innerHTML=quips[Math.floor(Math.random()*quips.length)];
+  logLine("$ retry --file lewis_newyear_FINAL_v9.mov");
+  logLine("  > seeking signal... none found. (0.000 bars)");
+}
+function grantTowers(){
+  granted=true;
+  document.getElementById("upbar").style.width="100%";
+  document.getElementById("uppct").innerHTML="100%";
+  document.getElementById("upmsg").innerHTML=" &#151; &#9989; UPLOAD COMPLETE. LEWIS IS LIVE. THE PEOPLE REJOICE.";
+  logLine("$ towers --build 15");
+  logLine("  > erecting... [##############] 15/15 HUMMING");
+  logLine("  > signal restored. LOSSLESS.");
+  logLine("  > broadcast LIVE. the bees are dancing. happy new year.");
+}
+var CONSOLE_LINES=[
+  "$ dalarwen-net status",
+  "  > interface: THE HILL",
+  "  > bars: 0.000",
+  "  > 4G: absent   3G: absent   carrier pigeon: en route",
+  "$ upload lewis_newyear_FINAL_v9_REALFINAL.mov",
+  "  > 1% ... 1% ... 1% ...",
+  "  > ETA: heat death of the universe",
+  "  > TIP: build 15 towers. (see /towers)"
+];
+function logLine(s){ var c=document.getElementById("console"); if(c){ c.innerHTML+=s+"\n"; c.scrollTop=c.scrollHeight; } }
+window.addEventListener("load",function(){
+  startCountdown("cd");
+  typeTerminal("console",CONSOLE_LINES);
+});
+</script>
+</body>
+</html>
