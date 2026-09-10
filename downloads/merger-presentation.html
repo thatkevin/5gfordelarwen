@@ -178,13 +178,41 @@
 
 <script>
 var _s=0, _slides;
+/* a short dissonant sting for the Phase 3 slide */
+var _actx=null;
+function sting(){
+  try{
+    var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+    _actx=_actx||new AC(); if(_actx.resume) _actx.resume();
+    var t=_actx.currentTime;
+    var g=_actx.createGain();
+    g.gain.setValueAtTime(0.0001,t);
+    g.gain.exponentialRampToValueAtTime(0.09,t+0.05);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+1.6);
+    g.connect(_actx.destination);
+    // two detuned low drones = unease
+    [110,116.7].forEach(function(f){
+      var o=_actx.createOscillator(); o.type="sawtooth"; o.frequency.value=f;
+      o.connect(g); o.start(t); o.stop(t+1.6);
+    });
+    // a thin high blip on top
+    var hg=_actx.createGain(); hg.gain.setValueAtTime(0.0001,t);
+    hg.gain.exponentialRampToValueAtTime(0.03,t+0.02);
+    hg.gain.exponentialRampToValueAtTime(0.0001,t+0.5);
+    hg.connect(_actx.destination);
+    var h=_actx.createOscillator(); h.type="square"; h.frequency.value=1760;
+    h.connect(hg); h.start(t); h.stop(t+0.5);
+  }catch(e){}
+}
 function show(i){
   _slides=_slides||document.getElementsByClassName("slide");
   if(i<0) i=0; if(i>=_slides.length) i=_slides.length-1;
+  var was=_s;
   for(var k=0;k<_slides.length;k++){ _slides[k].className="slide"+(k===i?" on":""); }
   _s=i;
   var n=(i+1); var pad=(n<10?"0"+n:n);
   document.getElementById("counter").innerHTML=pad+" / 09";
+  if(i===6 && was!==6){ sting(); }   // entering PHASE 3
 }
 function slide(d){ show(_s+d); }
 document.addEventListener("keydown",function(e){
