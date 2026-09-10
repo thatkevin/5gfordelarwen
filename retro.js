@@ -23,7 +23,6 @@ var PAGES = [
   ["faq.html","F.A.Q."],
   ["downloads.html","DOWNLOADS"],
   ["matrix.html","THE MATRIX"],
-  ["cube-knows.html","CUBE KNOWS"],
   ["guestbook.html","GUESTBOOK"],
   ["webring.html","WEBRING"],
   ["credits.html","CREDITS"],
