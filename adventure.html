@@ -47,6 +47,15 @@
 </table>
 
 <br>
+<table border="3" cellpadding="14" width="94%" bgcolor="#08120A" bordercolor="#6B8F3F" style="border:3px ridge #6B8F3F;">
+<tr><td>
+<font face="Impact,Arial Black" size="5" color="#AEDE7E">&#127942; THE ENDINGS YOU HAVE FOUND</font>
+<hr color="#6B8F3F">
+<div id="gallery"></div>
+</td></tr>
+</table>
+
+<br>
 <font face="Times New Roman" size="2" color="#8FAF6F"><i>Grounded in the real off-grid farmhouse at Llyn Brianne. &copy; The Cube.</i></font>
 <br><br>
 </center>
@@ -174,7 +183,38 @@ var STORY={
 
 var current;
 function foundEndings(){ try{ return JSON.parse(localStorage.getItem("dalarwen_endings")||"[]"); }catch(e){ return []; } }
-function totalEndings(){ var s={}; for(var k in STORY){ if(STORY[k].end) s[STORY[k].end]=1; } var n=0; for(var e in s) n++; return n; }
+function totalEndings(){ return ENDINGS.length; }
+
+/* the full roster, in order, with a spoiler-free hint for the locked ones */
+var ENDINGS=[
+  ["THE CHIPS","warm, vinegary, and closer than you think"],
+  ["LET LEWIS DOWN THE HILL","the kindest thing you can do to a man with 1%"],
+  ["THE QUIET","stop wanting the signal"],
+  ["THE SIXTEENTH","ask the wrong number"],
+  ["THE WALK","you are, technically, still in it"],
+  ["THE 16:12 THAT NEVER COMES","platform 1, forever"],
+  ["SAM'S THREE HECTARES","the field was the chart"],
+  ["THE OTHER SHORE","wave first. or did you"],
+  ["CLIFFTOP","your pitch is drifting"],
+  ["ENROLLED","don't read the notification"],
+  ["REMOVED FROM PLAY","a legal position, never played"],
+  ["THE FRIDGE KNOWS","since 2009"]
+];
+function renderGallery(){
+  var host=document.getElementById("gallery"); if(!host) return;
+  var f=foundEndings(), html="", got=0;
+  for(var i=0;i<ENDINGS.length;i++){
+    var name=ENDINGS[i][0], hint=ENDINGS[i][1], have=f.indexOf(name)>=0;
+    if(have) got++;
+    html += '<div style="font-family:\'Courier New\',monospace;font-size:13px;padding:5px 0;border-bottom:1px solid #14200F;">'+
+      (have
+        ? '<b style="color:#00FF66;">&#9670; '+name+'</b> <span style="color:#6F8F4F;">'+hint+'</span>'
+        : '<span style="color:#2f3f2a;">&#9671; <span style="background:#14200F;color:#14200F;">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</span> &#8212; not yet found &#8212; '+hint+'</span>')+
+      '</div>';
+  }
+  host.innerHTML = '<font face="Courier New" size="3" color="#FFCC00">'+got+' / '+ENDINGS.length+' endings discovered'+
+    (got>=ENDINGS.length?' &#11835; <b style="color:#FF00FF;">the valley is complete. so, now, are you.</b>':'')+'</font><br><br>'+html;
+}
 function render(id){
   var n=STORY[id]; if(!n) return; current=id;
   var html='<div class="scene">'+n.t+'</div>';
@@ -191,8 +231,9 @@ function render(id){
     html+='</div>';
   }
   document.getElementById("game").innerHTML=html;
+  renderGallery();
 }
-window.addEventListener("load",function(){ render("start"); });
+window.addEventListener("load",function(){ render("start"); renderGallery(); });
 </script>
 </body>
 </html>
