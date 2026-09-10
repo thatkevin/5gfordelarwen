@@ -7,7 +7,7 @@
 /* ---------- shared NAV + FOOTER injection ---------- */
 var PAGES = [
   ["index.html","HOME"],
-  ["about-dalarwen.html","THE REAL PLACE"],
+  ["about-dalarwen.html","PLACE"],
   ["the-cube.html","THE CUBE"],
   ["towers.html","15 TOWERS"],
   ["radiation.html","RADIATION"],
