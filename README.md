@@ -32,9 +32,7 @@ Best viewed at 800×600 in 256 colours on a hill facing Belgium.
 
 ## ⚠️ Disclaimer
 
-This is a joke among pals. No actual towers were harmed. Radiation is **not**
-actually nutritious ⸻ please do not eat 5G. Not affiliated with any telecom,
-government, bee, or Belgium.
+Not affiliated with any telecom, government, bee, or Belgium.
 
 ---
 

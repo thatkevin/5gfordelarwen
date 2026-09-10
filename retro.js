@@ -20,6 +20,7 @@ var PAGES = [
   ["faq.html","F.A.Q."],
   ["downloads.html","DOWNLOADS"],
   ["matrix.html","THE MATRIX"],
+  ["cube-knows.html","CUBE KNOWS"],
   ["guestbook.html","GUESTBOOK"],
   ["webring.html","WEBRING"]
 ];
@@ -364,10 +365,60 @@ function buildTowerMap(id){
   updateCoverage();
 }
 
+/* ---------- 5G-FM: a lo-fi chiptune loop (autoplay is blocked, so it's a toggle) ---------- */
+var _fm={ctx:null,osc:null,gain:null,timer:null,on:false,step:0};
+var FM_MELODY=[
+  440,0,554,659, 440,0,659,554, 494,0,587,740, 494,587,0,494,
+  392,0,494,587, 392,0,587,494, 330,392,494,392, 0,294,0,0
+];
+function _fmUpdateBtn(){
+  var b=document.getElementById("fmbtn"); if(!b) return;
+  b.innerHTML = _fm.on ? "&#9835; 5G-FM: ON" : "&#9834; 5G-FM: OFF";
+  b.style.background = _fm.on ? "#00FF66" : "#111";
+  b.style.color = _fm.on ? "#000" : "#00FF66";
+}
+function startMusic(){
+  try{
+    var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+    _fm.ctx=_fm.ctx||new AC();
+    if(_fm.ctx.resume) _fm.ctx.resume();
+    _fm.gain=_fm.ctx.createGain(); _fm.gain.gain.value=0.05;
+    _fm.osc=_fm.ctx.createOscillator(); _fm.osc.type="square";
+    _fm.osc.connect(_fm.gain); _fm.gain.connect(_fm.ctx.destination);
+    _fm.osc.start(); _fm.step=0;
+    _fm.timer=setInterval(function(){
+      var f=FM_MELODY[_fm.step%FM_MELODY.length];
+      var t=_fm.ctx.currentTime;
+      if(f===0){ _fm.gain.gain.setValueAtTime(0.0001,t); }
+      else { _fm.gain.gain.setValueAtTime(0.05,t); _fm.osc.frequency.setValueAtTime(f,t); }
+      _fm.step++;
+    },190);
+    _fm.on=true; lsSet("dalarwen_music","on"); _fmUpdateBtn();
+  }catch(e){}
+}
+function stopMusic(){
+  try{ if(_fm.timer){clearInterval(_fm.timer);_fm.timer=null;}
+    if(_fm.osc){ _fm.osc.stop(); _fm.osc.disconnect(); _fm.osc=null; } }catch(e){}
+  _fm.on=false; lsSet("dalarwen_music","off"); _fmUpdateBtn();
+}
+function toggleMusic(){ if(_fm.on) stopMusic(); else startMusic(); }
+function injectMusicButton(){
+  if(document.getElementById("fmbtn")) return;
+  var b=document.createElement("button");
+  b.id="fmbtn"; b.type="button";
+  b.style.cssText="position:fixed;left:8px;bottom:8px;z-index:9998;font-family:'Courier New',monospace;"+
+    "font-weight:bold;font-size:12px;border:2px outset #00FF66;background:#111;color:#00FF66;"+
+    "padding:5px 9px;cursor:pointer;letter-spacing:1px;";
+  b.onclick=toggleMusic;
+  document.body.appendChild(b);
+  _fmUpdateBtn();
+}
+
 /* ---------- boot ---------- */
 window.addEventListener("load",function(){
   buildNav();
   armEasterEggs();
   armOdometerSecret();
   injectPortal();
+  injectMusicButton();
 });
