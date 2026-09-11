@@ -1,7 +1,7 @@
 /* Dalarwen 5G — offline service worker.
    Pre-caches the whole site so it runs with no internet (ironically, for Dalarwen).
    Bump CACHE when content changes to force an update on next online visit. */
-var CACHE = "dalarwen-offline-v26";
+var CACHE = "dalarwen-offline-v27";
 var ASSETS = [
   "./",
   "404.html",
@@ -255,6 +255,23 @@ self.addEventListener("fetch", function(e){
   if(e.request.method!=="GET") return;
   var url=new URL(e.request.url);
   if(url.origin!==location.origin) return;
+  // HTML documents: NETWORK-FIRST so pages are always fresh when online,
+  // falling back to the cached copy only when offline. (Avoids serving stale pages.)
+  var isDoc = e.request.mode==="navigate" || /\.html($|\?)/.test(url.pathname) || url.pathname.endsWith("/");
+  if(isDoc){
+    e.respondWith(
+      fetch(e.request).then(function(net){
+        try{ var copy=net.clone(); caches.open(CACHE).then(function(c){ c.put(e.request, copy); }); }catch(err){}
+        return net;
+      }).catch(function(){
+        return caches.match(e.request, {ignoreSearch:true}).then(function(hit){
+          return hit || caches.match("index.html", {ignoreSearch:true});
+        });
+      })
+    );
+    return;
+  }
+  // Assets (css/js/images/fonts): cache-first for speed; they are version-busted or stable.
   e.respondWith(
     caches.match(e.request, {ignoreSearch:true}).then(function(hit){
       if(hit) return hit;
@@ -262,7 +279,6 @@ self.addEventListener("fetch", function(e){
         try{ var copy=net.clone(); caches.open(CACHE).then(function(c){ c.put(e.request, copy); }); }catch(err){}
         return net;
       }).catch(function(){
-        if(e.request.mode==="navigate") return caches.match("index.html", {ignoreSearch:true});
         return new Response("", {status:504, statusText:"offline"});
       });
     })
