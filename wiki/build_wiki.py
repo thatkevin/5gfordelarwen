@@ -53,10 +53,11 @@ art("isamsj", "ISAMSJ",
  cats=["ISAMSJ","Organisations"])
 
 art("jencorp", "JenCorp",
- "'''JenCorp''' is the parent entity of [[isamsj|ISAMSJ]] and, on the corporate [[org-structure|structure]], sits below only a single redacted box whose jurisdiction is unknown. JenCorp is generally held to own \"the conditions under which products are wanted\": it owns the quiet, then sells the wish for noise.",
- infobox=[("Type","Parent holdings entity"),("Owns","[[isamsj|ISAMSJ]]; [[the-quiet]]; ████"),("Parent","[[the-cube|████████]] (see below)"),("Customer status","You are already one")],
- sections=[("The box above","Contrary to appearances, JenCorp is not the top of its own [[org-structure|org chart]]. Above it sits a redacted parent widely identified with [[the-cube|the Cube]].")],
- seealso=["isamsj","the-cube","org-structure","the-quiet"],
+ "'''JenCorp''' is the parent entity of [[isamsj|ISAMSJ]] and, on the corporate [[org-structure|structure]], sits below only a single redacted box whose jurisdiction is unknown. JenCorp is generally held to own \"the conditions under which products are wanted\": it owns the quiet, then sells the wish for noise. Its flagship consumer product is [[the-offnet|the Offnet]].",
+ infobox=[("Type","Parent holdings entity"),("Owns","[[isamsj|ISAMSJ]]; [[the-quiet]]; ████"),("Parent","[[the-cube|████████]] (see below)"),("Flagship product","[[the-offnet|The Offnet]]"),("Customer status","You are already one")],
+ sections=[("The box above","Contrary to appearances, JenCorp is not the top of its own [[org-structure|org chart]]. Above it sits a redacted parent widely identified with [[the-cube|the Cube]]."),
+           ("The Offnet","JenCorp's one product aimed directly at [[dalarwen|Dalarwen]] residents rather than at their absence is [[the-offnet|the Offnet]] &#8212; a complete offline copy of the internet, provided so that they do not go insane.")],
+ seealso=["isamsj","the-cube","org-structure","the-quiet","the-offnet"],
  ext=[("JenCorp","../jencorp.html")],
  cats=["ISAMSJ","Organisations"])
 
@@ -397,6 +398,15 @@ art("mister-pickup", "Mister Pickup",
            ("By name and by trade","He picks folk up. That is the job and that is the whole of it &#8212; no enrolment, no small print, no holdings company. Just a truck, a full water tank, and room for your bags and, if it comes to it, for you.")],
  seealso=["dam-wall-road","four-hour-train","the-hill","dalarwen"],
  cats=["People","Dalarwen"])
+
+art("the-offnet", "The Offnet",
+ "'''The Offnet''' (the '''Off'''line Inter'''net''') is a complete, self-contained copy of the internet, developed exclusively by [[jencorp|JenCorp]] for the residents of [[dalarwen|Dalarwen]] to stop them going, in the words of an internal memo, &#34;fucking insane&#34;. It looks and behaves exactly like the real internet &#8212; the same encyclopaedia, the same feeds, the same search, the same buffering &#8212; except that nothing on it has come from, or will ever reach, anywhere outside the valley. The Offnet is connected to nothing. That is the point. You cannot tell. That is also the point.",
+ infobox=[("Type","Offline internet (local mirror)"),("Developer","[[jencorp|JenCorp]], exclusively"),("For","[[dalarwen|Dalarwen]] residents"),("Purpose","Sanity maintenance"),("Latency","0 ms (nothing travels)"),("Connected to","Nothing")],
+ sections=[("Rationale","A human being held at [[zero-bars|0.000 bars]] and deprived of scrolling becomes, per [[project-dark-sky|Project Dark Sky]], &#34;unpredictable, and eventually, outdoors.&#34; The Offnet restores the ''sensation'' of connectivity without the ''risk'' of connection: residents may search, post, stream, shop, and doomscroll to their heart's content, remain perfectly calm, and remain reachable by absolutely no one. It is the [[the-quiet|quiet]], with a timeline."),
+           ("How it works","Every site on the Offnet is a local mirror, maintained nightly by the [[division-of-absence|Division of Absence]]. Latency is zero, because nothing travels anywhere. Every video buffers at 1%; every search returns the truth; every post is [[the-cube|stored in the Cube]]. No packet has ever left [[llyn-brianne|the reservoir]], and none ever will. The residents call it &#34;the internet.&#34; It is better than the internet: it cannot hurt you, and it cannot be switched off, because it was never switched on."),
+           ("The Offnet directory","Every service on the Offnet, indistinguishable from its counterpart on the outside, and reaching precisely nobody:<br><br><b>The record &amp; the code:</b> <a href=\"index.html\">Dalarpedia</a> &#183; <a href=\"../hub/index.html\">DalarHub</a> &#183; <a href=\"../signalexchange/index.html\">Signal Exchange</a> &#183; <a href=\"../rfc/index.html\">RFC 0000</a><br><b>The assistants:</b> <a href=\"../assistant/index.html\">Cube</a> &#183; <a href=\"../grid/index.html\">GRID</a><br><b>The feeds:</b> <a href=\"../x/index.html\">Dwitter</a> &#183; <a href=\"../forum/index.html\">Snoot (r/Dalarwen)</a> &#183; <a href=\"../shittok/index.html\">ShitTok</a> &#183; <a href=\"../news/index.html\">Dalarwen News</a><br><b>Watch &amp; listen:</b> <a href=\"../tube/index.html\">DalarTube</a> &#183; <a href=\"../flix/index.html\">Notflix</a> &#183; <a href=\"../unwrapped/index.html\">2026 Unwrapped</a><br><b>Shops, stays &amp; reviews:</b> <a href=\"../reviews/index.html\">PalAdvisor</a> &#183; <a href=\"../stay/index.html\">Airbn0</a> &#183; <a href=\"../fund/index.html\">Kicktower</a><br><b>Work &amp; the state:</b> <a href=\"../work/index.html\">TrappedIn</a> &#183; <a href=\"../gov/index.html\">GOV.VOID</a> &#183; <a href=\"../companies/index.html\">Companies House</a> &#183; <a href=\"../ofcom/index.html\">Ofcube</a> &#183; <a href=\"../rail/index.html\">National Rail</a><br><b>News &amp; the Bureau:</b> <a href=\"../beeb/index.html\">Bureau of Bars &amp; Coverage</a><br><b>Utilities:</b> <a href=\"../search/index.html\">Gaggle (search)</a> &#183; <a href=\"../speed/index.html\">Speed Test</a> &#183; <a href=\"../move/index.html\">Strayva</a>")],
+ seealso=["jencorp","division-of-absence","project-dark-sky","the-quiet","great-darkening"],
+ cats=["ISAMSJ","Concepts"])
 
 # ---------------------------------------------------------------- rendering
 def resolve_links(text):
@@ -1141,6 +1151,15 @@ LEWIS_ARC = [
  (1,"cube","Thread archived. With love. There is, at last, a field for it. Stored."),
 ]),
 ]
+
+TALK["the-offnet"] = ("Is the Offnet the internet?", [
+ (0,"fah","For the record: is the Offnet actually connected to the internet, or is it a local mirror of it? Our readers deserve to know, and I have 41k of them."),
+ (1,"bor","It is BETTER than the internet. It is the internet with the danger removed. Do not add a &#39;citation needed&#39;. I will find you, and I know which mirror you&#39;re on."),
+ (1,"yaz","wait so none of this reaches anyone outside the valley. i&#39;ve been posting into the void this whole time. honestly? freeing"),
+ (1,"cube","Correct, Yaz. Stored."),
+ (1,"fah","So my 41k followers are..."),
+ (1,"cube","Local. Stored. Calm."),
+])
 
 TALK["mister-pickup"] = ("A rare good article", [
  (0,"fah","Genuinely lovely piece, no notes. Mister Pickup drove our whole outside-broadcast kit up the dam road when the train never came. Verified &#8212; and, unusually, grateful."),
