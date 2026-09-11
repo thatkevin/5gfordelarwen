@@ -15,12 +15,7 @@
     {f:"conservatory-weather.html",t:"Conservatory Weather"},
     {f:"educated-stupid.html",   t:"Educated Stupid No More"},
     {f:"loo-standing-society.html",t:"The Loo Standing Society"},
-    {f:"pyramids-5g.html",       t:"Pyramids Had 5G"},
-    {f:"norfolk-mythology.html", t:"The Black Shuck Signal"},
-    {f:"scouse-5g.html",         t:"The Scouse Signal Committee"},
-    {f:"nazca-peru.html",        t:"Backpacking The Signal (Peru)"},
-    {f:"hull.html",              t:"Hull: Our Own Signal"},
-    {f:"coventry.html",          t:"Sent to Coventry"}
+    {f:"pyramids-5g.html",       t:"Pyramids Had 5G"}
   ];
   var here=(location.pathname.split("/").pop())||"";
   var idx=0; for(var i=0;i<RING.length;i++){ if(RING[i].f===here){ idx=i; break; } }
