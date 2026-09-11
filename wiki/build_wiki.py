@@ -300,7 +300,7 @@ art("sent-to-coventry", "Sent to Coventry",
 art("tv-licence-suppression", "TV Licence suppression theory",
  "The '''TV Licence suppression theory''' holds that a redacted portion of the annual television licence fee is diverted, off-books, into a single line item &mdash; ''signal suppression, [[llyn-brianne|Llyn Brianne]]'' &mdash; funding the [[exclusion-envelope]]. Proponents identify the [[detector-vans|detector vans]] as the suppression fleet and cite the restructuring of certain broadcast services as the source of the diverted funds.",
  seealso=["detector-vans","exclusion-envelope","big-candle","llyn-brianne"],
- ext=[("Follow the Licence Fee","../tv-licence.html")],
+ ext=[("Follow the Licence Fee","../tv-licence.html"),("The Bureau's own coverage (they deny it)","../beeb/dalarwen.html")],
  cats=["Concepts","Infrastructure"])
 
 art("detector-vans", "Detector vans",

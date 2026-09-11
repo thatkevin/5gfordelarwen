@@ -113,7 +113,12 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
   keyword put-down that links back). Both chat pages stream by revealing plain text then swapping in the
   paragraph's real HTML on completion &#8212; do NOT go back to char-by-char `innerHTML+=esc(ch)`, it mangles
   entities and links.
-- Note: DalarHub/Signal Exchange/Dalarpedia/Cube/GRID all clone a real product's *layout* but use their own
+- **Bureau of Bars & Coverage** (`beeb/`): a BBC-News-style skin (own branding, no real BBC logo) &#8212; the
+  in-universe public broadcaster Yaz & Fahima work for, a licence-fee-funded front that helps *maintain* the
+  silence. `index` (news homepage: hero, story grid, weather/most-read/sounds sidebar, corrections box) +
+  `dalarwen` (the contested lead story Dr. Melonsis keeps calling libel). Bylined Yaz/Fahima. Door: link on
+  `tv-licence.html`; also linked from Dalarpedia's `tv-licence-suppression` article. Reuses assets/*.jpg thumbnails.
+- Note: DalarHub/Signal Exchange/Dalarpedia/Cube/GRID/the Bureau all clone a real product's *layout* but use their own
   names and no real logos. Keep it that way.
 - **Hidden doors** into all five are scattered as faint, thematically-matched footer links across many loud
   and dark pages (dim low-contrast colours, small Arial) &#8212; e.g. lewis&rarr;DalarHub issue #7,
