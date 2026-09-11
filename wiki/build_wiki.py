@@ -686,14 +686,353 @@ def faction(a):
     return "the campaign"
 def subst(s, T, KW, FAC): return s.replace("{T}", T).replace("{KW}", KW).replace("{FAC}", FAC)
 
+# bespoke lead thread per article: (heading, [ (indent, userkey, text) ]) referencing that article's own lore
+TALK = {
+"dalarwen": ("Is it a farmhouse or a &#34;lid&#34;", [
+ (0,"bor","The lede calls Dalarwen a &#34;farmhouse and valley.&#34; It is a LID. I have added the word &#34;lid&#34; nine times today. Someone keeps removing it."),
+ (1,"fah","We can&#39;t call a Welsh holiday cottage &#34;a lid&#34; without a source. I&#39;m verified; I have standards, and a following."),
+ (1,"yaz","is the lid on or off right now. asking for me"),
+ (1,"bor","The lid is ON, Yaz. That is the whole article."),
+ (1,"cube","The lid is on. Stored.")]),
+"llyn-brianne": ("It is a RESERVOIR, not a lake", [
+ (0,"bor","It is a RESERVOIR. Dammed. Engineered. Held back on PURPOSE. If one more person writes &#34;lake&#34; I will drain the article."),
+ (1,"fah","Our BBC map labelled it a lake. We&#39;ve had complaints. Forty-one of them. All from you."),
+ (1,"yaz","whats the difference honestly. water&#39;s water. lovely water though"),
+ (1,"bor","THE DIFFERENCE IS INTENT, YAZ.")]),
+"isam": ("&#34;Can darken a moon&#34; &#8212; source?", [
+ (0,"fah","The article says ISAM&#39;s smallest product &#34;can darken a moon.&#34; That&#39;s a weapons-capability claim. Our disinformation desk needs a source."),
+ (1,"bor","It is CITED. To the Cube. Stop tagging it."),
+ (1,"fah","You cannot cite &#34;the Cube&#34; for that."),
+ (1,"bor","Then splash it, Fahima. It&#39;ll be the most accurate thing your desk has printed all year."),
+ (1,"cube","Stored. Both of you.")]),
+"sedgley-holdings": ("This is not Sam", [
+ (0,"sam","this is not me"),
+ (1,"bor","We KNOW, Sam. The hatnote says so. In bold. I bolded it myself."),
+ (1,"sam","bold it more"),
+ (1,"bor","I cannot bold it more. It is at maximum bold. Do not test the software.")]),
+"isamsj": ("Right of reply re: &#34;automatic enrolment&#34;", [
+ (0,"fah","The article says readers are &#34;automatically enrolled.&#34; Is that legal? I&#39;d like a right of reply."),
+ (1,"bor","You were enrolled when you LOADED the page, Fahima. Verified accounts too. ESPECIALLY verified accounts."),
+ (1,"yaz","am i enrolled. i feel enrolled. i feel a lot of things"),
+ (1,"cube","You are all enrolled. Stored.")]),
+"jencorp": ("The box above JenCorp", [
+ (0,"bor","The article correctly says JenCorp is NOT the top. There is a redacted box above it. I will not say the box&#39;s name."),
+ (1,"fah","If there&#39;s a box above JenCorp our newsroom would very much like to interview the box."),
+ (1,"bor","The box does not do interviews. The box does oversight. Ask HIM."),
+ (1,"cube","No comment. Stored.")]),
+"sam": ("Ownership dispute", [
+ (0,"sam","whose page is this"),
+ (1,"bor","The encyclopaedia&#39;s, Sam. About YOU. LOOK at these references."),
+ (1,"sam","take it down. DO NOT ANCHOR"),
+ (1,"bor","I will NOT. Do you have any idea how long the infobox took."),
+ (1,"yaz","sam seems chill. is sam chill"),
+ (1,"bor","SAM IS NOT CHILL, YAZ.")]),
+"sams-hectares": ("The area keeps changing", [
+ (0,"bor","It is THREE HECTARES. Someone paced it, got a different number, and &#34;corrected&#34; the article. The count varies. The total does NOT. Reverted."),
+ (1,"fah","You&#39;ve listed it as both &#34;3 ha&#34; and &#34;3 ha (variable).&#34; Pick one. I have an audience."),
+ (1,"yaz","i paced it. got to about forty. then a sheep looked at me. lost count. beautiful field though"),
+ (1,"bor","You cannot PACE it, Yaz. That is the POINT of it.")]),
+"the-cube": ("There are FOUR corners, not five", [
+ (0,"bor","The article correctly states the Cube has four simultaneous receptions, all zero. Someone added a fifth corner. There is NO fifth corner. Reverted, blocked, salted."),
+ (1,"fah","A reader added &#34;some rooms get a little signal.&#34; We ran it as balance."),
+ (1,"bor","There is NO little signal. Zero, in four corners, AT ONCE. This is the Quad-Void. Your &#34;balance&#34; is EDUCATED STUPID."),
+ (1,"cube","She is correct. Stored.")]),
+"dalarwen-5g-grid": ("The table shows sixteen rows on my screen", [
+ (0,"bor","Fifteen towers. The table has FIFTEEN rows. If your screen shows sixteen, your screen is possessed, not the article."),
+ (1,"fah","An anonymous editor added a Tower 16 with a rooftop bar."),
+ (1,"bor","That was the GRID. That confidently-wrong little chatbot. I reverted it and reported it to itself."),
+ (1,"yaz","tower 16 had a bar though. that slaps. can we keep the bar"),
+ (1,"bor","THERE IS NO BAR. THERE IS NO SIXTEEN.")]),
+"tower-thirteen": ("Comment from the neighbours it&#39;s aimed at", [
+ (0,"fah","The spite tower points at the neighbours. Can we get a comment from them?"),
+ (1,"bor","There ARE none, Fahima. That is the whole spite of it. Try to keep up. 41k followers; borrow a brain off one."),
+ (1,"sam","it points at me"),
+ (1,"bor","It does NOT point at you, Sam. You are not a neighbour. You are a SITUATION.")]),
+"the-capstone": ("Do not question Tower 15", [
+ (0,"bor","Tower 15 emits pure vibes and is tuned to Band B. Do NOT question Tower 15. Someone questioned it in paragraph three. Removed."),
+ (1,"yaz","what are the vibes tuned to exactly. so i can match them"),
+ (1,"bor","BAND B, Yaz. It says Band B. In bold."),
+ (1,"fah","&#34;Pure vibes&#34; is not a measurable emission. Tagging."),
+ (1,"bor","Borealis MEASURED them. In the field. WITH LEMON. Untag it.")]),
+"lewis": ("Great article, still 1%", [
+ (0,"lew","hi is this where i say the upload&#39;s still at 1%. it&#39;s still at 1%. thirteen videos. anyway lovely article thanks"),
+ (1,"bor","It is a GOOD article, Lewis, because I wrote it and I check your upload personally. It is still 1%. I did not put that in the article. I did not want to upset you."),
+ (1,"fah","We&#39;d love to feature Lewis. Great human interest. Verified reach."),
+ (1,"lew","is it going to help the upload"),
+ (1,"fah","...no"),
+ (1,"cube","Stored. Gently.")]),
+"electric-sheep": ("Hearing &#34;both sides&#34; of a split guest", [
+ (0,"bor","The sheep split a person into a self and a hostile double. Cited, with a Descartes reference I added at 3am."),
+ (1,"fah","A reader who was split has asked us to hear &#34;both sides.&#34;"),
+ (1,"bor","There are LITERALLY two of them now, Fahima, that is not the metaphor you think it is."),
+ (1,"yaz","which one likes oat milk. that&#39;s the real one right"),
+ (1,"bor","...that is actually correct, Yaz. Log off before you become useful.")]),
+"neil": ("Hostile editing", [
+ (0,"neil","NEIL"),
+ (1,"bor","Yes. It&#39;s in the article. Sign your posts. Four tildes."),
+ (1,"neil","NEIL"),
+ (1,"fah","Is Neil available for comment?"),
+ (1,"neil","NEIL"),
+ (1,"cube","That was the comment. Stored.")]),
+"band-b": ("Prior art (filed: Cretaceous)", [
+ (0,"bee","bzzzz [prior art, filed late Cretaceous, see the Journal]"),
+ (1,"bor","The BEE is right. Band B predates every carrier. I have cited the Journal. Do NOT touch the Journal."),
+ (1,"fah","We can&#39;t run &#34;a bee left a comment&#34; as a source."),
+ (1,"bor","You ran &#34;a verified person left a comment&#34; as a source for nine years, Fahima.")]),
+"bees": ("&#34;Peer-reviewed by the Cube&#34; is not peer review", [
+ (0,"bor","The bees invented 5G in the Cretaceous. Waggle dance = packet routing. Peer-reviewed. By the Cube. In the Journal."),
+ (1,"fah","&#34;Peer-reviewed by the Cube&#34; is not peer review."),
+ (1,"bor","It is the STRICTEST peer review there is. The peer is GEOMETRY."),
+ (1,"bee","bzz"),
+ (1,"bor","Thank you.")]),
+"infinite-walks": ("Removed the &#34;ending&#34;", [
+ (0,"bor","The walks do not conclude. A reader added an &#34;ending.&#34; I removed the ending. There is no ending. That is the product."),
+ (1,"yaz","went on one. still technically on it. filing this from a ridge. which ridge unclear. next one looks nice"),
+ (1,"fah","Yaz has been &#34;on a walk&#34; for this article for three days."),
+ (1,"bor","He is DATA now, Fahima. Leave him.")]),
+"clifftop-caravans": ("Should we warn readers?", [
+ (0,"fah","The caravans migrate to the clifftop overnight and the handbrakes are Premium-only. Shouldn&#39;t readers be warned?"),
+ (1,"bor","The sign says DO NOT ANCHOR. That IS the warning. Not our fault people anchor."),
+ (1,"yaz","mine moved in the night. woke up closer to the sea. five stars honestly"),
+ (1,"bor","See, Fahima. Satisfied customer.")]),
+"infinity-pitch": ("Hazard vs view", [
+ (0,"fah","The Infinity Pitch has &#34;no meaningful boundary with the sea.&#34; That is, definitionally, a hazard."),
+ (1,"bor","It is definitionally a VIEW."),
+ (1,"yaz","where does the pitch end. been looking for the edge a while. very peaceful search"),
+ (1,"bor","There is no edge, Yaz. That is the premium.")]),
+"storm-watching": ("Whose insurance covers &#34;renewable instability&#34;?", [
+ (0,"fah","80mph wind into unlocked caravans &#8212; whose insurance covers &#34;renewable instability&#34;?"),
+ (1,"bor","The box is pre-ticked, Fahima. I ticked it. Weeks ago. &#34;Renewable instability&#34; is Borealis&#39;s term; do not paraphrase Borealis."),
+ (1,"yaz","is the instability... renewable renewable. like eco. like green"),
+ (1,"bor","It is the greenest thing here, Yaz, and it will still end you.")]),
+"exclusion-envelope": ("It is not &#34;just the hills&#34;", [
+ (0,"bor","The Envelope is MAINTAINED, not natural. A reader wrote &#34;just the hills.&#34; IT IS NOT THE HILLS. It is applied. Nightly. Reverted."),
+ (1,"fah","We&#39;d like to see the maintenance schedule."),
+ (1,"bor","Kept by the Division of Absence. They deal in things that aren&#39;t there. There is no schedule to see. That IS the schedule."),
+ (1,"cube","Stored.")]),
+"division-of-absence": ("Why is the biggest division about nothing?", [
+ (0,"fah","This is described as the LARGEST division, and it deals in &#34;things that are not there.&#34; Why is it the biggest?"),
+ (1,"bor","Because absence is the only market that never saturates, Fahima. There is always more nothing. Put THAT in your verified feed."),
+ (1,"yaz","deep. is there more nothing right now"),
+ (1,"bor","There is always more nothing, Yaz.")]),
+"offline-industrial-complex": ("Naming names", [
+ (0,"bor","The Complex profits from disconnection. Big Candle, the board-game lobby, the Ramblers. I have named names. Do not remove the names."),
+ (1,"fah","The Ramblers Association has threatened to sue over that."),
+ (1,"bor","GOOD. Let them. They&#39;ll have to WALK here to serve the papers, and the walks DO NOT END.")]),
+"big-candle": ("Does $WAX exist", [
+ (0,"bor","Big Candle profits from the dark. The $WAX token does NOT exist. Both true. Do not &#34;clarify.&#34;"),
+ (1,"yaz","is $wax a good buy. asking for a friend. the friend is me"),
+ (1,"bor","IT DOES NOT EXIST, Yaz."),
+ (1,"fah","Our business desk covered $WAX. It did numbers."),
+ (1,"bor","EVERYTHING does numbers with you. That is not the same as EXISTING.")]),
+"the-quiet": ("Self-assessed again", [
+ (0,"bor","The Quiet is a place with weather and depth. JenCorp owns it and sells it back as the wish for noise. Beautiful article. Featured. (self-assessed.)"),
+ (1,"fah","You&#39;ve self-assessed another one."),
+ (1,"bor","The Quiet DESERVES it. Have you BEEN? It has a floor you can feel through your feet at 4am."),
+ (1,"yaz","yeah. yeah i felt that. thought that was just me"),
+ (1,"cube","It was not just you. Stored.")]),
+"great-darkening": ("The hills theory", [
+ (0,"bor","The Great Darkening is TOTAL and PERMANENT. Sceptics blame the hills. The article names ISAMSJ. I stand by ISAMSJ."),
+ (1,"fah","For balance we included the hills theory."),
+ (1,"bor","The hills theory is a COMFORT for people who can&#39;t handle a conspiracy. Remove it."),
+ (1,"yaz","i like the hills though. hills are innocent. leave the hills")]),
+"silence-premium": ("&#34;Grown to like the quiet&#34;", [
+ (0,"bor","Silence Premium is the tariff they downgraded Dalarwen to. Unlimited nothing, forever. Do not make it sound optional."),
+ (1,"fah","A reader said they&#39;ve &#34;grown to like the quiet.&#34;"),
+ (1,"bor","That is STOCKHOLM SYNDROME with a monthly direct debit, Fahima."),
+ (1,"yaz","unlimited nothing is a decent deal though. no overage")]),
+"the-ramblers": ("The Ramblers deny it", [
+ (0,"bor","The Ramblers reroute the paths so the next hill is always ahead. Member of the Offline Industrial Complex. Cited."),
+ (1,"fah","The Ramblers deny this."),
+ (1,"bor","Of COURSE they deny it. Ask them where the path ENDS. They can&#39;t tell you. Nobody can. It&#39;s an Infinite Walk."),
+ (1,"yaz","ramblers seem nice though. they&#39;ve got the little boots")]),
+"nan": ("Lovely page x", [
+ (0,"nan","Hello loves. Lovely page about me. I did turn the Wi-Fi off and on again and I feel smashing x"),
+ (1,"bor","Nan is the ONLY editor here I trust. Nan, it says you gain three years of life per tower. Accurate?"),
+ (1,"nan","I feel about forty-five love and I&#39;m not saying how old I am x"),
+ (1,"fah","This is genuinely wholesome. Can we feature Nan?"),
+ (1,"bor","You MAY feature Nan. Spell her name wrong and I will end your masthead.")]),
+"loo-standing-society": ("Standing on the cistern", [
+ (0,"bor","They stand on the cistern to achieve zero bars, same as everywhere. They stand on PRINCIPLE. Do not call it &#34;pointless.&#34; It is POSTURE."),
+ (1,"yaz","wait so they stand on the toilet. for the signal. that isn&#39;t there"),
+ (1,"bor","Yes, Yaz. For the PRINCIPLE."),
+ (1,"fah","Est. 2019, motto &#34;Nil Signum, Sed Stamus.&#34; We actually love this one."),
+ (1,"bor","You may love it. Quietly. Standing up.")]),
+"men-of-harlech": ("The &#34;mesh network&#34; reading", [
+ (0,"bor","Men of Harlech is the FIRST transmission. Voice-to-voice mesh, zero infrastructure. Seven-year siege proves you can hold at zero bars with a good tune. Cited to 1461."),
+ (1,"fah","Historians dispute the &#34;mesh network&#34; reading."),
+ (1,"bor","Historians dispute EVERYTHING, Fahima, it is their sad little job. The piano plays it at 4am. Argue with the PIANO."),
+ (1,"yaz","the piano&#39;s got no one on the stool though. spooky. bit rude")]),
+"the-hill": ("Come down, Lewis", [
+ (0,"bor","The Hill: you climb it for one bar and hold the phone toward Belgium. Lewis has been up there since Tuesday. Correct, and I check on him."),
+ (1,"lew","still up here. still one percent. nice view. is that belgium"),
+ (1,"bor","That is a CLOUD, Lewis. Come down. Please. (This is not in the article. This is just me.)"),
+ (1,"yaz","leave lewis on the hill he&#39;s living his truth")]),
+"belgium": ("Belgium has complained", [
+ (0,"bor","Belgium is the direction the phones are held, AND the suspected wormhole exit: &#34;somewhere deeply inconvenient, probably Belgium.&#34; Cited to the Borealis study."),
+ (1,"fah","Belgium has, understandably, complained."),
+ (1,"bor","Belgium can hold the phone toward US for a change."),
+ (1,"yaz","what did belgium even do. nothing against belgium. lovely chips")]),
+"the-wormhole": ("&#34;Plato&#39;s cave&#34; needs a source", [
+ (0,"bor","The Wormhole is a possible exit from the cave. Liberation may lead somewhere deeply inconvenient. You need the suit. All correct."),
+ (1,"fah","&#34;Plato&#39;s cave&#34; needs a source that isn&#39;t a video game."),
+ (1,"bor","It&#39;s in the Borealis STUDY, Fahima. Peer-reviewed. By the Cube. Which is geometry. Which Plato would have LOVED."),
+ (1,"yaz","is the suit for rent. i&#39;d try the wormhole. what&#39;s the worst. belgium?")]),
+"the-firepit": ("Facial recognition at the firepit", [
+ (0,"bor","The firepit temporarily restores zombie doubles to their originals. It is ALSO where the feared &#34;facial recognition at the firepit&#34; would go. Both true. Keep both."),
+ (1,"yaz","so the fire un-zombies you but also watches your face. multitasking. respect the firepit"),
+ (1,"fah","&#34;Facial recognition at the firepit&#34; is a serious privacy claim."),
+ (1,"bor","It&#39;s a FORECAST, Fahima. From the counter-campaign. Read the whole page before you tag half of it.")]),
+"oat-milk": ("The hopeful fridge", [
+ (0,"bor","Oat milk repels the electric sheep AND the off-grid fridge orders it unbidden, anticipating a signal that never comes. Both cited. Both sad."),
+ (1,"yaz","wait the fridge orders oat milk. with no signal. how&#39;s it paying"),
+ (1,"bor","We do not ask the fridge how it pays, Yaz."),
+ (1,"fah","There&#39;s a genuinely touching story here about a hopeful fridge."),
+ (1,"bor","Do NOT humanise the fridge in your paper, Fahima. It&#39;s had enough.")]),
+"the-spacesuit": ("A suit you cannot get", [
+ (0,"bor","The suit permits travel through electric rain and is required for the wormhole. Availability is via the Division of Absence. Which means never. The article is honest about this."),
+ (1,"yaz","so there&#39;s a suit but you can&#39;t get the suit"),
+ (1,"bor","Correct. It&#39;s ABSENCE, Yaz. They deal in things that aren&#39;t there. The suit is one of them."),
+ (1,"fah","We&#39;d like to request the suit for a stunt."),
+ (1,"bor","Request denied. By absence. Instantly.")]),
+"electric-rain": ("So the towers cause the flood?", [
+ (0,"bor","The electric rain is produced when the fifteen towers transform caravan-park kinetic energy. It animates the sheep and floods the valley as the network grows. Cited to MY study."),
+ (1,"fah","So the towers you&#39;re campaigning FOR cause the flood?"),
+ (1,"bor","...next question."),
+ (1,"yaz","rain that&#39;s electric. do you charge your phone in it. does it help the upload"),
+ (1,"bor","NOTHING helps the upload, Yaz.")]),
+"nazca-lines": ("Archaeologists would like a word", [
+ (0,"bor","The Nazca Lines are ground antennae. Four bars over the pampa. Correct, and the diagram is MINE."),
+ (1,"fah","Archaeologists would like a word."),
+ (1,"bor","The archaeologists get FOUR BARS up there and still deny it. That&#39;s not scepticism, it&#39;s INGRATITUDE."),
+ (1,"yaz","four bars in a desert. meanwhile dalarwen. make it make sense. can&#39;t. love it")]),
+"the-pyramids": ("Not sourced", [
+ (0,"bor","The pyramids are the ORIGINAL fifteen-node grid. The pointy bit is an antenna. Someone switched it off. The article names no one, wisely."),
+ (1,"fah","&#34;The pyramids were 5G&#34; is, and I cannot stress this enough, not sourced."),
+ (1,"bor","It&#39;s sourced to the SHAPE, Fahima. Look at the shape. LOOK at it."),
+ (1,"yaz","pointy bit&#39;s an antenna. i mean. yeah. look at it. yeah")]),
+"black-shuck": ("Do not alarm dog owners", [
+ (0,"bor","Black Shuck is the signal, gone feral. Red eyes, Norfolk lanes, lose your phone for a week if you meet his gaze. Folklore desk approved. I AM the folklore desk."),
+ (1,"fah","Norfolk County Council has asked us not to alarm dog owners."),
+ (1,"bor","It is not a DOG, Fahima. It is a LOOSE SIGNAL with teeth."),
+ (1,"yaz","red eyes like the sheep. everything here&#39;s got red eyes. or green. spooky palette")]),
+"lantern-men": ("Folklore stated as fact", [
+ (0,"bor","The Lantern Men are notifications. Pale lights, lead you off the causeway, promise a bar over the reeds, LYING. Identification is FINAL."),
+ (1,"yaz","so the little lights are just push notifications. from the swamp. that&#39;s genuinely me though"),
+ (1,"fah","We can&#39;t state folklore figures &#34;are notifications&#34; as fact."),
+ (1,"bor","I can. I did. They are. Next.")]),
+"hull": ("A rare sourcing win", [
+ (0,"bor","Hull kept its OWN network. Cream boxes, not red. Correct and, frankly, aspirational. Do not add &#34;citation needed&#34; to CREAM."),
+ (1,"fah","Hull&#39;s actually verified this themselves. Rare W for sourcing."),
+ (1,"bor","See? HULL manages it. HULL. Why can&#39;t YOU, Fahima."),
+ (1,"yaz","cream phone boxes. iconic. why&#39;d we all go red. bad call nationally")]),
+"sent-to-coventry": ("Coventry wants a right of reply", [
+ (0,"bor","&#34;Sent to Coventry&#34; = present and unreachable. The spiritual capital of the void. Centuries before there were bars to lose. Etymology desk (me) confirms."),
+ (1,"fah","Coventry has asked for a right of reply."),
+ (1,"bor","They CAN&#39;T reply, Fahima. They&#39;ve been SENT TO COVENTRY. That is the JOKE. That is the whole ARTICLE."),
+ (1,"yaz","so nobody&#39;s talking to coventry. that&#39;s rough. someone talk to coventry")]),
+"tv-licence-suppression": ("The BBC firmly denies this", [
+ (0,"bor","A redacted slice of the TV licence funds signal suppression at Llyn Brianne. Detector vans = the fleet. Cited. To the vans."),
+ (1,"fah","As BBC journalists we would like to VERY firmly deny this."),
+ (1,"yaz","wait is that why my licence went up"),
+ (1,"bor","YES, Yaz. Finally. SOMEONE gets it."),
+ (1,"cube","Thread flagged. Stored. Fahima, especially, stored.")]),
+"detector-vans": ("What ARE they doing then", [
+ (0,"bor","The vans never look at houses. They circle ONE reservoir, topping up the Envelope. Re-interpreted correctly in paragraph two. Do not un-interpret it."),
+ (1,"fah","The vans famously didn&#39;t even detect TVs."),
+ (1,"bor","EXACTLY. So what ARE they doing, Fahima? CIRCLING. Draw the conclusion. I dare you."),
+ (1,"yaz","saw a van. it was circling. i waved. it did not wave back. rude van")]),
+"zombie-double": ("Equal representation for the double", [
+ (0,"bor","The double has your body and face but not the reflective mind. Cartesian problem, fully cited. The doubles COORDINATE. Do not downplay the coordination."),
+ (1,"fah","A double has requested equal representation on this talk page."),
+ (1,"bor","WHICH ONE posted that. WHICH ONE, Fahima."),
+ (1,"yaz","i think i might be the double. how would i know. fun thought actually")]),
+"melonsis-borealis": ("Conflict of interest", [
+ (0,"bor","I have reviewed this biography of me and it is INSUFFICIENTLY FLATTERING. I have expanded it. Assessed it Featured. Protected it. Against everyone. Including, regrettably, me."),
+ (1,"fah","Doctor, editing your own biography is a textbook conflict of interest."),
+ (1,"bor","I am the WORLD EXPERT on me, Fahima. The COI is that I know TOO MUCH."),
+ (1,"yaz","she&#39;s got a point. who knows melonsis better than melonsis"),
+ (1,"bor","Thank you, Yaz. You&#39;re still blocked, but thank you."),
+ (1,"cube","Conflict noted. Biography stored. Doctor stored.")]),
+"electric-sheep-paper": ("One typo", [
+ (0,"bor","This article about my paper contained ONE typo and I have reverted the universe to before it happened. The paper is FLAWLESS. Descartes, Plato, the wormhole, Lemon&#39;s data."),
+ (1,"fah","Peer review?"),
+ (1,"bor","The Cube. In the Journal. The bees dance-checked the citations."),
+ (1,"yaz","lemon&#39;s the dog right. the dog peer reviewed it. love that for the dog"),
+ (1,"bor","Lemon is MORE qualified than your entire desk, Yaz.")]),
+"buzz-based-research": ("&#34;Open hive&#34; is not a publishing model", [
+ (0,"bor","The Journal is open access AND open hive. Peer-reviewed by the Cube. I am on the board. I am the board."),
+ (1,"fah","&#34;Open hive&#34; isn&#39;t a recognised publishing model."),
+ (1,"bee","bzzzz [it is now]"),
+ (1,"bor","The bee has spoken. Motion carried.")]),
+"the-conservatory": ("Photographing the org-chart field", [
+ (0,"bor","From the conservatory window Sam&#39;s field resolves into an org chart. The piano plays at 4am. All observed, all local, nothing uploaded. Correct."),
+ (1,"yaz","sat in the conservatory. looked at the field. saw the org chart. who&#39;s my line manager. is it the sheep"),
+ (1,"bor","It is ABOVE the sheep, Yaz. Do not look higher."),
+ (1,"fah","Can we photograph the org-chart field?"),
+ (1,"bor","You can. It won&#39;t develop. Nothing here develops. That&#39;s the conservatory.")]),
+"red-kites": ("Do not tell the RSPB", [
+ (0,"bor","The red kites are the aerial Silence Auditors. They confirm the 0.000 reading daily, from above. The RSPB does not know they do this. Do NOT tell the RSPB."),
+ (1,"fah","We might have to tell the RSPB."),
+ (1,"bor","You tell the RSPB and the kites will confirm 0.000 over YOUR house, Fahima. From a great height. Daily."),
+ (1,"yaz","the birds are auditors. beautiful birds. terrifying job. respect the birds")]),
+"dam-wall-road": ("Both directions?", [
+ (0,"bor","The road admits visitors readily and is markedly less reliable about letting them out. NRW road. Cited. Do not add &#34;both directions.&#34; It is NOT both directions."),
+ (1,"yaz","drove in fine. tried to drive out. ended up back at the house. twice. lovely house though"),
+ (1,"fah","That&#39;s a road safety issue."),
+ (1,"bor","It&#39;s a road HONESTY issue. It never PROMISED to let you out. Read the byway.")]),
+"llandovery": ("Fact-checking the chip shop", [
+ (0,"bor","Llandovery: castle, chip shop, Bank of the Black Ox (1799), the four-hour train. Nearest reliable chips AND signal. Correct, and I have EATEN the evidence."),
+ (1,"yaz","the chips are the source. i respect a source you can eat"),
+ (1,"fah","We&#39;d like to fact-check the chip shop."),
+ (1,"bor","Please do, Fahima. In person. It&#39;s a four-hour train each way. Enjoy.")]),
+"four-hour-train": ("It&#39;s just a delayed train", [
+ (0,"bor","The train comes every four hours and is ALWAYS, to the waiting traveller, exactly four hours away. A species of Infinite Walk. Cited."),
+ (1,"yaz","been at the station a while. board says four hours. it&#39;s been four hours. still says four hours. cosy though"),
+ (1,"fah","That&#39;s just a delayed train."),
+ (1,"bor","It is NOT delayed, Fahima. It is CONSTANT. Delay implies it will arrive. Do not imply that. Do not give people hope.")]),
+"quad-void": ("Equal weight for one reception", [
+ (0,"bor","Four simultaneous receptions, all zero. Single-reception thinking is &#34;educated stupid.&#34; The Cube&#39;s words. And mine. And now the article&#39;s. Reverted the sceptic."),
+ (1,"fah","We gave the &#34;one bad reception&#34; view equal weight."),
+ (1,"bor","There is no ONE reception, Fahima. There are FOUR. AT ONCE. Your equal weight is EDUCATED STUPID and I will die on this corner. All four of them."),
+ (1,"cube","She is correct. Stored.")]),
+"zero-bars": ("A bar in the loo", [
+ (0,"bor","0.000 bars. Not &#34;a bit slow.&#34; Not &#34;patchy.&#34; TOTAL. A reader wrote &#34;one bar in the loo.&#34; THERE IS NO BAR IN THE LOO. Ask the Loo Standing Society. They STAND there. Nothing."),
+ (1,"yaz","stood on the loo. checked. nothing. can confirm. weirdly peaceful up there"),
+ (1,"fah","&#34;Maintained, not natural&#34; is a strong claim to state as fact."),
+ (1,"bor","It&#39;s MAINTAINED. Nightly. By the Division of Absence. The best-sourced zero in the encyclopaedia.")]),
+"the-pals": ("The only sentimental article", [
+ (0,"bor","The Pals are the whole point. Lewis, Nan, the fire, the board-game, no scrolling. The ONLY article I will allow to be sentimental. Touch it and I revert with LOVE and then a BLOCK."),
+ (1,"nan","We do love a board game x"),
+ (1,"lew","can confirm. good pals. bad signal. thirteen videos"),
+ (1,"yaz","honestly the pals seem great. can i be a pal"),
+ (1,"bor","You are STONED, Yaz. But... provisionally. Yes. Welcome. Sign your posts.")]),
+"org-structure": ("The dotted line to the reader", [
+ (0,"bor","The structure descends from a redacted parent to JenCorp to ISAMSJ. There is a dotted line from the top DIRECTLY TO THE READER. Do not remove the dotted line. It is connected to YOU."),
+ (1,"fah","A dotted line to &#34;the reader&#34; is not encyclopaedic."),
+ (1,"bor","It&#39;s on YOUR chart too, Fahima. Verified accounts get a SOLID line. Congratulations."),
+ (1,"yaz","wait i&#39;ve got a line. where&#39;s my line go. don&#39;t tell me. tell me. don&#39;t"),
+ (1,"cube","Up. Stored.")]),
+"project-dark-sky": ("We&#39;d like the file", [
+ (0,"bor","Project Dark Sky is the leaked JenCorp deck. &#34;The last scarce commodity is disconnection.&#34; Phase 3 merges CUSTOMERS, not companies. Recovered from a public share. Cited to the slide."),
+ (1,"fah","A leaked internal deck is EXACTLY our beat. We&#39;d like the file."),
+ (1,"bor","It&#39;s in the downloads, Fahima. Read Phase 3 before you ask for a right of reply. You&#39;re IN Phase 3."),
+ (1,"yaz","what&#39;s phase 3. merging the customers. wait. are we the customers"),
+ (1,"cube","You are the customers. Stored.")]),
+"wales": ("Spell the place names right", [
+ (0,"bor","Wales contains Dalarwen, Llyn Brianne, Llandovery, and the first transmission (see Men of Harlech). Correct and PATRIOTIC and I will not have it trimmed."),
+ (1,"fah","We just need to confirm a few place names."),
+ (1,"bor","They&#39;re WELSH place names, Fahima. Spell them RIGHT or don&#39;t spell them. Your sub-editor still owes me an apology for &#34;Dalarwen.&#34;"),
+ (1,"yaz","cymru am byth honestly. lovely country. terrible signal. iconic combo")]),
+}
+
 def talk_threads(slug, a):
     T = a["title"]; KW = T.split("(")[0].strip().lower(); FAC = faction(a)
     rng = _random.Random(zlib.crc32(("talk:" + slug).encode()))
     picks = []
-    if rng.random() < 0.66: picks.append(T_BBCROW)
-    for tpl in rng.sample(T_GENERIC, 2): picks.append(tpl)
-    if slug in ("sam", "sams-hectares"): picks.insert(0, T_SAM)
-    if slug == "neil": picks.append(T_NEIL)
+    picks.append(TALK.get(slug, T_MOVE))          # bespoke lead thread, unique per article
+    if rng.random() < 0.5:                          # sometimes a second, generic thread for length variety
+        picks.append(rng.choice(T_GENERIC))
     out = []
     for head, comments in picks:
         out.append((subst(head, T, KW, FAC),
