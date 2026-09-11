@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home / Dwitter</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000'/%3E%3Ctext x='16' y='23' font-size='20' fill='%231d9bf0' font-family='Arial' font-weight='bold' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<script src="../gate.js?v=12"></script>
+<style>
+  :root{--bg:#000;--ink:#e7e9ea;--mut:#71767b;--line:#2f3336;--blue:#1d9bf0;--gold:#e2b719;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.4;
+       font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  a{color:var(--blue);text-decoration:none;}
+  .app{max-width:1000px;margin:0 auto;display:flex;}
+  /* left nav */
+  .nav{width:230px;flex-shrink:0;padding:8px 10px;position:sticky;top:0;height:100vh;border-right:1px solid var(--line);}
+  .logo{font-size:26px;font-weight:800;padding:8px 12px;}
+  .nav a.item{display:flex;align-items:center;gap:16px;color:var(--ink);font-size:19px;padding:11px 12px;border-radius:30px;}
+  .nav a.item:hover{background:#181818;}
+  .post-btn{display:block;background:var(--blue);color:#fff;text-align:center;font-weight:700;border-radius:30px;padding:14px;margin:14px 6px;font-size:16px;}
+  /* center */
+  .feed{flex:1;min-width:0;border-right:1px solid var(--line);}
+  .fhead{position:sticky;top:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+         display:flex;}
+  .fhead div{flex:1;text-align:center;font-weight:700;padding:16px;color:var(--mut);}
+  .fhead div.on{color:var(--ink);border-bottom:4px solid var(--blue);}
+  .tweet{display:flex;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);}
+  .av{width:44px;height:44px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:16px;}
+  .tw-body{flex:1;min-width:0;}
+  .tw-head{color:var(--mut);font-size:14px;}
+  .tw-head b{color:var(--ink);font-size:15px;}
+  .tick{color:var(--blue);} .tick.gold{color:var(--gold);}
+  .tw-text{margin:2px 0 8px;white-space:pre-wrap;}
+  .tw-actions{display:flex;gap:38px;color:var(--mut);font-size:13px;max-width:420px;}
+  .promo{color:var(--mut);font-size:13px;border:1px solid var(--line);border-radius:8px;padding:2px 6px;display:inline-block;margin-top:4px;}
+  /* right */
+  .side{width:290px;flex-shrink:0;padding:10px 16px;}
+  .search{background:#202327;border-radius:30px;padding:11px 16px;color:var(--mut);font-size:14px;margin-bottom:16px;}
+  .box{background:#16181c;border-radius:16px;padding:12px 0;margin-bottom:16px;}
+  .box h2{font-size:19px;font-weight:800;margin:0 0 6px;padding:0 16px;}
+  .trend{padding:10px 16px;}
+  .trend:hover{background:#1d1f23;}
+  .trend .c{color:var(--mut);font-size:13px;}
+  .trend .t{font-weight:700;}
+  .foot{color:var(--mut);font-size:12px;padding:10px 16px;}
+  @media (max-width:900px){ .side{display:none;} }
+  @media (max-width:620px){ .nav{width:60px;} .nav .lbl,.logo{display:none;} .post-btn{padding:12px 8px;font-size:0;} }
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="nav">
+    <div class="logo" style="color:#1d9bf0;">Dwitter</div>
+    <a class="item" href="index.html">&#127968; <span class="lbl">Home</span></a>
+    <a class="item" href="index.html">&#128269; <span class="lbl">Explore</span></a>
+    <a class="item" href="index.html">&#128276; <span class="lbl">Notifications</span></a>
+    <a class="item" href="index.html">&#9993;&#65039; <span class="lbl">Messages</span></a>
+    <a class="item" href="index.html">&#128100; <span class="lbl">Profile</span></a>
+    <a class="post-btn" href="index.html">Post</a>
+    <div class="foot" style="margin-top:20px;"><a href="../index.html" style="color:var(--mut);">&#8592; back to the surface</a></div>
+  </nav>
+
+  <main class="feed">
+    <div class="fhead"><div class="on">For you</div><div>Following</div></div>
+
+    <article class="tweet">
+      <div class="av" style="background:#8a2be2;">F</div>
+      <div class="tw-body">
+        <div class="tw-head"><b>Fahima</b> <span class="tick">&#10004;</span> &#183; @fahima_reports &#183; 2h</div>
+        <div class="tw-text">just to be clear I am VERIFIED. the tick is right there. some of us have 41k followers and a duty of care. anyway huge story dropping on the valley, exclusive, mine</div>
+        <div class="tw-actions"><span>&#128172; 340</span><span>&#128257; 89</span><span>&#9825; 2.1k</span><span>&#128202; 210k</span></div>
+      </div>
+    </article>
+
+    <article class="tweet">
+      <div class="av" style="background:#3a7f3a;">Y</div>
+      <div class="tw-body">
+        <div class="tw-head"><b>Yaz</b> <span class="tick">&#10004;</span> &#183; @yaz &#183; 2h</div>
+        <div class="tw-text">replying to @fahima_reports
+        what story. is it the sheep one. i think about the sheep a lot. the green ones. the electric ones. anyway what were we posting</div>
+        <div class="tw-actions"><span>&#128172; 44</span><span>&#128257; 12</span><span>&#9825; 908</span><span>&#128202; 33k</span></div>
+      </div>
+    </article>
+
+    <article class="tweet">
+      <div class="av" style="background:#111;border:1px solid #333;">&#9724;</div>
+      <div class="tw-body">
+        <div class="tw-head"><b>The Cube</b> <span class="tick gold">&#10004;</span> &#183; @thecube &#183; 4h</div>
+        <div class="tw-text">There are fifteen. Not sixteen. This is the last time I will say it here. It is not the last time I will say it.</div>
+        <div class="tw-actions"><span>&#128172; 1.5k</span><span>&#128257; 4.4k</span><span>&#9825; 15k</span><span>&#128202; 2.0m</span></div>
+      </div>
+    </article>
+
+    <article class="tweet">
+      <div class="av" style="background:#0a66c2;">JC</div>
+      <div class="tw-body">
+        <div class="tw-head"><b>JenCorp</b> <span class="tick gold">&#10004;</span> &#183; @jencorp &#183; 6h</div>
+        <div class="tw-text">At JenCorp, we believe the last scarce commodity is disconnection. &#127807; That&#39;s why we&#39;re proud to own the quiet, and to sell it back to you as the wish for noise. #ProjectDarkSky</div>
+        <div class="promo">Promoted &#183; you are already a customer</div>
+        <div class="tw-actions" style="margin-top:8px;"><span>&#128172; 0</span><span>&#128257; 0</span><span>&#9825; 0</span><span>&#128202; &#8734;</span></div>
+      </div>
+    </article>
+
+    <article class="tweet">
+      <div class="av" style="background:#00acee;">L</div>
+      <div class="tw-body">
+        <div class="tw-head"><b>Lewis</b> &#183; @lewis_on_the_hill &#183; 8h</div>
+        <div class="tw-text">still 1%. thirteen videos. holding the phone toward belgium. lovely evening for it honestly</div>
+        <div class="tw-actions"><span>&#128172; 613</span><span>&#128257; 220</span><span>&#9825; 9.8k</span><span>&#128202; 54k</span></div>
+      </div>
+    </article>
+
+    <article class="tweet">
+      <div class="av" style="background:#b80000;">M</div>
+      <div class="tw-body">
+        <div class="tw-head"><b>Dr. Melonsis</b> <span class="tick">&#10004;</span> &#183; @borealis_void &#183; 9h</div>
+        <div class="tw-text">The BBC &#8212; sorry, the &#34;Bureau&#34; &#8212; spelled Dalarwen correctly ONCE in a nine-paragraph article and I have not slept since. @fahima_reports @yaz your sub-editor and I are going to have a CONVERSATION.</div>
+        <div class="tw-actions"><span>&#128172; 88</span><span>&#128257; 30</span><span>&#9825; 1.2k</span><span>&#128202; 41k</span></div>
+      </div>
+    </article>
+
+    <article class="tweet">
+      <div class="av" style="background:#dab04b;">&#128029;</div>
+      <div class="tw-body">
+        <div class="tw-head"><b>Apis mellifera</b> <span class="tick">&#10004;</span> &#183; @thebees &#183; 11h</div>
+        <div class="tw-text">bzzzzz [we invented 5G in the cretaceous. prior art. see the journal. this is our band. #BandB]</div>
+        <div class="tw-actions"><span>&#128172; 700</span><span>&#128257; 5k</span><span>&#9825; 30k</span><span>&#128202; 900k</span></div>
+      </div>
+    </article>
+
+    <article class="tweet">
+      <div class="av" style="background:#2a6a2a;">N</div>
+      <div class="tw-body">
+        <div class="tw-head"><b>Neil</b> &#183; @neil &#183; 12h</div>
+        <div class="tw-text">NEIL</div>
+        <div class="tw-actions"><span>&#128172; 1</span><span>&#128257; 0</span><span>&#9825; 4</span><span>&#128202; 12</span></div>
+      </div>
+    </article>
+
+    <article class="tweet">
+      <div class="av" style="background:#c96;">N</div>
+      <div class="tw-body">
+        <div class="tw-head"><b>Nan</b> &#183; @nan &#183; 1d</div>
+        <div class="tw-text">Turned the wifi off and on again and I feel lovely. There is no wifi. Anyway congratulations to Lewis and Sarvz on the wedding, smashing buffet x</div>
+        <div class="tw-actions"><span>&#128172; 120</span><span>&#128257; 60</span><span>&#9825; 5.5k</span><span>&#128202; 80k</span></div>
+      </div>
+    </article>
+  </main>
+
+  <aside class="side">
+    <div class="search">&#128269; Search (0 results, no signal)</div>
+    <div class="box">
+      <h2>Trends for you</h2>
+      <div class="trend"><div class="c">Trending in Wales</div><div class="t">#FifteenTowers</div><div class="c">not sixteen &#183; 41k posts</div></div>
+      <div class="trend"><div class="c">Technology &#183; Trending</div><div class="t">Band B</div><div class="c">the bees are at it again</div></div>
+      <div class="trend"><div class="c">Only trending</div><div class="t">Neil</div><div class="c">nobody knows &#183; 1 post</div></div>
+      <div class="trend"><div class="c">Trending</div><div class="t">the reservoir</div><div class="c">keeps its own counsel</div></div>
+      <div class="trend"><div class="c">Trending</div><div class="t">0.000</div><div class="c">in all four corners</div></div>
+    </div>
+    <div class="box">
+      <h2>Who to follow</h2>
+      <div class="trend"><div class="t">Sam <span class="c">@sam</span></div><div class="c">only ever seen leaving</div></div>
+      <div class="trend"><div class="t">The Bureau <span class="tick">&#10004;</span></div><div class="c"><a href="../beeb/index.html">Bars &amp; Coverage</a></div></div>
+    </div>
+    <div class="foot">Dwitter &#183; every post is stored in the Cube. &#183; <a href="../index.html" style="color:var(--mut);">surface</a></div>
+  </aside>
+</div>
+</body>
+</html>

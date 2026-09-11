@@ -28,7 +28,7 @@ art("llyn-brianne", "Llyn Brianne",
  infobox=[("Type","Reservoir (not a lake)"),("Holds back","Water; also, allegedly, [[zero-bars|bars]]"),("Access","The [[dam-wall-road]] (Natural Resources Wales)"),("On approach","On your right, coming off the dam")],
  sections=[("The silence thesis","If the dam can hold back a whole valley of water, adherents ask, what else is it holding back? The [[tv-licence-suppression|licence-fee theory]] holds that the dam stores ''silence'', and the fee pays the standing charge.")],
  seealso=["dalarwen","dam-wall-road","tv-licence-suppression","exclusion-envelope"],
- ext=[("The reservoir on the field report","../about-dalarwen.html")],
+ ext=[("The reservoir on the field report","../about-dalarwen.html"),("Reviews on PalAdvisor","../reviews/index.html"),("Check the signal (GOV.VOID)","../gov/index.html")],
  cats=["Places","Infrastructure"])
 
 art("isam", "ISAM",
@@ -61,11 +61,11 @@ art("jencorp", "JenCorp",
  cats=["ISAMSJ","Organisations"])
 
 art("sam", "Sam",
- "'''Sam''' is the neighbour of [[dalarwen]]. Just Sam &#8212; no one is certain it is short for anything, and no one has ever established a surname. Sam occupies exactly [[sams-hectares|three hectares]] behind a leaning gate marked ''DO NOT ANCHOR''. There are no neighbours for miles; Sam is the exception that proves it. Sam is not, whatever the name of a certain [[sedgley-holdings|holdings company]] might suggest, anything to do with that company.",
- infobox=[("Name","Sam (just Sam)"),("Surname","None on record"),("Occupation","The neighbour"),("Land","[[sams-hectares|Three hectares]]"),("Habits","Only ever seen leaving")],
+ "'''Sam''' is the neighbour of [[dalarwen]], known to some as &#34;Laddy Long Legs&#34;. Just Sam &#8212; no one is certain it is short for anything, and no one has ever established a surname. Sam occupies exactly [[sams-hectares|three hectares]] behind a leaning gate marked ''DO NOT ANCHOR''. There are no neighbours for miles; Sam is the exception that proves it. Sam is not, whatever the name of a certain [[sedgley-holdings|holdings company]] might suggest, anything to do with that company.",
+ infobox=[("Name","Sam (just Sam)"),("Also known as","&#34;Laddy Long Legs&#34;"),("Surname","None on record"),("Occupation","The neighbour"),("Land","[[sams-hectares|Three hectares]]"),("Habits","Only ever seen leaving")],
  sections=[("Sightings","No one has seen Sam ''arrive''; Sam is only ever seen ''leaving'', one hand raised in a wave that could be hello and is, on reflection, always goodbye.")],
  seealso=["sams-hectares","dalarwen","the-conservatory"],
- ext=[("Sam","../sam.html")],
+ ext=[("Sam","../sam.html"),("Sam on TrappedIn","../work/index.html")],
  cats=["People","Dalarwen"])
 
 art("sams-hectares", "Sam's three hectares",
@@ -107,7 +107,7 @@ art("lewis", "Lewis",
  infobox=[("Role","Chief broadcast officer (pending signal)"),("Videos","13 (unuploaded)"),("Upload progress","1% since Tuesday"),("Uplink","Towers 10–12 of the [[dalarwen-5g-grid|grid]]")],
  sections=[("The Last Towa","In the final scenario, Lewis receives five bars just as the valley floods, and must choose between destroying the tower to save [[dalarwen]] or waiting for his thirteenth video to upload. See [[electric-sheep-paper|the study]].")],
  seealso=["the-hill","dalarwen-5g-grid","electric-sheep-paper"],
- ext=[("Lewis Connectivity HQ","../lewis.html")],
+ ext=[("Lewis Connectivity HQ","../lewis.html"),("Watch the upload on DalarTube","../tube/index.html"),("Lewis on Dwitter","../x/index.html")],
  cats=["People","Dalarwen"])
 
 art("electric-sheep", "Electric sheep",

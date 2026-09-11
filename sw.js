@@ -1,7 +1,7 @@
 /* Dalarwen 5G — offline service worker.
    Pre-caches the whole site so it runs with no internet (ironically, for Dalarwen).
    Bump CACHE when content changes to force an update on next online visit. */
-var CACHE = "dalarwen-offline-v28";
+var CACHE = "dalarwen-offline-v29";
 var ASSETS = [
   "./",
   "404.html",
@@ -49,6 +49,7 @@ var ASSETS = [
   "favicon-32.png",
   "favicon.ico",
   "favicon.svg",
+  "forum/index.html",
   "free-up-lewis.html",
   "game-art/win1.png",
   "game-art/win2.png",
@@ -56,6 +57,7 @@ var ASSETS = [
   "game-art/win4.png",
   "game-art/win5.png",
   "gate.js",
+  "gov/index.html",
   "grid/index.html",
   "guestbook.html",
   "hub/hub.css",
@@ -80,6 +82,7 @@ var ASSETS = [
   "radiation.html",
   "retro.css",
   "retro.js",
+  "reviews/index.html",
   "ring/bees-invented-5g.html",
   "ring/big-candle.html",
   "ring/conservatory-weather.html",
@@ -111,6 +114,7 @@ var ASSETS = [
   "the-division.html",
   "the-quiet.html",
   "towers.html",
+  "tube/index.html",
   "tv-licence.html",
   "webring.html",
   "wiki/band-b-talk.html",
@@ -239,7 +243,9 @@ var ASSETS = [
   "wiki/zero-bars-talk.html",
   "wiki/zero-bars.html",
   "wiki/zombie-double-talk.html",
-  "wiki/zombie-double.html"
+  "wiki/zombie-double.html",
+  "work/index.html",
+  "x/index.html"
 ];
 self.addEventListener("install", function(e){
   self.skipWaiting();
