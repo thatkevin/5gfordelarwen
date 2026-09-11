@@ -113,13 +113,27 @@ var player, cam, rain, state, hearts, builtCount, upCount, msg, msgT, frozen, re
 var WINSRC=["game-art/win1.png","game-art/win2.png","game-art/win3.png","game-art/win4.png","game-art/win5.png"];
 var WINCAP=["CHAPTER I  -  FREE UP LEWIS","CHAPTER II  -  SAVE DI FEAST","CHAPTER III  -  DALARWEN WOOD","CHAPTER IV  -  THE SPLIT","CHAPTER V  -  ENTER DI VOID"];
 var winArt=WINSRC.map(function(s){ var im=new Image(); im.src=s; return im; });
-var winIdx=0, winProg=0, winDone=false;
+var winIdx=0, winProg=0, winDone=false, bugShown=false;
 function startWin(){ winIdx=0; winProg=0; winDone=false; startWinMusic(); }
 function winAdvance(){
-  if(winDone){ startGame(); return; }
+  if(winDone){ reportBug(); return; }
   winProg=0;
   if(winIdx<WINSRC.length-1){ winIdx++; beep(880,0.08); beep(1175,0.08); }
-  else { winDone=true; beep(1568,0.3); }
+  else { winDone=true; beep(1568,0.3); setTimeout(reportBug,700); }
+}
+/* Finishing the game is treated, by the maintainers, as an unexpected success (i.e. a bug). */
+function reportBug(){
+  if(bugShown) return; bugShown=true;
+  stopWinMusic();
+  var ok=confirm(
+    "⚠  UNEXPECTED SUCCESS DETECTED  ⚠\n\n"+
+    "Lewis has been freed. The sheep were survived. Neil was outrun. The game has been completed.\n\n"+
+    "This was not supposed to be possible, and has been logged upstream as a bug.\n\n"+
+    "  Repository:  dalarwen-5g-liberation-front/fifteen-towers\n"+
+    "  Severity:    the Cube is looking into it\n\n"+
+    "Submit the bug report to the maintainers?");
+  if(ok){ window.location.href="hub/issues.html"; }
+  else { bugShown=false; startGame(); }
 }
 
 /* an ORIGINAL uplifting victory chiptune (not derived from any real song) */
@@ -204,7 +218,7 @@ function buildLevel(){
 function resetPlayer(px,py){ player={x:px,y:py,w:22,h:34,vx:0,vy:0,onGround:false,face:1,inv:0,run:0,checkX:px,checkY:py}; }
 
 function startGame(){
-  stopWinMusic(); winDone=false; winIdx=0; winProg=0;
+  stopWinMusic(); winDone=false; winIdx=0; winProg=0; bugShown=false;
   buildLevel(); resetPlayer(60,430-34);
   cam=0; hearts=3; builtCount=0; upCount=0; msg=""; msgT=0; frozen=false; respawnT=0;
   rain=[]; for(var i=0;i<150;i++){ rain.push({x:rnd()*(VW+300)-150,y:rnd()*VH,l:16+rnd()*30,s:9+rnd()*10,c:rnd()<0.5?"#7dff9c":"#b57bff"}); }
