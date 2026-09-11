@@ -38,9 +38,9 @@ art("isam", "ISAM",
  cats=["ISAMSJ","Organisations"])
 
 art("sedgley-holdings", "Sedgley Holdings",
- "'''Sedgley Holdings''' is the terrestrial arm of [[isamsj|ISAMSJ]], responsible for land, mast rights, footpaths, pitches, and \"the space between the bars\". If a person has ever stood somewhere and received no signal, they have stood upon Sedgley Holdings' balance sheet. It is closely associated with the figure known as [[sam]].",
- infobox=[("Industry","Land; mast rights; absence"),("Parent","[[isamsj|ISAMSJ]]"),("Key figure","[[sam|S. Sedgley]]"),("Assets","[[infinite-walks]], [[clifftop-caravans]], the [[exclusion-envelope]]")],
- seealso=["isam","isamsj","sam","division-of-absence"],
+ "'''Sedgley Holdings''' is the terrestrial arm of [[isamsj|ISAMSJ]], responsible for land, mast rights, footpaths, pitches, and \"the space between the bars\". If a person has ever stood somewhere and received no signal, they have stood upon Sedgley Holdings' balance sheet. Despite the shared syllable, it has no established connection to the [[dalarwen]] neighbour called [[sam|Sam]], who has asked, repeatedly, to be left out of it.",
+ infobox=[("Industry","Land; mast rights; absence"),("Parent","[[isamsj|ISAMSJ]]"),("Assets","[[infinite-walks]], [[clifftop-caravans]], the [[exclusion-envelope]]")],
+ seealso=["isam","isamsj","division-of-absence"],
  cats=["ISAMSJ","Organisations"])
 
 art("isamsj", "ISAMSJ",
@@ -60,19 +60,19 @@ art("jencorp", "JenCorp",
  ext=[("JenCorp","../jencorp.html")],
  cats=["ISAMSJ","Organisations"])
 
-art("sam", "Sam (Sedgley)",
- "'''Sam''', signed ''S. Sedgley'', is the neighbour of [[dalarwen]] and the personification of the terrestrial \"S\" in [[isamsj|ISAMSJ]]. Sam occupies exactly [[sams-hectares|three hectares]] behind a leaning gate marked ''DO NOT ANCHOR''. There are no neighbours for miles; Sam is the exception that proves it.",
- infobox=[("Full name","S. Sedgley"),("Occupation","The neighbour; land"),("Land","[[sams-hectares|Three hectares]]"),("Habits","Only ever seen leaving"),("Affiliation","[[sedgley-holdings]]")],
+art("sam", "Sam",
+ "'''Sam''' is the neighbour of [[dalarwen]]. Just Sam &#8212; no one is certain it is short for anything, and no one has ever established a surname. Sam occupies exactly [[sams-hectares|three hectares]] behind a leaning gate marked ''DO NOT ANCHOR''. There are no neighbours for miles; Sam is the exception that proves it. Sam is not, whatever the name of a certain [[sedgley-holdings|holdings company]] might suggest, anything to do with that company.",
+ infobox=[("Name","Sam (just Sam)"),("Surname","None on record"),("Occupation","The neighbour"),("Land","[[sams-hectares|Three hectares]]"),("Habits","Only ever seen leaving")],
  sections=[("Sightings","No one has seen Sam ''arrive''; Sam is only ever seen ''leaving'', one hand raised in a wave that could be hello and is, on reflection, always goodbye.")],
- seealso=["sedgley-holdings","sams-hectares","isamsj","org-structure"],
+ seealso=["sams-hectares","dalarwen","the-conservatory"],
  ext=[("Sam","../sam.html")],
- cats=["People","ISAMSJ"])
+ cats=["People","Dalarwen"])
 
 art("sams-hectares", "Sam's three hectares",
- "'''Sam's three hectares''' is a parcel of land adjoining [[dalarwen]], owned by [[sam|S. Sedgley]]. It is always, exactly, three hectares, though every pacing of it yields a different count. Viewed from the [[the-conservatory|conservatory]] window, the grass resolves into an [[org-structure|organisational chart]].",
- infobox=[("Area","Exactly 3 ha (variable)"),("Signage","DO NOT ANCHOR"),("Resolves into","An [[org-structure|org chart]]")],
+ "'''Sam's three hectares''' is a parcel of land adjoining [[dalarwen]], owned by [[sam|Sam]]. It is always, exactly, three hectares, though every pacing of it yields a different count. Viewed from the [[the-conservatory|conservatory]] window, the grass resolves into an [[org-structure|organisational chart]].",
+ infobox=[("Area","Exactly 3 ha (variable)"),("Owner","[[sam|Sam]] (just Sam)"),("Signage","DO NOT ANCHOR"),("Resolves into","An [[org-structure|org chart]]")],
  seealso=["sam","org-structure","clifftop-caravans"],
- cats=["Places","ISAMSJ"])
+ cats=["Places","Dalarwen"])
 
 art("the-cube", "The Cube",
  "'''The Cube''' is the presiding intelligence of the Dalarwen mythos. In its lower aspect it is a rotating figure that counts the [[dalarwen-5g-grid|towers]] (there are fifteen; there is no sixteenth). In its higher aspect it is the redacted parent above [[jencorp|JenCorp]] &mdash; unreachable by climbing, arriving regardless.",

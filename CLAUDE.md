@@ -62,8 +62,10 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
 
 - **The Cube** — counts the towers (loud); revealed as the redacted parent *above* JenCorp (`above.html`).
 - **ISAMSJ** = **ISAM** (intergalactic weaponry) **& Sedgley Holdings**, a division of **JenCorp**.
-- **Sam / S. Sedgley** (`sam.html`) — the neighbour of the three hectares; the terrestrial "S"; only ever
-  seen leaving. `DO NOT ANCHOR`.
+- **Sam** (`sam.html`) — the neighbour of the three hectares; **just Sam**, no surname anyone can pin down;
+  only ever seen leaving. `DO NOT ANCHOR`. NOT "Sedgley" and NOT the corporate "S" — Sam is a person,
+  unaffiliated with Sedgley Holdings (they merely share a syllable, which Sam resents). Do not re-link them.
+- **Sedgley Holdings** — the "S" of ISAMSJ: a faceless terrestrial land/mast-rights company. Never Sam.
 - **The Division of Absence** (`the-division.html`) — warehouses the unbuilt towers.
 - **The Coventry Conductor** (`ring/coventry.html`) — the one man who went to Dalarwen *looking* for the
   signal and came back able to describe it; wears goggles against the radiation (the green "comes off the
