@@ -33,7 +33,7 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
 - **The gate**: every page loads `gate.js` in `<head>`. Password is **ISAMSJ** (case-insensitive, fuzzy —
   Levenshtein ≤ 2, substring, etc). Unlock persists per session. Dark pages include it too so they aren't
   an un-gated bypass.
-- **Cache-busting**: shared assets are referenced with `?v=N` (currently **v=7**). If you edit
+- **Cache-busting**: shared assets are referenced with `?v=N` (currently **v=8**). If you edit
   `retro.css`, `retro.js`, `gate.js`, `dark.css`, or `drone.js`, **bump N everywhere** or browsers serve
   stale copies (this has already bitten us once — a ghost "psst" line).
 - **Favicon**: loud pages use `favicon.svg` (+ `.ico` + apple-touch). Dark pages keep their own bleak

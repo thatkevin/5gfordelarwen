@@ -6,8 +6,8 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="alternate icon" href="favicon.ico">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="retro.css?v=7">
-<script src="gate.js?v=7"></script>
+<link rel="stylesheet" href="retro.css?v=8">
+<script src="gate.js?v=8"></script>
 <style type="text/css">
   .scene{ font-family:Georgia,'Times New Roman',serif; font-size:17px; line-height:1.75;
           color:#E4ECD4; text-align:left; max-width:640px; margin:0 auto 18px; }
@@ -60,18 +60,18 @@
 <br><br>
 </center>
 
-<script src="retro.js?v=7"></script>
+<script src="retro.js?v=8"></script>
 <script>
 var D="&#11835;"; // three-em dash
 var STORY={
 
 "start":{ t:
-  "You are the last car on the Natural Resources Wales road. It runs along the top of the dam wall of <b>Llyn Brianne</b>: black water on your left, a long drop to the spillway on your right, the Cambrian foothills going purple ahead. On the passenger seat your phone slides from one bar "+D+" to none. <b>0.000.</b> The radio dissolves into soft static, then into a silence so complete it has texture. Ahead: the track up to Dalarwen. Behind: the dam, and the way back.",
+  "You come down off the dam wall onto the Natural Resources Wales road: the black water of <b>Llyn Brianne reservoir</b> on your right, the hillside rising on your left, the Cambrian foothills going purple ahead. On the passenger seat your phone slides from one bar "+D+" to none. <b>0.000.</b> The radio dissolves into soft static, then into a silence so complete it has texture. Ahead: the track up to Dalarwen. Behind: the dam, and the way back.",
   c:[["Drive on to the house","arrive"],["Stop on the dam and hold your phone to the sky","dam_phone"],["Turn the car around","turn_back"]] },
 
 "arrive":{ t:
   "The farmhouse is exactly as the website promised: a low stone building tucked into a south-facing hill, oak and conifer behind, solar panels catching the last light, a lean-to stacked with split logs. Nobody for miles. You kill the engine and the quiet arrives like a change in pressure "+D+" the loudest thing you have ever failed to hear. A red kite tilts overhead and does not call.",
-  c:[["Go inside","hall"],["Walk down to the lake","lake"],["Climb the hill to find one bar","hill_intro"],["Drive the long way to Llandovery","llandovery"],["Wander past the lean-to to the neighbour's field","sams_hectares"]] },
+  c:[["Go inside","hall"],["Walk down to the reservoir","lake"],["Climb the hill to find one bar","hill_intro"],["Drive the long way to Llandovery","llandovery"],["Wander past the lean-to toward Sam's field","sams_hectares"]] },
 
 "dam_phone":{ t:
   "You stand on the dam wall, arm raised, phone toward the sky "+D+" toward, you decide, Belgium. Nothing. The kite watches from a thermal; it knows something and isn't saying. Then the screen lights, once, with a notification that was not there a second ago and cannot possibly have arrived: <b>'welcome, asset.'</b> You did not sign up for anything.",
@@ -82,7 +82,7 @@ var STORY={
   c:[["Get out and approach the caravan","caravan_end"],["Drive toward the house; there is only one direction now","arrive"]] },
 
 "hall":{ t:
-  "The hall smells of woodsmoke and cold stone. A vast <b>inglenook fireplace</b>, unlit. A shelf sagging with jigsaws and board-games. Stairs to five bedrooms, three with lake views. From the kitchen, the tick of an Oil Range cooling. On the wall, in careful cross-stitch, a single framed word: <b>FIFTEEN.</b>",
+  "The hall smells of woodsmoke and cold stone. A vast <b>inglenook fireplace</b>, unlit. A shelf sagging with jigsaws and board-games. Stairs to five bedrooms, three with reservoir views. From the kitchen, the tick of an Oil Range cooling. On the wall, in careful cross-stitch, a single framed word: <b>FIFTEEN.</b>",
   c:[["Light the wood-burner","fire"],["Take a board-game off the shelf","boardgame"],["Choose a bedroom","bedroom"],["Go through to the kitchen","kitchen"]] },
 
 "fire":{ t:
@@ -94,12 +94,12 @@ var STORY={
   c:[["Place the tower","boardgame_play"],["Put it back on the shelf, slowly","hall"]] },
 
 "boardgame_play":{ t:
-  "You place the tower. The board <i>responds.</i> Squares you didn't draw ink themselves in. A tiny painted valley appears; a tiny black lake; a tiny you, mid-move, one hand raised. You look down and realise you are not holding the piece. You <b>are</b> the piece. Somewhere very large, a hand hesitates over the board, deciding your next square.",
+  "You place the tower. The board <i>responds.</i> Squares you didn't draw ink themselves in. A tiny painted valley appears; a tiny black reservoir; a tiny you, mid-move, one hand raised. You look down and realise you are not holding the piece. You <b>are</b> the piece. Somewhere very large, a hand hesitates over the board, deciding your next square.",
   c:[["Refuse to move","refuse_end"],["Move to the square marked THE HILL","hill_intro"],["Move to the square marked THE QUIET","stay_end"]] },
 
 "bedroom":{ t:
-  "You take the twin room with the lake view (one bunk bed, made up for guests who never signed the guestbook). You lie down 'just for a second.' You dream of fifteen towers on the far shore, humming, and a sixteenth that isn't there but casts a shadow anyway. You wake. It is either dusk or dawn; the light refuses to commit. Through the window, the neighbour's field is showing its lines.",
-  c:[["Go to the window and count the towers","count_towers"],["Look at the patterns in the neighbour's grass","sams_hectares"],["Go back downstairs","hall"]] },
+  "You take the twin room with the reservoir view (one bunk bed, made up for guests who never signed the guestbook). You lie down 'just for a second.' You dream of fifteen towers on the far shore, humming, and a sixteenth that isn't there but casts a shadow anyway. You wake. It is either dusk or dawn; the light refuses to commit. Through the window, Sam's field is showing its lines.",
+  c:[["Go to the window and count the towers","count_towers"],["Look at the patterns in Sam's grass","sams_hectares"],["Go back downstairs","hall"]] },
 
 "count_towers":{ t:
   "You count the towers on the far shore. One, two "+D+" you keep losing your place and starting again. Each attempt gives you fifteen. Each attempt gives you a <i>different</i> fifteen. On the far shore a figure stands with a phone held to the sky, also counting. It is you. It waves. You did not wave.",
@@ -110,7 +110,7 @@ var STORY={
   c:[["Close the fridge and never speak of it","hall"],["Ask the fridge how long it has been waiting","fridge_end"]] },
 
 "hill_intro":{ t:
-  "You set off up the hill for one bar; the website promised one, at the top. The track is genuinely lovely "+D+" bracken, a lone rowan, the lake dropping away beneath you. You climb. The top is not where it was. There is always a little more hill.",
+  "You set off up the hill for one bar; the website promised one, at the top. The track is genuinely lovely "+D+" bracken, a lone rowan, the reservoir dropping away beneath you. You climb. The top is not where it was. There is always a little more hill.",
   c:[["Keep climbing","walk_end"],["Sit on a rock and give up on signal","stay_end"],["Look for Lewis (someone said he was up here)","lewis_meet"]] },
 
 "lewis_meet":{ t:
@@ -118,7 +118,7 @@ var STORY={
   c:[["Tell Lewis the truth: there is no bar, there never was","lewis_truth"],["Say nothing; raise your own phone beside his","walk_end"]] },
 
 "lake":{ t:
-  "You walk down to the shore. The lake is a sheet of black glass. A kite drops, kisses the surface, climbs. Across the water, on the far shore, <b>fifteen shapes</b> stand in a line "+D+" towers? fenceposts? people? "+D+" at exactly the distance where you cannot tell, and there they stay.",
+  "You walk down to the shore. The reservoir is a sheet of black glass. A kite drops, kisses the surface, climbs. Across the water, on the far shore, <b>fifteen shapes</b> stand in a line "+D+" towers? fenceposts? people? "+D+" at exactly the distance where you cannot tell, and there they stay.",
   c:[["Swim out toward the shapes","stay_end"],["Count the shapes","count_towers"],["Walk back to the house","arrive"]] },
 
 "llandovery":{ t:
@@ -126,7 +126,7 @@ var STORY={
   c:[["Wait on the platform for the train","train_wait"],["Get chips and eat them on a wall","chips"],["Drive back to Dalarwen before dark","arrive"]] },
 
 "sams_hectares":{ t:
-  "Past the lean-to and a leaning gate is the neighbour's land: <b>Sam's three hectares.</b> Nobody's sure when Sam bought them, or whether 'Sam' is short for something (or longer). The gate wears a small enamel sign: <b>S. SEDGLEY "+D+" 3 ha "+D+" DO NOT ANCHOR.</b> The three hectares are always, exactly, three hectares "+D+" though every time you pace them the count comes out different and the total comes out the same. At ground level it's just a damp field. But from the bedroom window, you remember, the grass grows in lines that resolve into an org chart.",
+  "There are no neighbours for miles. Past the lean-to and a leaning gate, all the same, sits <b>Sam's three hectares.</b> Nobody's sure when Sam bought them, or whether 'Sam' is short for something (or longer). The gate wears a small enamel sign: <b>S. SEDGLEY "+D+" 3 ha "+D+" DO NOT ANCHOR.</b> The three hectares are always, exactly, three hectares "+D+" though every time you pace them the count comes out different and the total comes out the same. At ground level it's just a damp field. But from the bedroom window, you remember, the grass grows in lines that resolve into an org chart.",
   c:[["Pace the boundary","sams_end"],["Go back to the house, quickly","arrive"]] },
 
 /* ============ ENDINGS ============ */
@@ -144,7 +144,7 @@ var STORY={
   link:{href:"careers.html",label:"collect your award &#8250;"} },
 
 "mirror_end":{ end:"THE OTHER SHORE", t:
-  "You wave back. Something swaps. Now the water is behind you and the house is very far across the lake, and there is a figure at the window, counting, losing its place, starting again. You raise your phone to the sky out of a habit that is suddenly, entirely, someone else's. Zero bars. You have always been on this shore. You are the fifteenth shape. There has to be a fifteenth.",
+  "You wave back. Something swaps. Now the water is behind you and the house is very far across the reservoir, and there is a figure at the window, counting, losing its place, starting again. You raise your phone to the sky out of a habit that is suddenly, entirely, someone else's. Zero bars. You have always been on this shore. You are the fifteenth shape. There has to be a fifteenth.",
   descend:true, link:{href:"the-quiet.html",label:"stand very still &#8250;"} },
 
 "fridge_end":{ end:"THE FRIDGE KNOWS", t:
@@ -160,11 +160,11 @@ var STORY={
   descend:true, link:{href:"above.html",label:"look up at it &#8250;"} },
 
 "walk_end":{ end:"THE WALK", t:
-  "You keep climbing. The top keeps arriving four hours away, at precisely the speed of your climbing. Bracken, rowan, the lake shrinking beneath you, then not shrinking, then the same rowan again. You are not lost "+D+" to be lost you'd need somewhere you were trying to reach. You are simply, now, someone who walks. A Walk Warden files a report. It is favourable.",
+  "You keep climbing. The top keeps arriving four hours away, at precisely the speed of your climbing. Bracken, rowan, the reservoir shrinking beneath you, then not shrinking, then the same rowan again. You are not lost "+D+" to be lost you'd need somewhere you were trying to reach. You are simply, now, someone who walks. A Walk Warden files a report. It is favourable.",
   descend:true, link:{href:"the-corridor.html",label:"keep walking &#8250;"} },
 
 "lewis_truth":{ end:"LET LEWIS DOWN THE HILL", t:
-  "You tell him. Lewis lowers the phone. For a long moment he looks at the lake, the woods, the flawless absence of a single bar. Then he smiles "+D+" the way people smile when a weight they've carried for years turns out to be made of nothing at all. 'Fancy a swim?' Down at the lake the water is very cold and completely silent, and it is the best New Year's Eve either of you can remember, and nobody films a single second of it.",
+  "You tell him. Lewis lowers the phone. For a long moment he looks at the reservoir, the woods, the flawless absence of a single bar. Then he smiles "+D+" the way people smile when a weight they've carried for years turns out to be made of nothing at all. 'Fancy a swim?' Down at the reservoir the water is very cold and completely silent, and it is the best New Year's Eve either of you can remember, and nobody films a single second of it.",
   c:[] },
 
 "chips":{ end:"THE CHIPS", t:

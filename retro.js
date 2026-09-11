@@ -111,7 +111,7 @@ function initOdometer(id,base){
 
 /* ---------- GUESTBOOK (localStorage) ---------- */
 var GUESTBOOK_SEED=[
-  {name:"L3WIS_ONLINE",loc:"The Attic (still zero bars)",msg:"i cannot even SEE this message. i posted it from the hill. FIFTEEN TOWERS NOW. i have things to POST."},
+  {name:"L3WIS_ONLINE",loc:"The Conservatory (still zero bars)",msg:"i cannot even SEE this message. i posted it from the hill. FIFTEEN TOWERS NOW. i have things to POST."},
   {name:"BeeQueen_Dalarwen",loc:"The Hive (zero bars, obviously)",msg:"we invented 5G. give us our frequency back. buzz buzz. <3"},
   {name:"xX_TruthSeeker_Xx",loc:"On the hill, facing Belgium",msg:"finally a site that GETS IT. the cube is real. i have seen the four corners. all zero. ALL of them."},
   {name:"nan",loc:"Kitchen (zero bars)",msg:"how do i turn the wifi on. the little man on the phone said i need a tower. i want 15."},
