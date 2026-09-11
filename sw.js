@@ -1,7 +1,7 @@
 /* Dalarwen 5G — offline service worker.
    Pre-caches the whole site so it runs with no internet (ironically, for Dalarwen).
    Bump CACHE when content changes to force an update on next online visit. */
-var CACHE = "dalarwen-offline-v1";
+var CACHE = "dalarwen-offline-v2";
 var ASSETS = [
   "./",
   "404.html",
@@ -42,15 +42,20 @@ var ASSETS = [
   "ring/bees-invented-5g.html",
   "ring/big-candle.html",
   "ring/conservatory-weather.html",
+  "ring/coventry.html",
   "ring/cube-told-me-so.html",
   "ring/educated-stupid.html",
   "ring/held-toward-belgium.html",
+  "ring/hull.html",
   "ring/lewis-dot-mov.html",
   "ring/loo-standing-society.html",
   "ring/nans-wifi-guide.html",
+  "ring/nazca-peru.html",
+  "ring/norfolk-mythology.html",
   "ring/pyramids-5g.html",
   "ring/ramblers-lying.html",
   "ring/rotisserie-nan.html",
+  "ring/scouse-5g.html",
   "ring/silence-premium.html",
   "ring/spite-tower-13.html",
   "downloads/merger-presentation.html",
@@ -94,9 +99,8 @@ var ASSETS = [
 self.addEventListener("install", function(e){
   self.skipWaiting();
   e.waitUntil(caches.open(CACHE).then(function(c){
-    // add individually so one 404 doesn't sink the whole precache
     return Promise.all(ASSETS.map(function(u){
-      return c.add(new Request(u, {cache:"reload"})).catch(function(){ /* ignore misses */ });
+      return c.add(new Request(u, {cache:"reload"})).catch(function(){ });
     }));
   }));
 });
@@ -108,7 +112,7 @@ self.addEventListener("activate", function(e){
 self.addEventListener("fetch", function(e){
   if(e.request.method!=="GET") return;
   var url=new URL(e.request.url);
-  if(url.origin!==location.origin) return; // only handle same-origin
+  if(url.origin!==location.origin) return;
   e.respondWith(
     caches.match(e.request, {ignoreSearch:true}).then(function(hit){
       if(hit) return hit;
