@@ -69,7 +69,12 @@ function setKey(e,v){
 function poke(){ if(state==="win"){ winAdvance(); } else if(state!=="play"){ startGame(); } }
 window.addEventListener("keydown",function(e){
   if(state==="title"&&(e.key===" "||e.key==="Enter")){startGame();return;}
-  if(state==="win"&&(e.key===" "||e.key==="ArrowRight"||e.key==="Enter")){ winAdvance(); e.preventDefault(); return; }
+  if(state==="win"){
+    // only a FRESH press of Right/Enter advances (never a held key, esp. Space);
+    if(!e.repeat && (e.key==="ArrowRight"||e.key==="Enter")){ winAdvance(); }
+    if(e.key==="r"||e.key==="R"){ startGame(); }
+    e.preventDefault(); return;   // swallow everything else (Space does nothing)
+  }
   setKey(e,true);
 });
 window.addEventListener("keyup",function(e){ setKey(e,false); });
@@ -550,7 +555,7 @@ function drawWin(){
     ctx.textAlign="left"; ctx.font="bold 12px monospace"; ctx.fillStyle="#3cff5a"; ctx.fillText("LOADING NEXT",16,VH-11);
     var bx=140,bw=VW-360; ctx.strokeStyle="#2f6f3a"; ctx.lineWidth=2; ctx.strokeRect(bx,VH-20,bw,12);
     ctx.fillStyle="#3cff5a"; ctx.fillRect(bx+2,VH-18,(bw-4)*Math.min(100,winProg)/100,8);
-    ctx.textAlign="right"; ctx.fillStyle="#8fe"; ctx.font="11px monospace"; ctx.fillText("→ / SPACE / tap to skip",VW-16,VH-11);
+    ctx.textAlign="right"; ctx.fillStyle="#8fe"; ctx.font="11px monospace"; ctx.fillText("→ / tap to skip",VW-16,VH-11);
   }
 }
 function drawTitle(){
