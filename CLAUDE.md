@@ -65,6 +65,9 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
 - **Sam / S. Sedgley** (`sam.html`) — the neighbour of the three hectares; the terrestrial "S"; only ever
   seen leaving. `DO NOT ANCHOR`.
 - **The Division of Absence** (`the-division.html`) — warehouses the unbuilt towers.
+- **The Coventry Conductor** (`ring/coventry.html`) — the one man who went to Dalarwen *looking* for the
+  signal and came back able to describe it; wears goggles against the radiation (the green "comes off the
+  masts like weather"). Bears Coventry's elephant-and-castle. Illustrated by `assets/coventry-conductor.jpg`.
 - **Infinite Walks™**, **Clifftop Non-Static Caravan Parks**, the **Dalarwen Exclusion Envelope**.
 - Real anchors used throughout: Llyn Brianne, the Towy valley, the NRW dam-wall road, red kites,
   Llandovery (Bank of the Black Ox 1799, chip shop), the Heart of Wales train (once every ~4 hours),
