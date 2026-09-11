@@ -1,7 +1,7 @@
 /* Dalarwen 5G — offline service worker.
    Pre-caches the whole site so it runs with no internet (ironically, for Dalarwen).
    Bump CACHE when content changes to force an update on next online visit. */
-var CACHE = "dalarwen-offline-v7";
+var CACHE = "dalarwen-offline-v8";
 var ASSETS = [
   "./",
   "404.html",
@@ -46,6 +46,7 @@ var ASSETS = [
   "ring/coventry.html",
   "ring/cube-told-me-so.html",
   "ring/educated-stupid.html",
+  "ring/electric-sheep-paper.html",
   "ring/held-toward-belgium.html",
   "ring/hull.html",
   "ring/lewis-dot-mov.html",
