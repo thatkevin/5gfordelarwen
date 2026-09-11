@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Speed Test &#8212; Dalarwen</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230b1a2b'/%3E%3Cpath d='M16 24a8 8 0 1 1 8-8' fill='none' stroke='%232fd5ff' stroke-width='3'/%3E%3Cpath d='M16 16l6-4' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+<script src="../gate.js?v=12"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#0a1622;color:#e6f0f7;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+       min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+  a{color:#2fd5ff;text-decoration:none;}
+  .top{width:100%;border-bottom:1px solid #16324a;padding:14px 20px;font-weight:800;letter-spacing:.5px;}
+  .top b{color:#2fd5ff;}
+  .wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 16px;text-align:center;}
+  .dial{position:relative;width:min(340px,86vw);height:min(340px,86vw);margin-bottom:10px;}
+  .dial svg{width:100%;height:100%;transform:rotate(135deg);}
+  .track{fill:none;stroke:#16324a;stroke-width:12;stroke-linecap:round;}
+  .fill{fill:none;stroke:#2fd5ff;stroke-width:12;stroke-linecap:round;stroke-dasharray:0 999;transition:stroke-dasharray .1s linear;}
+  .needle{position:absolute;left:50%;top:50%;width:44%;height:3px;background:linear-gradient(90deg,transparent,#fff);
+          transform-origin:left center;transform:rotate(135deg);transition:transform .1s linear;}
+  .hub{position:absolute;left:50%;top:50%;width:14px;height:14px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);}
+  .read{position:absolute;left:0;right:0;top:44%;text-align:center;}
+  .read .n{font-size:52px;font-weight:800;line-height:1;}
+  .read .u{font-size:13px;color:#89a3b8;letter-spacing:2px;}
+  .go{margin-top:6px;width:118px;height:118px;border-radius:50%;border:2px solid #2fd5ff;background:#0a1622;color:#2fd5ff;
+      font-size:26px;font-weight:800;letter-spacing:1px;cursor:pointer;}
+  .go:hover{background:#0f2436;} .go:disabled{opacity:.5;cursor:default;}
+  .stats{display:flex;gap:34px;margin-top:26px;flex-wrap:wrap;justify-content:center;}
+  .stat .lab{font-size:12px;color:#89a3b8;letter-spacing:1px;}
+  .stat .val{font-size:30px;font-weight:800;}
+  .stat .su{font-size:12px;color:#89a3b8;}
+  .meta{margin-top:22px;color:#89a3b8;font-size:13px;line-height:1.7;}
+  .meta b{color:#e6f0f7;}
+  .foot{color:#5c7386;font-size:12px;padding:16px;}
+</style>
+</head>
+<body>
+<div class="top"><b>&#9201;</b> SPEED&#8203;TEST <span style="color:#5c7386;font-weight:400;">&#183; Dalarwen node</span></div>
+<div class="wrap">
+  <div class="dial">
+    <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="50" stroke-dasharray="235 999"/><circle class="fill" id="fill" cx="60" cy="60" r="50"/></svg>
+    <div class="needle" id="needle"></div><div class="hub"></div>
+    <div class="read"><div class="n" id="num">0.00</div><div class="u" id="unit">Mbps &#183; DOWNLOAD</div></div>
+  </div>
+  <button class="go" id="go" onclick="runTest()">GO</button>
+
+  <div class="stats">
+    <div class="stat"><div class="lab">DOWNLOAD</div><div class="val" id="dl">&#8212;</div><div class="su">Mbps</div></div>
+    <div class="stat"><div class="lab">UPLOAD</div><div class="val" id="ul">&#8212;</div><div class="su">Mbps</div></div>
+    <div class="stat"><div class="lab">PING</div><div class="val" id="pg">&#8212;</div><div class="su">ms</div></div>
+  </div>
+
+  <div class="meta" id="meta">
+    Server: <b>Llyn Brianne (Exclusion Envelope)</b><br>
+    Your provider: <b>JenCorp</b> &#183; connection: <b>none</b>
+  </div>
+</div>
+<div class="foot">Speed Test &#183; the most honest number on the internet &#183; <a href="../signal-test.html">manual bar count</a> &#183; <a href="../index.html">surface</a></div>
+
+<script>
+var needle=document.getElementById("needle"),num=document.getElementById("num"),unit=document.getElementById("unit"),
+    fill=document.getElementById("fill"),go=document.getElementById("go");
+function setNeedle(v){ /* v 0..100 -> 135deg..135+270 */ needle.style.transform="rotate("+(135+ (v/100)*270)+"deg)"; }
+function setFill(v){ fill.style.strokeDasharray=(2.35*v)+" 999"; }
+function sweep(cb){
+  var t0=null, dur=2400;
+  function fr(ts){ if(!t0)t0=ts; var p=(ts-t0)/dur;
+    if(p<1){ var v=(Math.sin(p*Math.PI*3)*0.5+0.5)*(80*(1-p)); num.textContent=v.toFixed(2); setNeedle(v); setFill(v); requestAnimationFrame(fr); }
+    else{ cb(); }
+  }
+  requestAnimationFrame(fr);
+}
+function runTest(){
+  go.disabled=true;
+  document.getElementById("dl").textContent="&#8212;";
+  unit.innerHTML="Mbps &#183; DOWNLOAD";
+  sweep(function(){
+    // it always resolves to nothing
+    num.textContent="0.00"; setNeedle(0); setFill(0);
+    document.getElementById("dl").textContent="0.00";
+    setTimeout(function(){
+      unit.innerHTML="Mbps &#183; UPLOAD";
+      sweep(function(){
+        num.textContent="0.00"; setNeedle(0); setFill(0);
+        document.getElementById("ul").textContent="0.00";
+        document.getElementById("pg").innerHTML="&#8734;";
+        document.getElementById("meta").innerHTML=
+          "Result ID: <b>0.000-DALARWEN-"+(Math.floor(Math.random()*9e5)+1e5)+"</b><br>"+
+          "Download <b>0.00</b> &#183; Upload <b>0.00</b> &#183; Ping <b>&#8734;</b> ms &#183; Jitter <b>0</b> (nothing to jitter)<br>"+
+          "<span style='color:#2fd5ff;'>Your connection is working as intended. There is nothing to test. There never was.</span>";
+        go.disabled=false;
+      });
+    },500);
+  });
+}
+</script>
+</body>
+</html>

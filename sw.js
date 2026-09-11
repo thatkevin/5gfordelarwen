@@ -1,7 +1,7 @@
 /* Dalarwen 5G — offline service worker.
    Pre-caches the whole site so it runs with no internet (ironically, for Dalarwen).
    Bump CACHE when content changes to force an update on next online visit. */
-var CACHE = "dalarwen-offline-v35";
+var CACHE = "dalarwen-offline-v36";
 var ASSETS = [
   "./",
   "404.html",
@@ -49,8 +49,10 @@ var ASSETS = [
   "favicon-32.png",
   "favicon.ico",
   "favicon.svg",
+  "flix/index.html",
   "forum/index.html",
   "free-up-lewis.html",
+  "fund/index.html",
   "game-art/win1.png",
   "game-art/win2.png",
   "game-art/win3.png",
@@ -105,10 +107,14 @@ var ASSETS = [
   "ring/silence-premium.html",
   "ring/spite-tower-13.html",
   "sam.html",
+  "search/index.html",
+  "shittok/index.html",
   "signal-test.html",
   "signalexchange/index.html",
   "sitemap.html",
+  "speed/index.html",
   "static.html",
+  "stay/index.html",
   "the-corridor.html",
   "the-cube.html",
   "the-division.html",

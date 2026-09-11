@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notflix &#8212; nothing to watch</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Cpath d='M11 5v22M21 5v22M11 5l10 22' stroke='%23e50914' stroke-width='4'/%3E%3C/svg%3E">
+<script src="../gate.js?v=12"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#141414;color:#fff;font-family:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;}
+  a{color:#fff;text-decoration:none;}
+  .top{display:flex;align-items:center;gap:22px;padding:16px 40px;position:sticky;top:0;background:linear-gradient(#000,transparent);z-index:5;}
+  .logo{color:#e50914;font-weight:900;font-size:26px;letter-spacing:1px;}
+  .nav{display:flex;gap:18px;color:#e5e5e5;font-size:14px;}
+  .nav .on{font-weight:700;}
+  .top .r{margin-left:auto;color:#e5e5e5;font-size:13px;}
+  /* hero: continue watching a spinning circle */
+  .hero{position:relative;height:64vh;min-height:420px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 40px 46px;
+        background:radial-gradient(120% 90% at 30% 20%,#2a0a0a,#141414 70%);}
+  .hero .spin{position:absolute;top:34%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;border-radius:50%;border:7px solid rgba(255,255,255,.25);border-top-color:#fff;animation:sp 1.1s linear infinite;}
+  @keyframes sp{to{transform:translate(-50%,-50%) rotate(360deg);}}
+  .hero h1{font-size:clamp(30px,6vw,58px);font-weight:900;max-width:16em;}
+  .hero p{max-width:34em;color:#e5e5e5;margin:12px 0 18px;font-size:16px;line-height:1.5;}
+  .btns{display:flex;gap:12px;}
+  .btn{border:0;border-radius:5px;padding:11px 26px;font-weight:700;font-size:16px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+  .btn.play{background:#fff;color:#000;} .btn.info{background:rgba(109,109,110,.7);color:#fff;}
+  .badge{position:absolute;top:34%;right:40px;background:rgba(0,0,0,.6);border:1px solid #333;border-radius:6px;padding:6px 10px;font-size:12px;}
+  /* rows */
+  .row{padding:8px 40px 26px;}
+  .row h2{font-size:18px;margin-bottom:10px;color:#e5e5e5;}
+  .cards{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;}
+  .tile{flex:0 0 auto;width:200px;height:112px;border-radius:5px;background:#222 center/cover;position:relative;display:flex;align-items:flex-end;}
+  .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:5px;opacity:.6;}
+  .tile .lbl{position:relative;z-index:2;padding:8px;font-size:13px;font-weight:700;text-shadow:0 1px 4px #000;}
+  .tile .mini{position:absolute;top:6px;right:6px;z-index:2;width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;animation:sp2 1.1s linear infinite;}
+  @keyframes sp2{to{transform:rotate(360deg);}}
+  .foot{color:#808080;font-size:12px;padding:20px 40px 40px;}
+  @media (max-width:640px){ .top,.hero,.row,.foot{padding-left:18px;padding-right:18px;} .badge{display:none;} }
+</style>
+</head>
+<body>
+<div class="top">
+  <span class="logo">NOTFLIX</span>
+  <nav class="nav"><span class="on">Home</span><span>Series</span><span>Films</span><span>New &amp; Buffering</span><span>My List (empty)</span></nav>
+  <span class="r">Profile: asset</span>
+</div>
+
+<div class="hero">
+  <div class="spin"></div>
+  <div class="badge">buffering 1% &#183; no signal in your area</div>
+  <h1>Continue Watching: a spinning circle</h1>
+  <p>You&#39;re 1% of the way through. You&#39;ve been 1% of the way through for three years. Everyone in your household is also watching this. It is the most-streamed title in the valley. It does not resolve.</p>
+  <div class="btns">
+    <button class="btn play" onclick="alert('Cannot start playback. Your connection is 0.000 bars, in all four corners, at once. Please try again in a valley with signal. There are none nearby.');return false;">&#9654; Resume</button>
+    <button class="btn info" onclick="alert('This title is unavailable to stream, download, or perceive. It has, however, been stored in the Cube.');return false;">&#9432; More Info</button>
+  </div>
+</div>
+
+<div class="row">
+  <h2>Trending in the Valley</h2>
+  <div class="cards">
+    <div class="tile"><img src="../assets/bee-frequency.jpg" alt=""><span class="mini"></span><span class="lbl">The Bees: Band B</span></div>
+    <div class="tile"><img src="../assets/sam-humber.jpg" alt=""><span class="mini"></span><span class="lbl">Sam Is Leaving (S1)</span></div>
+    <div class="tile"><img src="../assets/melonsis-lemon.jpg" alt=""><span class="mini"></span><span class="lbl">Void Scholar &amp; Lemon</span></div>
+    <div class="tile"><img src="../assets/coventry-conductor.jpg" alt=""><span class="mini"></span><span class="lbl">The Conductor</span></div>
+    <div class="tile" style="background:#0e2a0e;"><span class="mini"></span><span class="lbl">NEIL</span></div>
+  </div>
+</div>
+
+<div class="row">
+  <h2>Because you have no signal</h2>
+  <div class="cards">
+    <div class="tile" style="background:#20122e;"><span class="mini"></span><span class="lbl">Lewis: 1% (13 eps)</span></div>
+    <div class="tile" style="background:#001a1a;"><span class="mini"></span><span class="lbl">The Cube: Four Corners</span></div>
+    <div class="tile" style="background:#2a1e0e;"><span class="mini"></span><span class="lbl">Nan Turns It Off &amp; On</span></div>
+    <div class="tile" style="background:#0a1622;"><span class="mini"></span><span class="lbl">Men of Harlech (4am loop)</span></div>
+    <div class="tile" style="background:#141414;"><span class="mini"></span><span class="lbl">Buffering: The Documentary</span></div>
+  </div>
+</div>
+
+<div class="row">
+  <h2>My List</h2>
+  <div class="cards"><div class="tile" style="background:#1a1a1a;align-items:center;justify-content:center;"><span class="lbl" style="opacity:.6;">nothing here &#183; nothing ever loads</span></div></div>
+</div>
+
+<div class="foot">Notflix &#183; there is nothing to watch, and no way to watch it &#183; <a href="../unwrapped/index.html">your listening, unwrapped</a> &#183; <a href="../index.html">back to the surface</a></div>
+</body>
+</html>
