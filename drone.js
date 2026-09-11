@@ -12,7 +12,10 @@
   function start(){
     try{
       var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
-      d.ctx=d.ctx||new AC(); if(d.ctx.resume) d.ctx.resume();
+      d.ctx=d.ctx||new AC();
+      if(d.ctx.state==="suspended" && d.ctx.resume) d.ctx.resume();
+      // iOS Safari: unlock audio with a 1-frame silent buffer inside the gesture
+      try{ var ub=d.ctx.createBuffer(1,1,22050), us=d.ctx.createBufferSource(); us.buffer=ub; us.connect(d.ctx.destination); us.start(0); }catch(e){}
       var t=d.ctx.currentTime;
       var master=d.ctx.createGain();
       master.gain.setValueAtTime(0.0001,t);
@@ -50,9 +53,10 @@
     if(document.getElementById("dronebtn")) return;
     var b=document.createElement("button");
     b.id="dronebtn"; b.type="button"; b.onclick=toggle;
-    b.style.cssText="position:fixed;left:8px;bottom:8px;z-index:9998;font-family:'Courier New',monospace;"+
-      "font-size:11px;background:#0a0a0a;color:#3a5a3a;border:1px solid #1f2a1f;padding:5px 9px;"+
-      "cursor:pointer;letter-spacing:1px;";
+    b.style.cssText="position:fixed;left:calc(10px + env(safe-area-inset-left));"+
+      "bottom:calc(20px + env(safe-area-inset-bottom));z-index:2147483000;font-family:'Courier New',monospace;"+
+      "font-size:13px;min-height:44px;background:#0a0a0a;color:#3a5a3a;border:1px solid #1f2a1f;padding:9px 13px;"+
+      "cursor:pointer;letter-spacing:1px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;";
     document.body.appendChild(b);
     btnUpd();
   }

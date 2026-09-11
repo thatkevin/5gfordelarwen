@@ -402,7 +402,9 @@ function startMusic(){
   try{
     var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
     _fm.ctx=_fm.ctx||new AC();
-    if(_fm.ctx.resume) _fm.ctx.resume();
+    if(_fm.ctx.state==="suspended" && _fm.ctx.resume) _fm.ctx.resume();
+    // iOS Safari: unlock audio with a 1-frame silent buffer inside the gesture
+    try{ var ub=_fm.ctx.createBuffer(1,1,22050), us=_fm.ctx.createBufferSource(); us.buffer=ub; us.connect(_fm.ctx.destination); us.start(0); }catch(e){}
     // lead voice (square)
     _fm.gain=_fm.ctx.createGain(); _fm.gain.gain.value=0.045;
     _fm.osc=_fm.ctx.createOscillator(); _fm.osc.type="square";
@@ -438,9 +440,10 @@ function injectMusicButton(){
   if(document.getElementById("fmbtn")) return;
   var b=document.createElement("button");
   b.id="fmbtn"; b.type="button";
-  b.style.cssText="position:fixed;left:8px;bottom:8px;z-index:9998;font-family:'Courier New',monospace;"+
-    "font-weight:bold;font-size:12px;border:2px outset #00FF66;background:#111;color:#00FF66;"+
-    "padding:5px 9px;cursor:pointer;letter-spacing:1px;";
+  b.style.cssText="position:fixed;left:calc(10px + env(safe-area-inset-left));"+
+    "bottom:calc(20px + env(safe-area-inset-bottom));z-index:2147483000;font-family:'Courier New',monospace;"+
+    "font-weight:bold;font-size:13px;min-height:44px;border:2px outset #00FF66;background:#111;color:#00FF66;"+
+    "padding:9px 13px;cursor:pointer;letter-spacing:1px;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;";
   b.onclick=toggleMusic;
   document.body.appendChild(b);
   _fmUpdateBtn();
