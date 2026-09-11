@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report a mobile coverage problem &#8212; Ofcube</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23e4002b' stroke-width='3'/%3E%3C/svg%3E">
+<script src="../gate.js?v=12"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#fff;color:#1a1a1a;font-size:17px;line-height:1.5;font-family:Arial,Helvetica,sans-serif;}
+  a{color:#e4002b;}
+  .top{border-bottom:4px solid #e4002b;padding:14px 24px;display:flex;align-items:center;gap:10px;}
+  .logo{font-weight:900;font-size:24px;letter-spacing:-1px;} .logo .o{color:#e4002b;}
+  .top .r{margin-left:auto;font-size:13px;color:#666;}
+  .banner{background:#f3f2f1;border-bottom:1px solid #ddd;}
+  .banner .in{max-width:720px;margin:0 auto;padding:10px 20px;font-size:14px;color:#444;}
+  .wrap{max-width:720px;margin:0 auto;padding:26px 20px 60px;}
+  h1{font-size:34px;line-height:1.15;margin-bottom:16px;}
+  p{margin:0 0 18px;}
+  label{display:block;font-weight:700;margin:18px 0 6px;}
+  input,select,textarea{width:100%;border:2px solid #1a1a1a;border-radius:0;padding:10px;font:inherit;}
+  .submit{background:#e4002b;color:#fff;border:0;padding:13px 22px;font-weight:700;font-size:17px;cursor:pointer;margin-top:20px;}
+  .submit:hover{background:#b80022;}
+  .result{border-left:8px solid #e4002b;background:#fff5f6;padding:16px 20px;margin-top:24px;display:none;}
+  .result h2{font-size:20px;margin-bottom:8px;}
+  .result .ref{font-family:monospace;background:#f3f2f1;padding:2px 6px;}
+  .status{display:inline-block;background:#8250df;color:#fff;font-size:13px;font-weight:700;padding:2px 10px;border-radius:2em;}
+  .foot{border-top:1px solid #ddd;background:#f3f2f1;margin-top:30px;padding:18px 24px;color:#666;font-size:13px;}
+</style>
+</head>
+<body>
+<div class="top"><span class="logo"><span class="o">Of</span>cube</span><span class="r">the office of communications, and the absence thereof</span></div>
+<div class="banner"><div class="in">Home &gt; Phones &amp; broadband &gt; Complaints &gt; Report a mobile coverage problem</div></div>
+<div class="wrap">
+  <h1>Report a mobile coverage problem</h1>
+  <p>Use this form to report an area where you cannot get a mobile signal. We take every complaint seriously, log it, and store it. We do not act on it.</p>
+
+  <label>Your location</label>
+  <input value="Dalarwen, Llyn Brianne, mid-Wales" readonly>
+  <label>Signal strength (bars)</label>
+  <input value="0.000 (in all four corners, at once)" readonly>
+  <label>Network</label>
+  <select><option>JenCorp</option><option>ISAMSJ</option><option>the Division of Absence</option><option>none of the above / all of the above</option></select>
+  <label>Describe the problem</label>
+  <textarea rows="4">There is no signal. There has never been any signal. I would simply like one bar.</textarea>
+  <label><input type="checkbox" style="width:auto;margin-right:8px;" checked> I understand this reading is maintained deliberately and is working as intended.</label>
+  <button class="submit" onclick="fileIt()">Submit complaint</button>
+
+  <div class="result" id="result">
+    <h2>Thank you. Your complaint has been closed.</h2>
+    <p>Reference: <span class="ref" id="ref">OFC-0000-DALARWEN</span> &#183; Status: <span class="status">works as intended</span></p>
+    <p>We investigated and found the signal at your location to be <b>0.000 bars</b>, which is the correct and expected reading. No further action will be taken. The reading is a service. You are the product of the service. We have forwarded your complaint to the <a href="../the-division.html">Division of Absence</a>, who deal in things that are not there and were therefore ideally placed to receive it.</p>
+    <p style="margin:0;color:#666;font-size:14px;">Complaints upheld this year: 0. Complaints received: &#9608;&#9608;&#9608;&#9608;.</p>
+  </div>
+</div>
+<div class="foot">Ofcube &#183; a very normal regulator &#183; your complaint is stored in the Cube &#183; <a href="../signal-test.html">test your signal</a> &#183; <a href="../tv-licence.html">where the licence fee goes</a> &#183; <a href="../index.html">surface</a></div>
+
+<script>
+function fileIt(){
+  document.getElementById("ref").textContent="OFC-"+(Math.floor(Math.random()*9e5)+1e5)+"-DALARWEN";
+  document.getElementById("result").style.display="block";
+  document.getElementById("result").scrollIntoView({behavior:"smooth"});
+}
+</script>
+</body>
+</html>

@@ -390,6 +390,14 @@ art("wales", "Wales",
  seealso=["dalarwen","men-of-harlech","llandovery"],
  cats=["Places"])
 
+art("mister-pickup", "Mister Pickup",
+ "'''Mister Pickup''' is a lone forest ranger and, in practice, the single most reliable form of connectivity at [[dalarwen|Dalarwen]] &#8212; not a signal, but a man in a 4x4. Where the [[four-hour-train|four-hour train]] never quite arrives and the [[dam-wall-road]] declines to let anyone out, Mister Pickup simply turns up, big truck and all, and brings water, luggage, and folk to and from the valley. He will roam anywhere.",
+ infobox=[("Occupation","Lone forest ranger"),("Vehicle","A big 4x4 (holds the road)"),("Brings","Water, luggage, folk"),("Range","Anywhere"),("Reliability","Total"),("Affiliation","None &#8212; genuinely just Mister Pickup")],
+ sections=[("The one who gets through","The [[dam-wall-road]] lets Mister Pickup in and out as it lets no one else; the [[clifftop-caravans|caravans]] drift, but his wheels hold the road, and [[neil|Neil]] does not bother him. If you are stranded on [[the-hill|the hill]] holding your phone toward [[belgium|Belgium]], Mister Pickup will find you, give you a lift and a bottle of water, and not once mention the signal."),
+           ("By name and by trade","He picks folk up. That is the job and that is the whole of it &#8212; no enrolment, no small print, no holdings company. Just a truck, a full water tank, and room for your bags and, if it comes to it, for you.")],
+ seealso=["dam-wall-road","four-hour-train","the-hill","dalarwen"],
+ cats=["People","Dalarwen"])
+
 # ---------------------------------------------------------------- rendering
 def resolve_links(text):
     def repl(m):
@@ -1133,6 +1141,14 @@ LEWIS_ARC = [
  (1,"cube","Thread archived. With love. There is, at last, a field for it. Stored."),
 ]),
 ]
+
+TALK["mister-pickup"] = ("A rare good article", [
+ (0,"fah","Genuinely lovely piece, no notes. Mister Pickup drove our whole outside-broadcast kit up the dam road when the train never came. Verified &#8212; and, unusually, grateful."),
+ (1,"bor","I have read it four times looking for an error. There is none. I have assessed it Featured and, for the first time on this site, I actually mean it."),
+ (1,"yaz","mister pickup gave me a lift and a bottle of water and did not once mention the signal. best man in the valley honestly"),
+ (1,"nan","He carried my cases AND a cup of tea appeared x lovely man x"),
+ (1,"cube","...Noted. Not stored. Left alone."),
+])
 
 def talk_threads(slug, a):
     T = a["title"]; KW = T.split("(")[0].strip().lower(); FAC = faction(a)

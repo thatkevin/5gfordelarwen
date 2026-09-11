@@ -1,7 +1,7 @@
 /* Dalarwen 5G — offline service worker.
    Pre-caches the whole site so it runs with no internet (ironically, for Dalarwen).
    Bump CACHE when content changes to force an update on next online visit. */
-var CACHE = "dalarwen-offline-v36";
+var CACHE = "dalarwen-offline-v37";
 var ASSETS = [
   "./",
   "404.html",
@@ -79,12 +79,17 @@ var ASSETS = [
   "manifesto.html",
   "matrix.html",
   "men-of-harlech.html",
+  "move/index.html",
+  "news/index.html",
+  "ofcom/index.html",
   "org-chart.html",
   "patwa.html",
   "radiation.html",
+  "rail/index.html",
   "retro.css",
   "retro.js",
   "reviews/index.html",
+  "rfc/index.html",
   "ring/bees-invented-5g.html",
   "ring/big-candle.html",
   "ring/conservatory-weather.html",
@@ -188,6 +193,8 @@ var ASSETS = [
   "wiki/melonsis-borealis.html",
   "wiki/men-of-harlech-talk.html",
   "wiki/men-of-harlech.html",
+  "wiki/mister-pickup-talk.html",
+  "wiki/mister-pickup.html",
   "wiki/nan-talk.html",
   "wiki/nan.html",
   "wiki/nazca-lines-talk.html",
