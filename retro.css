@@ -57,3 +57,21 @@ hr.z{border:0;height:6px;background:repeating-linear-gradient(90deg,#FF00FF 0 10
 .retrobtn.pink{background:#FF00FF;border-color:#FF00FF;}
 .retrobtn.cyan{background:#00FFFF;border-color:#00FFFF;}
 .retrobtn.amber{background:#FFCC00;border-color:#FFCC00;}
+
+/* ============ MOBILE ============ */
+img{max-width:100%;height:auto;}
+table{max-width:100%;}
+input,textarea{max-width:100%;}
+@media (max-width:640px){
+  body{ -webkit-text-size-adjust:100%; }
+  #navbar a{ font-size:11px; padding:4px 7px; margin:3px; }
+  .shimmer{ font-size:30px !important; }
+  font[size="7"]{ font-size:28px !important; }
+  font[size="6"]{ font-size:23px !important; }
+  font[size="5"]{ font-size:19px !important; }
+  font[size="4"]{ font-size:16px !important; }
+  /* stack the two-column layout tables (sidebar+content, split panels, counters) */
+  table td[width]{ display:block; width:auto !important; }
+  table[width] { width:98% !important; }
+  .retrobtn{ font-size:15px; padding:8px 10px; }
+}

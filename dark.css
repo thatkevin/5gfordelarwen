@@ -50,3 +50,11 @@ ul.d{ list-style:none; padding-left:0; }
 ul.d li{ padding:4px 0 4px 18px; border-left:1px solid #1a201a; margin-bottom:6px; }
 .logo{ letter-spacing:10px; font-size:20px; color:#c7d2c7; }
 .nav-d{ font-size:12px; letter-spacing:2px; color:#3a443a; margin-top:40px; text-align:center; }
+
+/* ============ MOBILE ============ */
+img{ max-width:100%; height:auto; }
+@media (max-width:560px){
+  .d-wrap{ padding:28px 16px 80px; }
+  h1{ font-size:19px; letter-spacing:5px; word-break:break-word; }
+  .logo{ letter-spacing:6px; font-size:17px; }
+}

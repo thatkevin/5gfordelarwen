@@ -3,8 +3,8 @@
 > You are not editing a website. You are trimming a wick. Read this before you touch the envelope.
 > — THE CUBE
 
-This repo is the public face of the **Dalarwen 5G Liberation Front**: an in-joke among pals about
-[Dalarwen](https://dalarwen.co.uk/), a real, gloriously off-grid Welsh farmhouse at Llyn Brianne with
+This repo is the public face of the **Dalarwen 5G Liberation Front**, a site about
+Dalarwen, a real, gloriously off-grid Welsh farmhouse at Llyn Brianne with
 **zero mobile signal**. The site loudly campaigns for **fifteen (15) 5G towers**; it also, if you dig,
 argues against them; it also hides a whole corporate-cosmic-horror ARG underneath. All three are true.
 Simultaneously. Like the Cube.
@@ -33,7 +33,7 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
 - **The gate**: every page loads `gate.js` in `<head>`. Password is **ISAMSJ** (case-insensitive, fuzzy —
   Levenshtein ≤ 2, substring, etc). Unlock persists per session. Dark pages include it too so they aren't
   an un-gated bypass.
-- **Cache-busting**: shared assets are referenced with `?v=N` (currently **v=8**). If you edit
+- **Cache-busting**: shared assets are referenced with `?v=N` (currently **v=9**). If you edit
   `retro.css`, `retro.js`, `gate.js`, `dark.css`, or `drone.js`, **bump N everywhere** or browsers serve
   stale copies (this has already bitten us once — a ghost "psst" line).
 - **Favicon**: loud pages use `favicon.svg` (+ `.ico` + apple-touch). Dark pages keep their own bleak
@@ -51,8 +51,12 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
 - It's "**pals**", never "mates".
 - **No "this is a joke" disclaimers.** The pals cut them all; it's clearly a joke. Keep in-character
   closers and `© The Cube` instead. Do not reintroduce hand-holding.
-- Be genuinely affectionate to the real Dalarwen. `about-dalarwen.html` links the real site as "the
-  maintained cover story"; keep it fond, not mocking.
+- Be genuinely affectionate to the real Dalarwen; keep it fond, not mocking. **Do not link
+  dalarwen.co.uk** (the real business) from any page, and don't describe the site as an "in-joke".
+- **Every page carries `<meta name="robots" content="noindex, nofollow">` and a `viewport` meta.** Keep
+  both on any new page (there's also a root `robots.txt`).
+- The **webring** members are real themed pages in `ring/` (each a different web era); they share
+  `ring/ring.js` (the ring nav widget) and load `../gate.js`.
 
 ## The cast / lore (stay consistent)
 

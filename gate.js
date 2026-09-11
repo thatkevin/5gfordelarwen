@@ -61,10 +61,12 @@
         d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a.charAt(i-1)===b.charAt(j-1)?0:1));
       return d[m][n];
     }
+    var EXTRA=["LEWIS","ISIS","SAM","ISAM","JEN","KEV","KEVIN","NEIL","5G"];
     function closeEnough(v){
       var t=norm(PW), x=norm(v);
       if(!x) return false;
       if(x===t) return true;                       // exact (any case/punctuation)
+      if(EXTRA.indexOf(x)>=0) return true;         // the pals' names also open the door
       if(x.indexOf(t)>=0 || (x.length>=4 && t.indexOf(x)>=0)) return true; // contains / prefix
       return lev(x,t)<=2;                           // a couple of typos are fine
     }
