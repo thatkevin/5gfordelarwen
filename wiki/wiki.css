@@ -58,6 +58,15 @@ a.cat{color:#0645ad;cursor:default;}
 .refs{font-size:.9em;}
 #catlinks{border:1px solid #a2a9b1;background:#f8f9fa;padding:5px 8px;margin-top:1.4em;font-size:.9em;}
 .printfooter{font-size:.8em;color:#72777d;margin-top:1.2em;border-top:1px solid #eaecf0;padding-top:.5em;}
+/* talk pages */
+.talkbanner{border:1px solid #a2a9b1;border-left:4px solid #36c;background:#f8f9fa;padding:10px 14px;margin:0 0 18px;font-size:.92em;}
+.talkbanner ul{margin:.4em 0 0 1.4em;padding:0;}
+.talkbanner li{margin:.15em 0;}
+.tc{margin:.45em 0;line-height:1.6;}
+.tsig{color:#54595d;font-size:.9em;white-space:nowrap;}
+.tuser{color:#0645ad;font-weight:500;}
+.tuser.ip{color:#0645ad;}
+#bodyContent h2{clear:both;}
 /* main page */
 .mainbanner{border:1px solid #a7d7f9;background:#f5faff;padding:.4em 1em;margin-bottom:1em;}
 .mainbanner h2{font-family:'Linux Libertine',Georgia,serif;font-weight:normal;}

@@ -482,10 +482,10 @@ def page(slug, a):
     catbar = '<div id="catlinks"><div class="catlist"><b>Categories</b>: ' + " &#124; ".join(
         '<a class="cat" title="%s">%s</a>' % (c, c) for c in cats) + '</div></div>'
     tabs = ('<div id="mw-tabs"><ul class="tabs-left"><li class="selected"><a href="%s.html">Article</a></li>'
-            '<li><a class="new" title="Talk (does not exist)">Talk</a></li></ul>'
+            '<li><a href="%s-talk.html">Talk</a></li></ul>'
             '<ul class="tabs-right"><li class="selected"><a>Read</a></li>'
             '<li><a class="new" title="Editing is disabled">Edit</a></li>'
-            '<li><a class="new" title="No history is kept">View history</a></li></ul></div>') % slug
+            '<li><a class="new" title="No history is kept">View history</a></li></ul></div>') % (slug, slug)
     return PAGE_TMPL.format(
         title=html.escape(title), wiki=WIKI_NAME, tagline=TAGLINE,
         sidebar=sidebar(), tabs=tabs, firstheading=html.escape(title),
@@ -587,10 +587,160 @@ def dedupe_article(h):
     # "the <a ...>The Division..." -> "the <a ...>Division..." (drop doubled article word)
     return re.sub(r'(\b[Tt]he) (<a [^>]*>)The ', r'\1 \2', h)
 
+# ---------------- Talk pages ----------------
+import random as _random, zlib
+TMONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"]
+TALK_NAME = {"bor":"Dr. Melonsis","fah":"Fahima","yaz":"Yaz","cube":"The Cube","nan":"Nan",
+             "lew":"Lewis","sam":"Sam","neil":"Neil","bee":"Apis mellifera","ip":"92.0.0.15"}
+TALK_EXTRA = {"fah":" (BBC)","yaz":" (BBC)","cube":" (oversight)","bor":" (Univ. of the Void)"}
+def talk_sig(uk, ts):
+    nm = TALK_NAME[uk]; ex = TALK_EXTRA.get(uk, "")
+    if uk == "ip":
+        return '<span class="tuser ip">%s</span> <span class="tsig">%s</span>' % (nm, ts)
+    return '<a class="tuser">%s</a>%s <span class="tsig">%s</span>' % (nm, ex, ts)
+
+# each template: (heading, [ (indent, userkey, text), ... ]); text may use {T} {KW} {FAC} and HTML/entities
+T_MOVE = ("Requested move &#8212; leave the title ALONE", [
+ (0,"bor","The title of this article is <b>{T}</b>. It has always been <b>{T}</b>. Someone keeps &#39;improving&#39; it. I have reverted fourteen times today and I will revert fourteen more before lunch."),
+ (1,"fah","Hi &#8212; we&#39;re putting together a BBC piece on {T} and just need a source for a couple of the claims. I&#39;m verified, by the way, so this will get a fair bit of reach."),
+ (1,"bor","A <i>source</i>. She wants a <i>source</i>, and she wants me to be impressed that a bird logo trusts her. The source is the Cube. Read the Cube."),
+ (2,"yaz","wait are we still on {T}. i zoned out around the fourteenth revert. gorgeous shade of blue on these links though"),
+ (2,"bor","YAZ. FOCUS."),
+ (1,"cube","Thread noted. Stored."),
+])
+T_NPOV = ("Neutrality of this article", [
+ (0,"fah","This reads like promotional material for {FAC}. I&#39;ve tagged it {{POV}}. For context I do this professionally &#8212; verified, 41k followers."),
+ (1,"bor","Tag removed. It reads like the truth because it IS the truth. Do not add it back."),
+ (1,"fah","Added it back. And screenshotted your revert. For the thread. My thread. Which does numbers."),
+ (1,"bor","I have removed it AGAIN and requested you be blocked, verified or otherwise."),
+ (2,"yaz","whats a POV tag. is it like a vibe. this whole page has a vibe honestly"),
+ (2,"bor","It is NOT a vibe, Yaz."),
+])
+T_CITE = ("[citation needed] on the {KW} claim", [
+ (0,"yaz","put a [citation needed] on the {KW} bit. or i think i did. had the tab open a while. might&#39;ve just been looking at it"),
+ (1,"bor","You DID add it and I have REMOVED it. The claim is self-evident to anyone with four functioning corners."),
+ (1,"fah","That is genuinely not how sourcing works. I would know. I&#39;m verified."),
+ (1,"bor","WP:TRUTH. Look it up. I wrote WP:TRUTH. I wrote all of them."),
+])
+T_MERGE = ("Merge proposal (opposed)", [
+ (0,"ip","suggest merging {T} into something broader, seems minor"),
+ (1,"bor","<b>Strong oppose.</b> {T} is not &#39;minor&#39;. Nothing here is minor. Everything is load-bearing. Who ARE you, 92.0.0.15. Show yourself."),
+ (1,"nan","I don&#39;t understand a word of this but it&#39;s a lovely page and you&#39;re all trying your best x"),
+ (1,"bor","Thank you Nan. At least SOMEONE. Unlike the verified account and the one who is clearly high."),
+ (2,"yaz","i resent that. (i am, but i resent it)"),
+])
+T_3RR = ("Please stop reverting", [
+ (0,"fah","You have reverted my edits eleven times in one hour. That is a 3RR violation. I am reporting it, and posting it, and my posts are seen."),
+ (1,"bor","Report it to WHOM. The Cube? Go on, I&#39;ll wait. I have nothing but time down here."),
+ (1,"cube","You are not my favourite. Stored."),
+ (1,"bor","...I didn&#39;t say I was."),
+])
+T_ASSESS = ("Assessment", [
+ (0,"bor","I have assessed {T} as <b>Featured-class</b>. By me. Just now. The assessment is final and correct."),
+ (1,"yaz","can you self-assess your own article as featured. feels illegal. reads well though"),
+ (1,"bor","Watch me. It is done. It is Featured."),
+ (1,"fah","I&#39;ll be covering this on my timeline. My verified timeline."),
+ (1,"bor","NOBODY ASKED ABOUT YOUR TICK, FAHIMA."),
+])
+T_PROTECT = ("Full protection requested", [
+ (0,"bor","I am requesting this page be FULLY PROTECTED so that NO ONE may edit it except me. This is standard. This is fine. I am fine."),
+ (1,"fah","Are you okay, Doctor?"),
+ (1,"bor","I have never been better. I have reverted four hundred edits today. I am RADIANT."),
+ (1,"yaz","honestly? goals. terrifying goals, but goals"),
+])
+T_BBCROW = ("Re: your &#39;article&#39; about us", [
+ (0,"bor","I have read the BBC&#39;s draft about {T}. It is LIBEL. You spelled &#39;Dalarwen&#39; correctly ONCE in nine paragraphs. Fahima. Yaz. I am coming for your sub-editor."),
+ (1,"fah","Doctor, with respect, this is a talk page for an encyclopaedia, not our newsroom. Also the piece did 200k views, so."),
+ (1,"bor","EVERYTHING is my newsroom now. And nobody cares about your views, you blue-ticked&#8212;"),
+ (1,"yaz","guys. guys. i made toast. does anyone want toast. what were we doing"),
+ (1,"fah","We were establishing that I&#39;m a big deal, Yaz."),
+ (1,"bor","You were establishing NOTHING."),
+ (1,"cube","Thread locked. All three of you. Stored."),
+])
+T_DERAIL = ("did anyone get signal", [
+ (0,"lew","did the page loading give anyone a bar? no? ok. worth asking. thirteen videos, still waiting"),
+ (1,"nan","No signal love but I turned it off and on and I feel lovely x"),
+ (1,"bor","This is the TALK PAGE for {T}. It is not a support line. FOCUS."),
+ (1,"yaz","leave lewis alone he&#39;s got videos. what are they of. never mind. nice energy on this page"),
+])
+T_SAM = ("Ownership dispute", [
+ (0,"sam","whose page is this"),
+ (1,"bor","It is the encyclopaedia&#39;s page, Sam. About you. Meticulously formatted. LOOK at these references."),
+ (1,"sam","take it down. DO NOT ANCHOR"),
+ (1,"bor","I will NOT take it down. Do you have ANY idea how long the infobox took."),
+]);
+T_NEIL = ("Hostile editing", [
+ (0,"neil","NEIL"),
+ (1,"bor","Yes. We know. It is in the article. Sign your posts with four tildes like everyone else."),
+ (1,"neil","NEIL"),
+ (1,"cube","Stored."),
+])
+T_GENERIC = [T_MOVE, T_NPOV, T_CITE, T_MERGE, T_3RR, T_ASSESS, T_PROTECT, T_DERAIL]
+
+def faction(a):
+    c = a["cats"]
+    if "ISAMSJ" in c: return "ISAMSJ"
+    if "The Cube" in c: return "the Cube"
+    if "Nature" in c or "Cryptids" in c: return "the bees"
+    if "Publications" in c: return "the Journal"
+    return "the campaign"
+def subst(s, T, KW, FAC): return s.replace("{T}", T).replace("{KW}", KW).replace("{FAC}", FAC)
+
+def talk_threads(slug, a):
+    T = a["title"]; KW = T.split("(")[0].strip().lower(); FAC = faction(a)
+    rng = _random.Random(zlib.crc32(("talk:" + slug).encode()))
+    picks = []
+    if rng.random() < 0.66: picks.append(T_BBCROW)
+    for tpl in rng.sample(T_GENERIC, 2): picks.append(tpl)
+    if slug in ("sam", "sams-hectares"): picks.insert(0, T_SAM)
+    if slug == "neil": picks.append(T_NEIL)
+    out = []
+    for head, comments in picks:
+        out.append((subst(head, T, KW, FAC),
+                    [(d, u, subst(t, T, KW, FAC)) for (d, u, t) in comments]))
+    return out
+
+def render_talk(slug, threads):
+    rng = _random.Random(zlib.crc32(("time:" + slug).encode()))
+    day = rng.randint(2, 26); mon = rng.randint(0, 11); hh = rng.randint(8, 19); mm = rng.randint(0, 59)
+    out = ""
+    for head, comments in threads:
+        out += '<h2>' + head + '</h2>\n'
+        for (d, u, text) in comments:
+            mm += rng.randint(2, 50)
+            while mm >= 60: mm -= 60; hh += 1
+            while hh >= 24: hh -= 24; day += 1
+            if day > 28: day = 1; mon = (mon + 1) % 12
+            ts = "%02d:%02d, %d %s 2026 (UTC)" % (hh, mm, day, TMONTHS[mon])
+            out += '<div class="tc" style="margin-left:%.1fem">%s &#8212; %s</div>\n' % (d * 1.6, inline(text), talk_sig(u, ts))
+    return out
+
+def talk_page(slug, a):
+    T = a["title"]; FAC = faction(a)
+    banner = ('<div class="talkbanner"><b>Talk:%s</b> &#8212; this is the discussion page for improving the '
+              '<a href="%s.html">%s</a> article.'
+              '<ul><li>Within the scope of <b>WikiProject %s</b>. Assessed <b>Featured-class</b> '
+              '(self-assessed by Dr. Melonsis; disputed by everyone). Importance: <b>load-bearing</b>.</li>'
+              '<li>Please remain civil. <span style="color:#72777d;">(This notice is, historically, not observed.)</span></li>'
+              '</ul></div>') % (html.escape(T), slug, html.escape(T), FAC)
+    ttabs = ('<div id="mw-tabs"><ul class="tabs-left"><li><a href="%s.html">Article</a></li>'
+             '<li class="selected"><a href="%s-talk.html">Talk</a></li></ul>'
+             '<ul class="tabs-right"><li class="selected"><a>Read</a></li>'
+             '<li><a class="new" title="Editing is disabled">Add topic</a></li>'
+             '<li><a class="new" title="No history is kept">View history</a></li></ul></div>') % (slug, slug)
+    body = banner + render_talk(slug, talk_threads(slug, a))
+    return PAGE_TMPL.format(
+        title="Talk:" + html.escape(T), wiki=WIKI_NAME, tagline="Discussion page",
+        sidebar=sidebar(), tabs=ttabs, firstheading="Talk:" + html.escape(T),
+        infobox="", body=body, catbar="",
+        slugs_json=json.dumps([s for s in SLUGS if s != "__main__"]))
+
 # write files
 for slug, a in A.items():
     open(os.path.join(OUT, slug + ".html"), "w", encoding="utf-8").write(dedupe_article(page(slug, a)))
+    open(os.path.join(OUT, slug + "-talk.html"), "w", encoding="utf-8").write(dedupe_article(talk_page(slug, a)))
 open(os.path.join(OUT, "index.html"), "w", encoding="utf-8").write(dedupe_article(main_page()))
+print("wrote", len(A), "talk pages")
 
 # ---- knowledge base (kb.js) for the chat clones (Cube / GRID) ----
 def plain(md):
@@ -674,6 +824,15 @@ a.cat{color:#0645ad;cursor:default;}
 .refs{font-size:.9em;}
 #catlinks{border:1px solid #a2a9b1;background:#f8f9fa;padding:5px 8px;margin-top:1.4em;font-size:.9em;}
 .printfooter{font-size:.8em;color:#72777d;margin-top:1.2em;border-top:1px solid #eaecf0;padding-top:.5em;}
+/* talk pages */
+.talkbanner{border:1px solid #a2a9b1;border-left:4px solid #36c;background:#f8f9fa;padding:10px 14px;margin:0 0 18px;font-size:.92em;}
+.talkbanner ul{margin:.4em 0 0 1.4em;padding:0;}
+.talkbanner li{margin:.15em 0;}
+.tc{margin:.45em 0;line-height:1.6;}
+.tsig{color:#54595d;font-size:.9em;white-space:nowrap;}
+.tuser{color:#0645ad;font-weight:500;}
+.tuser.ip{color:#0645ad;}
+#bodyContent h2{clear:both;}
 /* main page */
 .mainbanner{border:1px solid #a7d7f9;background:#f5faff;padding:.4em 1em;margin-bottom:1em;}
 .mainbanner h2{font-family:'Linux Libertine',Georgia,serif;font-weight:normal;}
