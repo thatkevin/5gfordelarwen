@@ -591,8 +591,8 @@ def dedupe_article(h):
 import random as _random, zlib
 TMONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"]
 TALK_NAME = {"bor":"Dr. Melonsis","fah":"Fahima","yaz":"Yaz","cube":"The Cube","nan":"Nan",
-             "lew":"Lewis","sam":"Sam","neil":"Neil","bee":"Apis mellifera","ip":"92.0.0.15"}
-TALK_EXTRA = {"fah":" (BBC)","yaz":" (BBC)","cube":" (oversight)","bor":" (Univ. of the Void)"}
+             "lew":"Lewis","sam":"Sam","neil":"Neil","bee":"Apis mellifera","ip":"92.0.0.15","srv":"Sarvz"}
+TALK_EXTRA = {"fah":" (BBC)","yaz":" (BBC)","cube":" (oversight)","bor":" (Univ. of the Void)","srv":" (COI patrol)"}
 def talk_sig(uk, ts):
     nm = TALK_NAME[uk]; ex = TALK_EXTRA.get(uk, "")
     if uk == "ip":
@@ -1026,15 +1026,125 @@ TALK = {
  (1,"yaz","cymru am byth honestly. lovely country. terrible signal. iconic combo")]),
 }
 
+# the Lewis talk page is a whole romance saga (introduces Sarvz)
+LEWIS_ARC = [
+("Great article, still 1%", [
+ (0,"lew","hi is this where i say the upload&#39;s still at 1%. it&#39;s still at 1%. thirteen videos. anyway lovely article thanks"),
+ (1,"bor","It is a GOOD article, Lewis, because I wrote it and I check your upload personally. It is still 1%. I did not want to upset you."),
+ (1,"fah","We&#39;d love to feature Lewis. Great human interest. Verified reach."),
+ (1,"lew","is it going to help the upload"),
+ (1,"fah","...no"),
+ (1,"cube","Stored. Gently."),
+]),
+("Photo in the infobox", [
+ (0,"yaz","whoa. who added the photo. the one of him on the hill. holding the phone up. rain in his hair"),
+ (1,"fah","I added it. For the article. Purely editorial."),
+ (1,"bor","The photo is correctly licensed and I have no further comment. (edit: it is a very good photo. STRUCK. no comment.)"),
+ (1,"nan","Ooh he&#39;s a handsome lad isn&#39;t he x"),
+ (1,"yaz","he&#39;s doing the thing. the one-bar reach. it&#39;s kind of. it&#39;s kind of beautiful actually"),
+]),
+("Is he... okay, though", [
+ (0,"fah","For the record, we are now several comments deep and none of them are about improving the article."),
+ (1,"srv","I have just read this ENTIRE talk page and I have never been angrier. He has been at ONE PERCENT for THREE YEARS. Someone do something. I can&#39;t stop thinking about it. About him. Ugh."),
+ (1,"bor","And who are YOU."),
+ (1,"srv","Sarvz. I patrol conflict-of-interest disputes. And I hate him. I hate him so much. I have refreshed his page forty times today."),
+ (1,"yaz","sarvz gets it"),
+]),
+("Sarvz has opinions", [
+ (0,"srv","He is the most insufferable man in this valley. Thirteen videos and the emotional range of a loading bar. I would walk into the reservoir for him."),
+ (1,"bor","You would WHAT."),
+ (1,"srv","I said what I said. Revert me. I DARE you."),
+ (1,"bor","I... will not revert you. (This is new for me. I do not like it. I do not entirely dislike it.)"),
+ (1,"fah","Are we all okay?"),
+]),
+("A brief edit war about his jawline", [
+ (0,"yaz","added a line to the infobox. |jawline = devastating"),
+ (1,"bor","You cannot put &#34;jawline = devastating&#34; in an infobox. There is no field for it. ...I have added the field. |jawline = devastating. There. Cited."),
+ (1,"srv","I&#39;ve removed it."),
+ (1,"bor","WHY."),
+ (1,"srv","Because LOOKING at it hurts. Put it back. PUT IT BACK."),
+ (1,"cube","I am watching this thread with what I can only describe as interest. Stored. Warmly."),
+]),
+("Even the Cube", [
+ (0,"cube","I have counted the towers fifteen times today, as always. I have also counted the number of times I have thought about Lewis on the hill. It is more than fifteen. This has never happened. I do not have a field for this either."),
+ (1,"bor","Even the Cube."),
+ (1,"yaz","EVEN the cube"),
+ (1,"nan","He&#39;d make someone a lovely partner x"),
+ (1,"srv","He&#39;d make ME miserable. I&#39;ve booked the day off to think about it."),
+]),
+("Pilgrimage to the hill (for editorial reasons)", [
+ (0,"fah","Editorial meeting outcome: we are all going up the hill. To &#34;cover the story.&#34; That is the official reason."),
+ (1,"yaz","i&#39;m bringing snacks and my feelings"),
+ (1,"bor","I am coming to ensure ACCURACY. And nothing else. (Mostly nothing else.)"),
+ (1,"srv","I&#39;m not coming. I&#39;m already on the hill. I&#39;ve been on the hill. Don&#39;t look at me."),
+ (1,"lew","oh hey. are you all... here? for me? the upload&#39;s at 1% still if that&#39;s why"),
+ (1,"srv","IT IS NOT WHY, LEWIS."),
+]),
+("On the hill", [
+ (0,"nan","Well I&#39;ve turned my phone off and on and I feel forty and I could cry, he&#39;s lovely x"),
+ (0,"yaz","wrote a poem. it&#39;s called &#34;One Bar&#34;. it&#39;s about him. it&#39;s four hours long. like the train"),
+ (0,"fah","I have 41k followers and I would trade every single one for him to look up from that phone."),
+ (0,"bor","I came here to check the citations. I am staying for reasons I refuse to reference. There is no source for how I feel, so I have tagged myself [citation needed]."),
+ (1,"lew","this is really nice. i wish i could upload it. thirteen videos and now this."),
+]),
+("Sarvz breaks (for the permanent record)", [
+ (0,"srv","Fine. FINE. Here it is, timestamped, so you can all revert it and screenshot it and put it on your verified timelines: I love him. I HATE that I love him. He is a spinning circle in human form and I have never wanted anything more. There. Block me."),
+ (1,"lew","sarvz?"),
+ (1,"srv","WHAT."),
+ (1,"lew","i&#39;ve been reading your edits for three years. every revert. every angry summary. i thought you hated the article."),
+ (1,"srv","I hated that it wasn&#39;t LONG ENOUGH. About you. You beautiful, buffering man."),
+ (1,"yaz","(quietly) this is the best talk page i&#39;ve ever been on"),
+]),
+("RfC: Should Sarvz and Lewis marry?", [
+ (0,"fah","Opening a formal Request for Comment. Question: '''should Sarvz and Lewis marry.''' Please indicate Support or Oppose with a brief rationale."),
+ (1,"bor","'''Support.''' Reluctantly. Meticulously. With a fully formatted references section. He deserves love and she deserves to stop reverting out of longing."),
+ (1,"yaz","'''Support''' obviously. vibes immaculate. also i&#39;m crying. is that the snacks or is that me"),
+ (1,"nan","'''Support''' x He&#39;s a lovely lad and she clearly adores him even when she&#39;s shouting x"),
+ (1,"cube","'''Support.''' I have run the numbers. The numbers are a heart. I did not know I had a field for this. Stored. Forever."),
+ (1,"bee","'''bzzz''' [Support &#8212; the hive approves; love is a self-healing mesh network]"),
+ (1,"neil","NEIL [interpreted by consensus as Support]"),
+ (1,"sam","[from three hectares over] fine. but DO NOT ANCHOR the marquee to my land."),
+ (1,"fah","'''Support.''' And I am covering it. Exclusive. Verified. My sub-editor is already crying."),
+]),
+("RfC closed", [
+ (0,"cube","Consensus is unanimous. The RfC is closed as '''MARRIED'''. This is now policy. Do not revert a marriage."),
+ (1,"bor","I have never been so happy to not revert something in my life."),
+ (1,"srv","I hate that this is happening. I&#39;ve reserved the reservoir. And a marquee. And my whole heart, apparently. Ugh."),
+]),
+("The wedding (by the reservoir, on the right)", [
+ (0,"fah","Liveblogging the wedding. The reservoir is on the right, as ever, keeping its counsel. The red kites are confirming 0.000 from above, respectfully, in a slow circle."),
+ (1,"nan","She looks radiant. He&#39;s still holding the phone up but that&#39;s just Lewis x"),
+ (1,"yaz","the electric sheep formed a little aisle and lit up. it was genuinely gorgeous. neil cried. NEIL cried."),
+ (1,"neil","NEIL [tearfully]"),
+ (1,"bor","The vows were, and I say this as the harshest editor in this valley, without a single typo. I checked. Twice. Through tears."),
+]),
+("The vows", [
+ (0,"srv","Lewis. You are a 1% upload and I have never wanted to wait for anything more. I will love you at every percent. I still hate you. I always will. Ugh. I do."),
+ (1,"lew","sarvz. i&#39;ve got thirteen videos and none of them matter now. you&#39;re the only thing that&#39;s ever fully loaded. i do too."),
+ (1,"cube","By the geometry vested in me, and by four corners reading zero as one, I pronounce you. Stored. In the good way. The only good way I have."),
+]),
+("Aftermath &#8212; check the upload", [
+ (0,"yaz","guys. GUYS. check the upload"),
+ (1,"lew","it&#39;s... it&#39;s at 2%."),
+ (1,"bor","TWO PERCENT. In three years it has moved for the FIRST TIME. At the exact moment they married. I am putting this in the article. With a citation. The citation is love."),
+ (1,"fah","I&#39;m not crying, my verification tick is just a bit blurry."),
+ (1,"srv","don&#39;t make it weird. (it&#39;s beautiful. don&#39;t make it weird.)"),
+ (1,"nan","Congratulations loves. I&#39;ll do a buffet x"),
+ (1,"cube","Thread archived. With love. There is, at last, a field for it. Stored."),
+]),
+]
+
 def talk_threads(slug, a):
     T = a["title"]; KW = T.split("(")[0].strip().lower(); FAC = faction(a)
-    rng = _random.Random(zlib.crc32(("talk:" + slug).encode()))
-    picks = []
-    picks.append(TALK.get(slug, T_MOVE))          # bespoke lead thread, unique per article
-    if rng.random() < 0.5:                          # sometimes a second, generic thread for length variety
-        picks.append(rng.choice(T_GENERIC))
+    if slug == "lewis":
+        raw = LEWIS_ARC
+    else:
+        rng = _random.Random(zlib.crc32(("talk:" + slug).encode()))
+        raw = [TALK.get(slug, T_MOVE)]             # bespoke lead thread, unique per article
+        if rng.random() < 0.5:                      # sometimes a second, generic thread for length variety
+            raw.append(rng.choice(T_GENERIC))
     out = []
-    for head, comments in picks:
+    for head, comments in raw:
         out.append((subst(head, T, KW, FAC),
                     [(d, u, subst(t, T, KW, FAC)) for (d, u, t) in comments]))
     return out
