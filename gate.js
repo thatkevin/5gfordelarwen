@@ -96,3 +96,26 @@
   if(document.body) build();
   else document.addEventListener("DOMContentLoaded",build);
 })();
+
+/* ============================================================
+   OFFLINE / PWA — register the service worker + inject the
+   manifest on every page, so the whole site works with no
+   internet once it has been loaded once over http(s).
+   ============================================================ */
+(function(){
+  if(!("serviceWorker" in navigator)) return;
+  try{
+    var s=document.querySelector('script[src*="gate.js"]');
+    // base = the directory that contains gate.js = the site root
+    var base = s ? s.src.replace(/gate\.js.*$/, "") : location.href.replace(/[^\/]*$/, "");
+    navigator.serviceWorker.register(base+"sw.js", {scope: base}).catch(function(){});
+    if(!document.querySelector('link[rel="manifest"]')){
+      var l=document.createElement("link"); l.rel="manifest"; l.href=base+"manifest.webmanifest";
+      document.head.appendChild(l);
+    }
+    if(!document.querySelector('meta[name="theme-color"]')){
+      var m=document.createElement("meta"); m.name="theme-color"; m.content="#00FF00";
+      document.head.appendChild(m);
+    }
+  }catch(e){}
+})();

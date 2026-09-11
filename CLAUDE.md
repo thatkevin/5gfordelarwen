@@ -33,7 +33,7 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
 - **The gate**: every page loads `gate.js` in `<head>`. Password is **ISAMSJ** (case-insensitive, fuzzy —
   Levenshtein ≤ 2, substring, etc). Unlock persists per session. Dark pages include it too so they aren't
   an un-gated bypass.
-- **Cache-busting**: shared assets are referenced with `?v=N` (currently **v=9**). If you edit
+- **Cache-busting**: shared assets are referenced with `?v=N` (currently **v=10**). If you edit
   `retro.css`, `retro.js`, `gate.js`, `dark.css`, or `drone.js`, **bump N everywhere** or browsers serve
   stale copies (this has already bitten us once — a ghost "psst" line).
 - **Favicon**: loud pages use `favicon.svg` (+ `.ico` + apple-touch). Dark pages keep their own bleak
@@ -78,6 +78,10 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
 - Dark (not in nav): `static`, `isamsj`, `infinite-walks`, `clifftop-caravans`, `jencorp`, `the-quiet`,
   `the-division`, `above`, `careers`, `org-chart`, `the-corridor`, `sam`, `free-up-lewis` (a hidden full-screen platformer, linked from the-quiet + the "LEWIS" keyword egg), `downloads/merger-presentation`.
 - Shared: `retro.css`, `retro.js`, `dark.css`, `drone.js`, `gate.js`, `favicon.*`, `assets/*.gif`.
+- Offline/PWA: `manifest.webmanifest`, `sw.js` (service worker; precache list is generated from the
+  real files — regenerate it if you add pages), `icon-192.png`/`icon-512.png`. `gate.js` registers the SW
+  and injects the manifest on every page. Everything is same-origin, so once loaded over http(s) the whole
+  site runs offline; can be "installed" as an app. SW needs https/localhost (not `file://`).
 
 ## `localStorage` keys (all client-side, never leave the browser)
 
