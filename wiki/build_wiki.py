@@ -87,7 +87,7 @@ art("dalarwen-5g-grid", "The Dalarwen 5G Grid",
  infobox=[("Towers","15 (non-negotiable)"),("Towers 1–5","Spotify core (lossless)"),("Towers 6–9","Rain redundancy"),("Towers 10–12","[[lewis|Lewis]] uplink"),("Tower 13","[[tower-thirteen|The Spite Tower]]"),("Tower 15","[[the-capstone|The Capstone]]")],
  sections=[("Numerology","15 is a triangular number (1+2+3+4+5). Adherents connect this to [[the-pyramids|the pyramids]].")],
  seealso=["tower-thirteen","the-capstone","lewis","electric-rain"],
- ext=[("Build the grid","../towers.html")],
+ ext=[("Build the grid","../towers.html"),("Reference implementation (fifteen-towers, DalarHub)","../hub/index.html")],
  cats=["Infrastructure","Dalarwen"])
 
 art("tower-thirteen", "Tower 13",
@@ -365,6 +365,7 @@ art("quad-void", "The Quad-Void",
 art("zero-bars", "0.000 bars",
  "'''0.000 bars''' is the canonical signal strength of [[dalarwen]] in all four corners simultaneously (see [[quad-void]]). It is not \"a bit slow\" or \"patchy\" but total: no 5G, no 4G, no 3G, no rumour of a signal. It is [[exclusion-envelope|maintained]], not natural.",
  seealso=["quad-void","great-darkening","exclusion-envelope"],
+ ext=[("Ask about it on Signal Exchange","../signalexchange/index.html")],
  cats=["Concepts","Dalarwen"])
 
 art("the-pals", "The Pals of Dalarwen",

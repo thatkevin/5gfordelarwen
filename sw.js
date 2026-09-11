@@ -1,7 +1,7 @@
 /* Dalarwen 5G — offline service worker.
    Pre-caches the whole site so it runs with no internet (ironically, for Dalarwen).
    Bump CACHE when content changes to force an update on next online visit. */
-var CACHE = "dalarwen-offline-v13";
+var CACHE = "dalarwen-offline-v14";
 var ASSETS = [
   "./",
   "404.html",
@@ -22,6 +22,7 @@ var ASSETS = [
   "assets/globe.gif",
   "assets/heart.gif",
   "assets/loading.gif",
+  "assets/melonsis-lemon.jpg",
   "assets/newblink.gif",
   "assets/radiation.gif",
   "assets/sam-humber.jpg",
@@ -50,6 +51,10 @@ var ASSETS = [
   "game-art/win5.png",
   "gate.js",
   "guestbook.html",
+  "hub/hub.css",
+  "hub/index.html",
+  "hub/issue-15.html",
+  "hub/issues.html",
   "icon-192.png",
   "icon-512.png",
   "index.html",
@@ -90,6 +95,7 @@ var ASSETS = [
   "ring/spite-tower-13.html",
   "sam.html",
   "signal-test.html",
+  "signalexchange/index.html",
   "sitemap.html",
   "static.html",
   "the-corridor.html",
