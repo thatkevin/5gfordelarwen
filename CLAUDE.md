@@ -109,7 +109,11 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
   paragraph's real HTML on completion &#8212; do NOT go back to char-by-char `innerHTML+=esc(ch)`, it mangles
   entities and links.
 - Note: DalarHub/Signal Exchange/Dalarpedia/Cube/GRID all clone a real product's *layout* but use their own
-  names and no real logos. Keep it that way. Character portraits live in `assets/*.jpg` (Coventry Conductor on
+  names and no real logos. Keep it that way.
+- **Hidden doors** into all five are scattered as faint, thematically-matched footer links across many loud
+  and dark pages (dim low-contrast colours, small Arial) &#8212; e.g. lewis&rarr;DalarHub issue #7,
+  signal-test/radiation&rarr;Signal Exchange, guestbook/the-quiet/above&rarr;Cube, matrix&rarr;GRID,
+  and a wide spread of pages&rarr;Dalarpedia. Keep new ones subtle and in-voice; none go in the nav or sitemap. Character portraits live in `assets/*.jpg` (Coventry Conductor on
   `ring/coventry`, Sam on `ring/hull`, Melonsis + Lemon the dog on `ring/nazca-peru`); optimise new ones to
   ~900px JPEG so the offline cache stays light.
 - Shared: `retro.css`, `retro.js`, `dark.css`, `drone.js`, `gate.js`, `favicon.*`, `assets/*.gif`.
