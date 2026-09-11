@@ -11,6 +11,7 @@ var PAGES = [
   ["the-cube.html","THE CUBE"],
   ["towers.html","15 TOWERS"],
   ["radiation.html","RADIATION"],
+  ["tv-licence.html","TV LICENCE"],
   ["lewis.html","LEWIS HQ"],
   ["manifesto.html","MANIFESTO"],
   ["keep-dalarwen-dark.html","KEEP IT DARK"],
