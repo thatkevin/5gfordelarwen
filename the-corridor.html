@@ -42,6 +42,8 @@
   <a class="turn" href="infinite-walks.html">&#8249; turn back (the route does not acknowledge turning back)</a>
   <a class="turn" href="index.html" style="color:#1a1a1a;">&#8249; or leave entirely, while you still count as someone who could</a>
 
+  <a class="turn" id="record" href="wiki/index.html" style="display:none;color:#25321f;margin-top:26px;">&#8226; a door in the corridor wall, unmarked: THE RECORD &#8226;</a>
+
 </div>
 
 <script>
@@ -62,6 +64,7 @@ function ls(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
 
 var STEPS=parseInt(lg("dalarwen_steps","0"),10)||0;
 document.getElementById("steps").innerHTML=STEPS.toLocaleString();
+if(STEPS>=100 || lg("dalarwen_descended","")==="1"){ var _rec=document.getElementById("record"); if(_rec){ _rec.style.display="block"; } }
 
 var EARLY=[
   "The path leads uphill. There is one bar at the top. You have been told this before.",
@@ -96,7 +99,7 @@ function walk(){
   var pool = STEPS<8?EARLY : STEPS<25?LATE : DEEP;
   document.getElementById("obs").innerHTML=pick(pool);
   if(STEPS===50){ document.getElementById("obs").innerHTML="&#9608;&#9608;&#9608; fifty steps. nobody watching would call this a walk any more. it is a condition. &#9608;&#9608;&#9608;"; }
-  if(STEPS>=100){ ls("dalarwen_descended","1"); }
+  if(STEPS>=100){ ls("dalarwen_descended","1"); var rec=document.getElementById("record"); if(rec){ rec.style.display="block"; } }
   // rings breathe a little each step
   var rings=document.getElementsByClassName("ring");
   for(var i=0;i<rings.length;i++){ rings[i].style.transform="translate(-50%,-50%) rotate("+(STEPS*2+i*4)+"deg)"; }
