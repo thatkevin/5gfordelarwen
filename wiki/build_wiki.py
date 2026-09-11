@@ -4,7 +4,7 @@ import os, re, html, json
 OUT = "/Users/kevin/Projects/5gfordelarwen/wiki"
 os.makedirs(OUT, exist_ok=True)
 
-WIKI_NAME = "The Weird World Wiki"
+WIKI_NAME = "Dalarpedia"
 TAGLINE = "From " + WIKI_NAME + ", the free encyclopaedia"
 
 # ---------------------------------------------------------------- articles
@@ -455,7 +455,7 @@ def sidebar(active_main=False):
     ])
     return ('<div id="mw-panel">'
       '<div id="p-logo"><a href="index.html" title="%s">'
-      '<span class="logo-mark">&#9741;</span><span class="logo-txt">The&nbsp;Weird<br>World&nbsp;Wiki</span></a></div>'
+      '<span class="logo-mark">&#9741;</span><span class="logo-txt">Dalarpedia</span></a></div>'
       '<nav class="portal"><h3>Navigation</h3><ul>%s</ul></nav>'
       '<nav class="portal"><h3>Tools</h3><ul>%s</ul></nav>'
       '</div>') % (WIKI_NAME, nav, tools)
@@ -530,7 +530,7 @@ PAGE_TMPL = """<!DOCTYPE html>
         {body}
         {catbar}
       </div>
-      <div class="printfooter">Retrieved from “{wiki}”. This page is part of a work of fiction.</div>
+      <div class="printfooter">Retrieved from “{wiki}”.</div>
     </div>
   </div>
 </div>

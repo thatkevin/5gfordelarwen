@@ -80,7 +80,7 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
   `matrix`, `guestbook`, `webring`, `credits`, `sitemap`, `about-dalarwen`, `404`.
 - Dark (not in nav): `static`, `isamsj`, `infinite-walks`, `clifftop-caravans`, `jencorp`, `the-quiet`,
   `the-division`, `above`, `careers`, `org-chart`, `the-corridor`, `sam`, `free-up-lewis` (a hidden full-screen platformer, linked from the-quiet + the "LEWIS" keyword egg), `downloads/merger-presentation`.
-- **The Weird World Wiki** (`wiki/`): a MediaWiki "Vector"-skin clone (own branding — no Wikipedia name/logo)
+- **Dalarpedia** (`wiki/`): a MediaWiki "Vector"-skin clone (own branding — no Wikipedia name/logo)
   documenting the lore. 62 interlinked articles + a Main page, all sharing `wiki/wiki.css` and a JS chrome
   injector baked into each page (sidebar, tabs, infobox, See also, categories). Carries a Wikipedia-style
   fundraising banner begging for investment in the caravan wing. Deliberately **hidden**: no nav link;
