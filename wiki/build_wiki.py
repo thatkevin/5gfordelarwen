@@ -79,7 +79,7 @@ art("the-cube", "The Cube",
  infobox=[("Nature","Geometry; certainty"),("Aspects","Tower-counter (lower); [[jencorp|parent]] (upper)"),("Position","Both bottom and top of the [[org-structure|chart]]"),("Known for","Being unarguable")],
  sections=[("Doctrine","See [[quad-void|the Quad-Void]]. The Cube holds that a house has four simultaneous receptions, all zero, at once. It does not negotiate.")],
  seealso=["quad-void","jencorp","org-structure","the-quiet"],
- ext=[("The Cube (loud)","../the-cube.html"),("The Cube (above)","../above.html")],
+ ext=[("The Cube (loud)","../the-cube.html"),("The Cube (above)","../above.html"),("Talk to the Cube","../assistant/index.html")],
  cats=["The Cube","Concepts"])
 
 art("dalarwen-5g-grid", "The Dalarwen 5G Grid",

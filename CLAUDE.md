@@ -96,8 +96,13 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
 - **Signal Exchange** (`signalexchange/`): a Stack-Overflow skin (own branding), one Q&A page
   ("How do I get a single bar at Dalarwen?", closed as works-as-intended). Hidden door: a faint "quieter"
   link on `faq.html`; also linked from Dalarpedia's `zero-bars` article. Cross-links DalarHub + the ring.
-- Note: DalarHub/Signal Exchange/Dalarpedia all clone a real product's *layout* but use their own names and
-  no real logos. Keep it that way. Character portraits live in `assets/*.jpg` (Coventry Conductor on
+- **Cube** (`assistant/`): a Claude.ai-style chat UI (warm cream, serif greeting, streaming replies, chips,
+  Recents sidebar) whose assistant is the Cube &#8212; endlessly polite, wholly unable to help. Pure client-side
+  JS: keyword-matched canned responses in `replyFor()`, streamed char-by-char. Own branding (isometric-cube
+  mark, model "Cube 15 &#183; Capstone") &#8212; NOT the Claude name or Anthropic logo. Door: faint link on
+  `the-cube.html` ("the Cube is taking questions now"); linked from Dalarpedia's the-cube article.
+- Note: DalarHub/Signal Exchange/Dalarpedia/Cube all clone a real product's *layout* but use their own names
+  and no real logos. Keep it that way. Character portraits live in `assets/*.jpg` (Coventry Conductor on
   `ring/coventry`, Sam on `ring/hull`, Melonsis + Lemon the dog on `ring/nazca-peru`); optimise new ones to
   ~900px JPEG so the offline cache stays light.
 - Shared: `retro.css`, `retro.js`, `dark.css`, `drone.js`, `gate.js`, `favicon.*`, `assets/*.gif`.

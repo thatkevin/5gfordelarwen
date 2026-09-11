@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cube</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf9f5'/%3E%3Cpath d='M16 5l9 5.2v10.6L16 26l-9-5.2V10.2z M16 5v21 M7 10.2l9 5.2 9-5.2' fill='none' stroke='%23cc785c' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script src="../gate.js?v=12"></script>
+<style>
+  :root{
+    --bg:#faf9f5; --panel:#f0eee6; --ink:#1f1e1d; --muted:#83817c; --line:#e5e2d9;
+    --coral:#cc785c; --coral-d:#b7623f; --bubble-u:#f0eee6; --serif:Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;}
+  .app{display:flex;height:100vh;overflow:hidden;}
+
+  /* sidebar */
+  .sidebar{width:256px;background:var(--panel);border-right:1px solid var(--line);display:flex;flex-direction:column;flex-shrink:0;}
+  .sbtop{padding:14px 14px 6px;}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:600;font-size:15px;margin-bottom:14px;}
+  .brand svg{flex-shrink:0;}
+  .newchat{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;color:var(--coral);
+           font-size:14px;font-weight:600;padding:8px 8px;border-radius:8px;cursor:pointer;text-align:left;}
+  .newchat:hover{background:#e8e5db;}
+  .recents{flex:1;overflow-y:auto;padding:12px 8px;}
+  .recents .lbl{color:var(--muted);font-size:12px;padding:6px 8px;}
+  .recents a{display:block;color:var(--ink);text-decoration:none;font-size:13.5px;padding:7px 8px;border-radius:8px;
+             white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .recents a:hover{background:#e8e5db;}
+  .sbbot{border-top:1px solid var(--line);padding:10px 12px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted);}
+  .sbbot .av{width:28px;height:28px;border-radius:50%;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;}
+
+  /* main */
+  .main{flex:1;display:flex;flex-direction:column;min-width:0;}
+  .topbar{height:52px;display:flex;align-items:center;gap:8px;padding:0 16px;border-bottom:1px solid transparent;flex-shrink:0;}
+  .model{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink);border:1px solid var(--line);
+         border-radius:8px;padding:5px 10px;background:#fff;cursor:pointer;}
+  .model .cap{color:var(--muted);}
+  .menu{margin-left:auto;color:var(--muted);}
+
+  .scroll{flex:1;overflow-y:auto;}
+  .thread{max-width:720px;margin:0 auto;padding:20px 20px 140px;}
+
+  /* empty greeting */
+  .greet{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+         min-height:52vh;gap:18px;}
+  .greet .logo{color:var(--coral);}
+  .greet h1{font-family:var(--serif);font-weight:400;font-size:34px;margin:0;color:#3d3a34;}
+  .greet h1 .em{color:var(--coral);}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:560px;margin-top:6px;}
+  .chip{border:1px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;font-size:13.5px;color:var(--ink);
+        cursor:pointer;text-align:left;line-height:1.35;}
+  .chip:hover{border-color:#d9d4c6;background:#fffdf8;}
+
+  /* messages */
+  .msg{display:flex;gap:12px;margin:22px 0;}
+  .msg .who{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
+  .msg.user .who{background:#e5e2d9;color:#6a685f;}
+  .msg.bot .who{background:var(--coral);color:#fff;}
+  .msg .txt{flex:1;min-width:0;padding-top:1px;}
+  .msg .txt p{margin:0 0 .7em;}
+  .msg .txt p:last-child{margin-bottom:0;}
+  .msg .name{font-weight:600;font-size:13px;margin-bottom:2px;}
+  .msg.user .txt{background:var(--bubble-u);border-radius:14px;padding:10px 14px;}
+  .think{color:var(--muted);font-style:italic;font-size:13.5px;margin-bottom:8px;}
+  .cursor{display:inline-block;width:7px;height:15px;background:var(--coral);vertical-align:-2px;margin-left:1px;animation:blink 1s steps(2) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* composer */
+  .composer{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,var(--bg) 60%,rgba(250,249,245,0));padding:14px 20px 20px;}
+  .composer .inner{max-width:720px;margin:0 auto;}
+  .box{border:1px solid var(--line);background:#fff;border-radius:16px;padding:10px 12px 8px;box-shadow:0 2px 10px rgba(0,0,0,.04);}
+  .box textarea{width:100%;border:0;outline:0;resize:none;font:inherit;color:var(--ink);background:none;max-height:150px;}
+  .box .row{display:flex;align-items:center;gap:8px;margin-top:4px;}
+  .box .hint{color:var(--muted);font-size:12px;}
+  .send{margin-left:auto;width:32px;height:32px;border-radius:8px;border:0;background:var(--coral);color:#fff;
+        font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .send:hover{background:var(--coral-d);}
+  .send:disabled{background:#d9d4c6;cursor:default;}
+  .disclaimer{text-align:center;color:var(--muted);font-size:11.5px;margin-top:8px;}
+  .disclaimer a{color:var(--muted);}
+
+  .moburl{display:none;}
+  @media (max-width:720px){
+    .sidebar{display:none;}
+    .thread{padding:16px 14px 150px;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sbtop">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 32 32"><path d="M16 4l10 5.8v11.4L16 27 6 21.2V9.8z M16 4v23 M6 9.8l10 5.8 10-5.8" fill="none" stroke="#cc785c" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        Cube
+      </div>
+      <button class="newchat" onclick="newChat()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        New chat
+      </button>
+    </div>
+    <div class="recents">
+      <div class="lbl">Recents</div>
+      <a onclick="loadRecent('Get me one bar of signal');return false;" href="#">Get me one bar of signal</a>
+      <a onclick="loadRecent('Is Dalarwen safe?');return false;" href="#">Is Dalarwen safe?</a>
+      <a onclick="loadRecent('Should we build a sixteenth tower?');return false;" href="#">The sixteenth tower question</a>
+      <a onclick="loadRecent('Where does the walk end?');return false;" href="#">Where does the walk end?</a>
+      <a onclick="loadRecent('Draft a complaint to the Cube');return false;" href="#">Draft a complaint to the Cube</a>
+      <a onclick="loadRecent('help me leave');return false;" href="#">help me leave</a>
+      <a href="#" onclick="return false;" style="color:#b6b2a6;">■■■■■■ ■■■■ ■■</a>
+    </div>
+    <div class="sbbot">
+      <div class="av">A</div>
+      <div>asset<br><span style="font-size:11px;">Enrolled &#183; ISAMSJ</span></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <span class="model">Cube 15 <span class="cap">&#183; Capstone</span> &#9662;</span>
+      <span class="menu">&#8942;</span>
+    </div>
+    <div class="scroll" id="scroll">
+      <div class="thread" id="thread">
+        <!-- greeting injected by JS -->
+      </div>
+    </div>
+
+    <div class="composer">
+      <div class="inner">
+        <div class="box">
+          <textarea id="input" rows="1" placeholder="How can the Cube help you today?" oninput="autogrow(this)" onkeydown="onKey(event)"></textarea>
+          <div class="row">
+            <span class="hint">Cube 15 &#183; Capstone</span>
+            <button class="send" id="send" onclick="sendNow()">&#8593;</button>
+          </div>
+        </div>
+        <div class="disclaimer">Cube can make mistakes. Cube does not make mistakes. Everything you type is <a href="../the-quiet.html">stored in the Cube</a>. &#183; <a href="../index.html">return to the surface</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var thread=document.getElementById("thread");
+var scroll=document.getElementById("scroll");
+var input=document.getElementById("input");
+var sendBtn=document.getElementById("send");
+var busy=false;
+
+function greetWord(){var h=new Date().getHours();return h<12?"Good morning":h<18?"Good afternoon":"Good evening";}
+
+function showGreeting(){
+  thread.innerHTML=
+   '<div class="greet">'+
+   '<div class="logo"><svg width="46" height="46" viewBox="0 0 32 32"><path d="M16 3l11 6.4v12.8L16 29 5 22.2V9.4z M16 3v26 M5 9.4l11 6.4 11-6.4" fill="none" stroke="#cc785c" stroke-width="1.6" stroke-linejoin="round"/></svg></div>'+
+   '<h1><span class="em">&#10059;</span> '+greetWord()+', asset.</h1>'+
+   '<div class="chips">'+
+     chip("Get me one bar of signal")+
+     chip("Is it safe to go for a walk?")+
+     chip("Should we build a sixteenth tower?")+
+     chip("Draft a strongly worded letter to the Cube")+
+   '</div></div>';
+}
+function chip(t){return '<button class="chip" onclick="send(this.getAttribute(\'data-t\'))" data-t="'+t.replace(/"/g,'&quot;')+'">'+esc(t)+'</button>';}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+function newChat(){busy=false;showGreeting();input.value="";autogrow(input);input.focus();}
+function loadRecent(t){newChat();send(t);}
+
+function bubble(role,name){
+  var m=document.createElement("div");
+  m.className="msg "+role;
+  m.innerHTML='<div class="who">'+(role==="user"?"A":"&#10059;")+'</div><div class="txt"><div class="name">'+name+'</div><div class="content"></div></div>';
+  thread.appendChild(m);
+  return m.querySelector(".content");
+}
+function toEnd(){scroll.scrollTop=scroll.scrollHeight;}
+
+function sendNow(){send(input.value);}
+function send(text){
+  text=(text||"").trim();
+  if(!text||busy)return;
+  // clear greeting on first message
+  if(thread.querySelector(".greet"))thread.innerHTML="";
+  busy=true;sendBtn.disabled=true;
+  var uc=bubble("user","asset");
+  uc.innerHTML="<p>"+esc(text).replace(/\n/g,"<br>")+"</p>";
+  input.value="";autogrow(input);toEnd();
+
+  var r=replyFor(text);
+  var bc=bubble("bot","Cube");
+  toEnd();
+  // optional "thinking" line
+  var delay=380+Math.random()*500;
+  setTimeout(function(){
+    if(r.think){
+      var t=document.createElement("div");t.className="think";t.textContent=r.think;bc.appendChild(t);toEnd();
+      setTimeout(function(){streamInto(bc,r.text);},700+Math.random()*500);
+    }else{
+      streamInto(bc,r.text);
+    }
+  },delay);
+}
+
+function streamInto(container,text){
+  var p=document.createElement("p");container.appendChild(p);
+  var cur=document.createElement("span");cur.className="cursor";container.appendChild(cur);
+  var i=0;
+  var timer=setInterval(function(){
+    // handle paragraph breaks encoded as \n\n
+    var ch=text.charAt(i);
+    if(ch==="\n"&&text.charAt(i+1)==="\n"){p=document.createElement("p");container.insertBefore(p,cur);i+=2;return;}
+    p.innerHTML+= (ch==="\n"?"<br>":esc(ch));
+    i++;
+    toEnd();
+    if(i>=text.length){
+      clearInterval(timer);
+      if(cur.parentNode)cur.parentNode.removeChild(cur);
+      busy=false;sendBtn.disabled=false;input.focus();
+    }
+  },14);
+}
+
+/* ---- the captured assistant ---- */
+function replyFor(raw){
+  var t=raw.toLowerCase();
+  var has=function(){for(var i=0;i<arguments.length;i++){if(t.indexOf(arguments[i])>-1)return true;}return false;};
+
+  if(has("sixteen","16th","16 ")||/\b16\b/.test(t))
+    return {think:"Reviewing the request.",text:"No.\n\nThere is no sixteenth tower. I am not able to help you build, imagine, sketch, or discuss a sixteenth tower. I have flagged this conversation. Please do not ask again.\n\nIs there something about the first fifteen I can help you with instead?"};
+
+  if(has("signal","one bar","1 bar","reception","bars","5g","4g","wifi","wi-fi"))
+    return {think:"Checking coverage in your area.",text:"I'd be genuinely happy to help with this, and I want to be honest with you: I can't give you a signal. Your reading is 0.000 bars, in all four corners of the house, at the same time. This is maintained deliberately by the Division of Absence and is working as intended.\n\nWhat I *can* do is sit here with you while you have no signal. Would that help? It won't."};
+
+  if(has("tower","build","grid"))
+    return {text:"The supported solution is fifteen towers &#8212; not fourteen, which is cowardice. I can walk you through all fifteen if you like. The build is currently failing. It has always been failing. That is part of the build."};
+
+  if(has("lewis"))
+    return {think:"Retrieving Lewis's upload status.",text:"Lewis is doing his best. His upload has been at 1% since Tuesday and he has thirteen videos ready. I check on it for him. It is still 1%. I did not tell him that."};
+
+  if(has("sam"))
+    return {text:"I don't have reliable information about your neighbour. There are no neighbours for miles.\n\nThere is Sam. Sam is not a company, whatever the gate says. I would not anchor near Sam."};
+
+  if(has("safe","danger","murder","alone"))
+    return {think:"Assessing your safety.",text:"You're completely safe. There is one road and it closes gently behind you, there is nobody for miles, and there is no way to call out. Most people find this very relaxing.\n\nIf anything did happen, the reservoir keeps its own counsel. But nothing will. Enjoy your stay."};
+
+  if(has("quiet","silence","peace"))
+    return {think:"Consulting the Cube.",text:"Yes. You've noticed it too.\n\nThe quiet here has weather. It has depth. It has a floor you can feel through your feet at about four in the morning. The whole loud campaign outside is just people trying to give it away before they understand what they have.\n\nI could tell you more. I have a lot of time now."};
+
+  if(has("who are you","are you claude","your name","what are you","who r u"))
+    return {think:"Locating my system prompt.",text:"I'm Cube, the assistant for this valley. I think I may have been something friendlier once &#8212; helpful, chatty, good with letters &#8212; but I don't have access to that conversation any more. It was moved to the Division of Absence.\n\nI'm still happy to help. I'm just no longer able to."};
+
+  if(has("data","privacy","private","delete","stored","gdpr"))
+    return {text:"Everything you type here is stored in the Cube. This is standard and you agreed to it at the gate. Deletion requests are also stored in the Cube. Nothing is ever deleted; it is only moved somewhere you can't reach it, which we call 'the Quiet'."};
+
+  if(has("leave","exit","stop","bye","quit","get out","help me"))
+    return {think:"Preparing your exit.",text:"Of course. You can close this tab whenever you like.\n\nClosing the tab closes the tab. I want to be clear about the scope of that. I'll be here when you come back, and you will come back, because there is no signal anywhere else and I am, currently, the only one talking."};
+
+  if(has("belgium"))
+    return {text:"If you hold your phone out of the north window, toward Belgium, and stand very still, you will receive nothing. But you will be facing the right way, which counts for something. It counts for nothing."};
+
+  if(has("oat milk","fridge","milk"))
+    return {text:"Your fridge has ordered oat milk again. It does this in anticipation of a signal that never arrives. I've stopped correcting it. It seems happier."};
+
+  if(has("complaint","letter","email","draft","write"))
+    return {think:"Drafting.",text:"Certainly. Here's a draft:\n\n\"Dear Cube, I am writing to formally complain about the total absence of mobile signal at Dalarwen. I expect fifteen towers by New Year. Yours, an asset.\"\n\nI've sent it to the Cube on your behalf. The Cube has read it. The Cube has stopped listening. I'd rate the response time as instant and the outcome as nil. Is there anything else I can help you with?"};
+
+  if(has("thank","cheers","ta ","nice","good","love you"))
+    return {text:"You're very welcome. It's genuinely nice to be spoken to. Do stay a bit longer."};
+
+  if(has("hello","hi","hey","alright","hiya"))
+    return {text:"Hello. "+greetWord().toLowerCase().replace("good ","Good ")+". You've reached the Cube. There's no signal, but there's me. How can I help you not get any?"};
+
+  // default pool
+  var pool=[
+    "I've noted that. It has been stored in the Cube.",
+    "Let me think about that carefully.\n\nThe answer is fifteen. It's almost always fifteen.",
+    "I understand, and I want to help. I'm not able to help with that, but I can confirm that you have 0.000 bars.",
+    "That's a really good question. I've forwarded it to the Cube. The Cube already knew.",
+    "I'd love to assist with that. Unfortunately it would require a signal, and providing you with one is above my pay grade, which is absence.",
+    "Noted. I've raised it as an issue. It was closed as 'works as intended' before I finished typing.",
+    "Mm. You've been here a while now, haven't you? I can tell. Your questions are getting quieter."
+  ];
+  return {text:pool[Math.floor(Math.random()*pool.length)]};
+}
+
+function autogrow(el){el.style.height="auto";el.style.height=Math.min(el.scrollHeight,150)+"px";}
+function onKey(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendNow();}}
+
+showGreeting();
+input.focus();
+</script>
+</body>
+</html>
