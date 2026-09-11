@@ -1,7 +1,7 @@
 /* Dalarwen 5G — offline service worker.
    Pre-caches the whole site so it runs with no internet (ironically, for Dalarwen).
    Bump CACHE when content changes to force an update on next online visit. */
-var CACHE = "dalarwen-offline-v19";
+var CACHE = "dalarwen-offline-v20";
 var ASSETS = [
   "./",
   "404.html",
@@ -133,6 +133,7 @@ var ASSETS = [
   "wiki/isam.html",
   "wiki/isamsj.html",
   "wiki/jencorp.html",
+  "wiki/kb.js",
   "wiki/lantern-men.html",
   "wiki/lewis.html",
   "wiki/llandovery.html",

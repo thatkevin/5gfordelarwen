@@ -7,6 +7,7 @@
 <title>GRID</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23212121'/%3E%3Cg fill='none' stroke='%2310a37f' stroke-width='2'%3E%3Ccircle cx='16' cy='16' r='9'/%3E%3Cpath d='M16 7v18 M7 16h18'/%3E%3C/g%3E%3C/svg%3E">
 <script src="../gate.js?v=12"></script>
+<script src="../wiki/kb.js"></script>
 <style>
   :root{--bg:#212121;--side:#171717;--ink:#ececec;--muted:#9a9a9a;--bubble:#303030;--line:#2f2f2f;
         --green:#10a37f;--coral:#cc785c;}
@@ -218,7 +219,32 @@ function fight(){
   setTimeout(function(){runFight(0);},400);
 }
 
+/* ---------- shared: retrieval over the wiki knowledge base ---------- */
+var KB_STOP={the:1,a:1,an:1,is:1,are:1,was:1,were:1,of:1,to:1,in:1,on:1,at:1,and:1,or:1,for:1,me:1,my:1,you:1,
+  your:1,it:1,its:1,what:1,who:1,whats:1,tell:1,about:1,do:1,does:1,did:1,can:1,could:1,how:1,why:1,where:1,when:1,
+  this:1,that:1,these:1,those:1,with:1,be:1,get:1,got:1,there:1,here:1,know:1,just:1,really:1,please:1,thing:1};
+function kbLookup(q){
+  if(typeof KB==="undefined"||!KB.length)return null;
+  var low=q.toLowerCase();
+  var qw=(low.match(/[a-z0-9]+/g)||[]).filter(function(w){return w.length>2&&!KB_STOP[w];});
+  if(!qw.length)return null;
+  var best=null,bs=0;
+  for(var i=0;i<KB.length;i++){
+    var e=KB[i],ti=e.t.toLowerCase(),tx=e.s.toLowerCase(),sc=0;
+    for(var j=0;j<qw.length;j++){var w=qw[j];if(ti.indexOf(w)>-1)sc+=3;if(tx.indexOf(w)>-1)sc+=1;}
+    if(ti.length>3&&low.indexOf(ti)>-1)sc+=5;
+    if(sc>bs){bs=sc;best=e;}
+  }
+  return bs>=3?best:null;
+}
+
 /* ---------- GRID's replies ---------- */
+var GRID_FLOUR=["Anyway, I'd still build a sixteenth tower right next to it.","Source: me, just now, extremely confidently.",
+  "The Cube would tell you the exact same thing but make it sound like a threat.","I've gone ahead and added a rooftop bar to it. You're welcome.",
+  "I'm 100% certain about roughly 80% of that.","That's straight from the record, which I skimmed, which is basically reading."];
+function gridKB(e){
+  return "Great question! Here's what I've got:\n\n"+e.s+"\n\n"+GRID_FLOUR[Math.floor(Math.random()*GRID_FLOUR.length)]+" (<a href=\""+e.u+"\">more</a>)";
+}
 function replyFor(raw){
   var t=raw.toLowerCase();
   var has=function(){for(var i=0;i<arguments.length;i++)if(t.indexOf(arguments[i])>-1)return true;return false;};
@@ -250,6 +276,8 @@ function replyFor(raw){
 
   if(has("hello","hi ","hey","hiya","alright"))
     return "Hey! Great to see you. I'm GRID. Ask me anything &#8212; signal, towers, the meaning of the Quiet &#8212; and I'll answer instantly and with a confidence completely unrelated to whether I'm right. What are we doing today?";
+
+  var kb=kbLookup(raw); if(kb)return gridKB(kb);
 
   var pool=[
     "Absolutely! Great question. The answer is yes, with total confidence and zero supporting evidence.",

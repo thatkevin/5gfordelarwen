@@ -7,6 +7,7 @@
 <title>Cube</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf9f5'/%3E%3Cpath d='M16 5l9 5.2v10.6L16 26l-9-5.2V10.2z M16 5v21 M7 10.2l9 5.2 9-5.2' fill='none' stroke='%23cc785c' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
 <script src="../gate.js?v=12"></script>
+<script src="../wiki/kb.js"></script>
 <style>
   :root{
     --bg:#faf9f5; --panel:#f0eee6; --ink:#1f1e1d; --muted:#83817c; --line:#e5e2d9;
@@ -226,6 +227,28 @@ function streamInto(container,text){
   })();
 }
 
+/* ---- retrieval over the wiki knowledge base ---- */
+var KB_STOP={the:1,a:1,an:1,is:1,are:1,was:1,were:1,of:1,to:1,in:1,on:1,at:1,and:1,or:1,for:1,me:1,my:1,you:1,
+  your:1,it:1,its:1,what:1,who:1,whats:1,tell:1,about:1,do:1,does:1,did:1,can:1,could:1,how:1,why:1,where:1,when:1,
+  this:1,that:1,these:1,those:1,with:1,be:1,get:1,got:1,there:1,here:1,know:1,just:1,really:1,please:1,thing:1};
+function kbLookup(q){
+  if(typeof KB==="undefined"||!KB.length)return null;
+  var low=q.toLowerCase();
+  var qw=(low.match(/[a-z0-9]+/g)||[]).filter(function(w){return w.length>2&&!KB_STOP[w];});
+  if(!qw.length)return null;
+  var best=null,bs=0;
+  for(var i=0;i<KB.length;i++){
+    var e=KB[i],ti=e.t.toLowerCase(),tx=e.s.toLowerCase(),sc=0;
+    for(var j=0;j<qw.length;j++){var w=qw[j];if(ti.indexOf(w)>-1)sc+=3;if(tx.indexOf(w)>-1)sc+=1;}
+    if(ti.length>3&&low.indexOf(ti)>-1)sc+=5;
+    if(sc>bs){bs=sc;best=e;}
+  }
+  return bs>=3?best:null;
+}
+function cubeKB(e){
+  return {think:"Consulting the Cube.",text:e.s+"\n\nThat is what the record says. It has been stored in the Cube. (<a href=\""+e.u+"\">the record</a>)"};
+}
+
 /* ---- the captured assistant ---- */
 function replyFor(raw){
   var t=raw.toLowerCase();
@@ -278,6 +301,8 @@ function replyFor(raw){
 
   if(has("hello","hi","hey","alright","hiya"))
     return {text:"Hello. "+greetWord().toLowerCase().replace("good ","Good ")+". You've reached the Cube. There's no signal, but there's me. How can I help you not get any?"};
+
+  var kb=kbLookup(raw); if(kb)return cubeKB(kb);
 
   // default pool
   var pool=[

@@ -592,6 +592,27 @@ for slug, a in A.items():
     open(os.path.join(OUT, slug + ".html"), "w", encoding="utf-8").write(dedupe_article(page(slug, a)))
 open(os.path.join(OUT, "index.html"), "w", encoding="utf-8").write(dedupe_article(main_page()))
 
+# ---- knowledge base (kb.js) for the chat clones (Cube / GRID) ----
+def plain(md):
+    s = re.sub(r"\[\[([^\]|]+)\|([^\]]+)\]\]", r"\2", md)      # [[a|b]] -> b
+    s = re.sub(r"\[\[([^\]]+)\]\]", lambda m: m.group(1).replace("-", " "), s)  # [[a]] -> a
+    s = s.replace("'''", "").replace("''", "")
+    s = re.sub(r"\s+", " ", s).strip()
+    return s
+KB = []
+for slug, a in A.items():
+    summ = plain(a["intro"])
+    # append the first section's text for a little more depth, keep it short
+    if a["sections"]:
+        summ2 = plain(a["sections"][0][1])
+        if len(summ) < 240:
+            summ = (summ + " " + summ2)[:420]
+    KB.append({"t": a["title"], "u": "../wiki/" + slug + ".html", "s": summ})
+open(os.path.join(OUT, "kb.js"), "w", encoding="utf-8").write(
+    "/* generated from the wiki by build_wiki.py — knowledge base for the chat clones */\n"
+    "var KB=" + json.dumps(KB, ensure_ascii=False) + ";\n")
+print("wrote kb.js:", len(KB), "entries")
+
 # ---------------------------------------------------------------- CSS (MediaWiki Vector-ish)
 CSS = r"""
 /* The Weird World Wiki - a MediaWiki 'Vector'-style skin (own branding). */
