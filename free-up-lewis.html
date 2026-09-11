@@ -551,7 +551,7 @@ function drawWin(){
     ctx.fillText("THE DALARWEN SAGA CONTINUES...   press R / tap to play again",VW/2,VH-11);
   } else {
     // auto-advancing loading bar
-    winProg+=0.55; if(winProg>=100){ winAdvance(); }
+    winProg+=0.18; if(winProg>=100){ winAdvance(); }
     ctx.textAlign="left"; ctx.font="bold 12px monospace"; ctx.fillStyle="#3cff5a"; ctx.fillText("LOADING NEXT",16,VH-11);
     var bx=140,bw=VW-360; ctx.strokeStyle="#2f6f3a"; ctx.lineWidth=2; ctx.strokeRect(bx,VH-20,bw,12);
     ctx.fillStyle="#3cff5a"; ctx.fillRect(bx+2,VH-18,(bw-4)*Math.min(100,winProg)/100,8);
