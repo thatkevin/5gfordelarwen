@@ -101,8 +101,15 @@ pages, on purpose. Getting the tonal whiplash right is the whole point; do not m
   JS: keyword-matched canned responses in `replyFor()`, streamed char-by-char. Own branding (isometric-cube
   mark, model "Cube 15 &#183; Capstone") &#8212; NOT the Claude name or Anthropic logo. Door: faint link on
   `the-cube.html` ("the Cube is taking questions now"); linked from Dalarpedia's the-cube article.
-- Note: DalarHub/Signal Exchange/Dalarpedia/Cube all clone a real product's *layout* but use their own names
-  and no real logos. Keep it that way. Character portraits live in `assets/*.jpg` (Coventry Conductor on
+- **GRID** (`grid/`): a ChatGPT-style clone (dark theme) that is the Cube's rival &#8212; brash, sycophantic,
+  confidently wrong; hallucinates signal, promises a 16th tower. A **"Settle it with the Cube"** chip runs a
+  scripted GRID-vs-Cube argument (the `FIGHT` array). Own branding (grid-node mark, "GRID-4o turbo") &#8212; not
+  the ChatGPT name/logo. Door: faint link on `towers.html`; each bot cross-links the other (Cube has a `grid`
+  keyword put-down that links back). Both chat pages stream by revealing plain text then swapping in the
+  paragraph's real HTML on completion &#8212; do NOT go back to char-by-char `innerHTML+=esc(ch)`, it mangles
+  entities and links.
+- Note: DalarHub/Signal Exchange/Dalarpedia/Cube/GRID all clone a real product's *layout* but use their own
+  names and no real logos. Keep it that way. Character portraits live in `assets/*.jpg` (Coventry Conductor on
   `ring/coventry`, Sam on `ring/hull`, Melonsis + Lemon the dog on `ring/nazca-peru`); optimise new ones to
   ~900px JPEG so the offline cache stays light.
 - Shared: `retro.css`, `retro.js`, `dark.css`, `drone.js`, `gate.js`, `favicon.*`, `assets/*.gif`.

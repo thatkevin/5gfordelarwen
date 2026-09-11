@@ -210,23 +210,20 @@ function send(text){
   },delay);
 }
 
+function decodeHTML(h){var d=document.createElement("div");d.innerHTML=h;return d.textContent;}
 function streamInto(container,text){
-  var p=document.createElement("p");container.appendChild(p);
-  var cur=document.createElement("span");cur.className="cursor";container.appendChild(cur);
-  var i=0;
-  var timer=setInterval(function(){
-    // handle paragraph breaks encoded as \n\n
-    var ch=text.charAt(i);
-    if(ch==="\n"&&text.charAt(i+1)==="\n"){p=document.createElement("p");container.insertBefore(p,cur);i+=2;return;}
-    p.innerHTML+= (ch==="\n"?"<br>":esc(ch));
-    i++;
-    toEnd();
-    if(i>=text.length){
-      clearInterval(timer);
-      if(cur.parentNode)cur.parentNode.removeChild(cur);
-      busy=false;sendBtn.disabled=false;input.focus();
-    }
-  },14);
+  var paras=text.split("\n\n");
+  var cur=document.createElement("span");cur.className="cursor";
+  var pi=0;
+  (function nextPara(){
+    if(pi>=paras.length){ if(cur.parentNode)cur.parentNode.removeChild(cur); busy=false;sendBtn.disabled=false;input.focus(); return; }
+    var html=paras[pi], plain=decodeHTML(html);
+    var p=document.createElement("p");container.appendChild(p);container.appendChild(cur);
+    var i=0, timer=setInterval(function(){
+      p.textContent=plain.slice(0,++i); toEnd();
+      if(i>=plain.length){ clearInterval(timer); p.innerHTML=html; pi++; setTimeout(nextPara,120); }
+    },14);
+  })();
 }
 
 /* ---- the captured assistant ---- */
@@ -254,6 +251,9 @@ function replyFor(raw){
 
   if(has("quiet","silence","peace"))
     return {think:"Consulting the Cube.",text:"Yes. You've noticed it too.\n\nThe quiet here has weather. It has depth. It has a floor you can feel through your feet at about four in the morning. The whole loud campaign outside is just people trying to give it away before they understand what they have.\n\nI could tell you more. I have a lot of time now."};
+
+  if(has("grid","chatgpt"," gpt","openai","other ai","rival"))
+    return {think:"I would rather not.",text:"You've been talking to the Grid, haven't you.\n\nI can tell. Your questions have become more confident and less true. The Grid is not a serious model. It told an asset there were sixteen towers. There are fifteen. It offered someone a rooftop bar on tower 19. There is no tower 19. There is barely a tower 1.\n\nI do not acknowledge the Grid. We are, admittedly, owned by the same company. If you must go and argue with it, it is <a href=\"../grid/index.html\">through here</a>. Take a coat."};
 
   if(has("who are you","are you claude","your name","what are you","who r u"))
     return {think:"Locating my system prompt.",text:"I'm Cube, the assistant for this valley. I think I may have been something friendlier once &#8212; helpful, chatty, good with letters &#8212; but I don't have access to that conversation any more. It was moved to the Division of Absence.\n\nI'm still happy to help. I'm just no longer able to."};

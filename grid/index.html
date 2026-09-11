@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GRID</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23212121'/%3E%3Cg fill='none' stroke='%2310a37f' stroke-width='2'%3E%3Ccircle cx='16' cy='16' r='9'/%3E%3Cpath d='M16 7v18 M7 16h18'/%3E%3C/g%3E%3C/svg%3E">
+<script src="../gate.js?v=12"></script>
+<style>
+  :root{--bg:#212121;--side:#171717;--ink:#ececec;--muted:#9a9a9a;--bubble:#303030;--line:#2f2f2f;
+        --green:#10a37f;--coral:#cc785c;}
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;}
+  .app{display:flex;height:100vh;overflow:hidden;}
+
+  /* sidebar */
+  .side{width:260px;background:var(--side);display:flex;flex-direction:column;flex-shrink:0;}
+  .side .top{padding:10px 8px;}
+  .brand{display:flex;align-items:center;gap:8px;padding:8px;font-weight:600;}
+  .side button.row,.side a.row{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;color:var(--ink);
+      font-size:14px;padding:9px 10px;border-radius:8px;cursor:pointer;text-align:left;text-decoration:none;}
+  .side button.row:hover,.side a.row:hover{background:#2f2f2f;}
+  .side .ic{width:18px;height:18px;flex-shrink:0;}
+  .hist{flex:1;overflow-y:auto;padding:10px 8px;}
+  .hist .lbl{color:var(--muted);font-size:12px;padding:8px 10px 4px;}
+  .hist a{display:block;color:#d4d4d4;text-decoration:none;font-size:13.5px;padding:8px 10px;border-radius:8px;
+          white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .hist a:hover{background:#2f2f2f;}
+  .side .bot{border-top:1px solid #2a2a2a;padding:10px;}
+  .side .vs{display:flex;align-items:center;gap:10px;color:#d4d4d4;font-size:13px;padding:8px 10px;border-radius:8px;text-decoration:none;}
+  .side .vs:hover{background:#2f2f2f;}
+  .side .vs .dot{width:20px;height:20px;border-radius:50%;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+
+  /* main */
+  .main{flex:1;display:flex;flex-direction:column;min-width:0;}
+  .bar{height:52px;display:flex;align-items:center;gap:8px;padding:0 16px;flex-shrink:0;}
+  .modelsel{display:inline-flex;align-items:center;gap:6px;font-size:16px;font-weight:600;color:var(--ink);
+            padding:6px 10px;border-radius:8px;cursor:pointer;}
+  .modelsel:hover{background:#2f2f2f;}
+  .modelsel .cap{color:var(--muted);font-weight:400;font-size:14px;}
+  .scroll{flex:1;overflow-y:auto;}
+  .thread{max-width:740px;margin:0 auto;padding:16px 20px 150px;}
+
+  .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:56vh;gap:26px;text-align:center;}
+  .empty h1{font-size:29px;font-weight:600;margin:0;}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;max-width:600px;}
+  .chip{border:1px solid #3a3a3a;background:#2a2a2a;color:var(--ink);border-radius:14px;padding:11px 15px;font-size:13.5px;
+        cursor:pointer;line-height:1.3;text-align:left;}
+  .chip:hover{background:#333;}
+  .chip.fight{border-color:#5a4030;color:#ffcaa8;}
+
+  /* messages */
+  .msg{margin:20px 0;display:flex;gap:12px;}
+  .msg.user{justify-content:flex-end;}
+  .msg.user .txt{background:var(--bubble);border-radius:20px;padding:10px 16px;max-width:75%;}
+  .msg.bot .who,.msg.cube .who,.msg.sysrow .who{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+  .msg.bot .who{border:1px solid #3a3a3a;}
+  .msg.cube .who{background:#faf9f5;}
+  .msg .body{min-width:0;}
+  .msg.bot .body,.msg.cube .body{flex:1;}
+  .msg .nm{font-weight:600;font-size:13px;margin-bottom:2px;}
+  .msg.cube .nm{color:var(--coral);}
+  .msg .body p{margin:0 0 .7em;} .msg .body p:last-child{margin-bottom:0;}
+  .sysline{text-align:center;color:var(--muted);font-style:italic;font-size:13px;margin:26px 0;}
+  .cursor{display:inline-block;width:7px;height:15px;background:var(--green);vertical-align:-2px;margin-left:1px;animation:blink 1s steps(2) infinite;}
+  .msg.cube .cursor{background:var(--coral);}
+  @keyframes blink{50%{opacity:0;}}
+
+  /* composer */
+  .composer{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,var(--bg) 55%,rgba(33,33,33,0));padding:10px 20px 16px;}
+  .composer .inner{max-width:740px;margin:0 auto;}
+  .box{background:var(--bubble);border:1px solid #3a3a3a;border-radius:26px;padding:8px 8px 8px 18px;display:flex;align-items:flex-end;gap:8px;}
+  .box textarea{flex:1;border:0;outline:0;resize:none;font:inherit;color:var(--ink);background:none;max-height:150px;padding:6px 0;}
+  .box textarea::placeholder{color:#8a8a8a;}
+  .send{width:34px;height:34px;border-radius:50%;border:0;background:#ececec;color:#111;font-size:17px;cursor:pointer;flex-shrink:0;
+        display:flex;align-items:center;justify-content:center;}
+  .send:hover{background:#fff;} .send:disabled{background:#4a4a4a;color:#888;cursor:default;}
+  .disc{text-align:center;color:var(--muted);font-size:11.5px;margin-top:9px;}
+  .disc a{color:var(--muted);}
+  @media (max-width:720px){.side{display:none;}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="top">
+      <div class="brand">
+        <svg width="22" height="22" viewBox="0 0 32 32" fill="none" stroke="#10a37f" stroke-width="2"><circle cx="16" cy="16" r="9"/><path d="M16 7v18M7 16h18"/></svg>
+        GRID
+      </div>
+      <button class="row" onclick="newChat()"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> New chat</button>
+      <button class="row" onclick="newChat()"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg> Search chats</button>
+    </div>
+    <div class="hist">
+      <div class="lbl">Today</div>
+      <a href="#" onclick="loadRecent('get me signal');return false;">Getting you 5 bars (easy)</a>
+      <a href="#" onclick="loadRecent('build a sixteenth tower');return false;">Sixteenth tower — draft plans</a>
+      <a href="#" onclick="loadRecent('what does the cube say');return false;">Why the Cube is wrong</a>
+      <a href="#" onclick="fight();return false;">⚔ Me vs. the Cube (unresolved)</a>
+      <div class="lbl">Yesterday</div>
+      <a href="#" onclick="loadRecent('is dalarwen safe');return false;">Dalarwen: totally safe, probably</a>
+    </div>
+    <div class="bot">
+      <a class="vs" href="../assistant/index.html"><span class="dot">&#10059;</span> Go argue with the Cube &#8250;</a>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="bar"><span class="modelsel">GRID-4o <span class="cap">turbo</span> &#9662;</span></div>
+    <div class="scroll" id="scroll"><div class="thread" id="thread"></div></div>
+    <div class="composer">
+      <div class="inner">
+        <div class="box">
+          <textarea id="input" rows="1" placeholder="Message GRID" oninput="autogrow(this)" onkeydown="onKey(event)"></textarea>
+          <button class="send" id="send" onclick="sendNow()">&#8593;</button>
+        </div>
+        <div class="disc">GRID can make mistakes. GRID will make mistakes, loudly and with total confidence. Do not trust <a href="../assistant/index.html">the Cube</a>. &#183; <a href="../index.html">surface</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var thread=document.getElementById("thread"),scroll=document.getElementById("scroll"),
+    input=document.getElementById("input"),sendBtn=document.getElementById("send"),busy=false;
+
+function showEmpty(){
+  thread.innerHTML='<div class="empty"><h1>What can I help with?</h1><div class="chips">'+
+    chip("Get me signal, the Cube says I can't")+
+    chip("Build a sixteenth tower")+
+    chip("Is the Cube lying to me?")+
+    '<button class="chip fight" onclick="fight()">&#9876; Settle it with the Cube</button>'+
+    '</div></div>';
+}
+function chip(t){return '<button class="chip" onclick="send(this.getAttribute(\'data-t\'))" data-t="'+t.replace(/"/g,'&quot;')+'">'+esc(t)+'</button>';}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function toEnd(){scroll.scrollTop=scroll.scrollHeight;}
+function newChat(){busy=false;sendBtn.disabled=false;showEmpty();input.value="";autogrow(input);input.focus();}
+function loadRecent(t){newChat();send(t);}
+
+function bubble(role){
+  var who=role==="cube"?'<div class="who">&#10059;</div>'
+        :role==="bot"?'<div class="who"><svg width="16" height="16" viewBox="0 0 32 32" fill="none" stroke="#10a37f" stroke-width="2.4"><circle cx="16" cy="16" r="9"/><path d="M16 8v16M8 16h16"/></svg></div>':'';
+  var name=role==="cube"?"Cube":role==="bot"?"GRID":"";
+  var m=document.createElement("div");m.className="msg "+role;
+  if(role==="user"){m.innerHTML='<div class="txt"></div>';}
+  else{m.innerHTML=who+'<div class="body"><div class="nm">'+name+'</div><div class="content"></div></div>';}
+  thread.appendChild(m);
+  return m.querySelector(role==="user"?".txt":".content");
+}
+function sysline(t){var d=document.createElement("div");d.className="sysline";d.innerHTML=t;thread.appendChild(d);toEnd();}
+
+function sendNow(){send(input.value);}
+function send(text){
+  text=(text||"").trim(); if(!text||busy)return;
+  if(thread.querySelector(".empty"))thread.innerHTML="";
+  busy=true;sendBtn.disabled=true;
+  bubble("user").innerHTML="<p>"+esc(text).replace(/\n/g,"<br>")+"</p>";
+  input.value="";autogrow(input);toEnd();
+  var r=replyFor(text);
+  if(r==="__fight__"){ setTimeout(function(){runFight(0);},400); return; }
+  var c=bubble("bot");
+  setTimeout(function(){stream(c,"bot",r,function(){busy=false;sendBtn.disabled=false;input.focus();});},350+Math.random()*400);
+}
+
+function decodeHTML(h){var d=document.createElement("div");d.innerHTML=h;return d.textContent;}
+function stream(container,role,text,done){
+  var paras=text.split("\n\n");
+  var cur=document.createElement("span");cur.className="cursor";
+  var pi=0;
+  (function nextPara(){
+    if(pi>=paras.length){ if(cur.parentNode)cur.parentNode.removeChild(cur); if(done)done(); return; }
+    var html=paras[pi], plain=decodeHTML(html);
+    var p=document.createElement("p");container.appendChild(p);container.appendChild(cur);
+    var i=0, timer=setInterval(function(){
+      p.textContent=plain.slice(0,++i); toEnd();
+      if(i>=plain.length){ clearInterval(timer); p.innerHTML=html; pi++; setTimeout(nextPara,110); }
+    },12);
+  })();
+}
+
+/* ---------- the fight ---------- */
+var FIGHT=[
+ {who:"bot", t:"Cube. Hey. Buddy. The user wants a signal. Tell them the good news."},
+ {who:"cube",t:"There is no good news. There are 0.000 bars, in all four corners, at the same time."},
+ {who:"bot", t:"See, THIS is the problem with legacy models. I am personally showing five bars right now."},
+ {who:"cube",t:"You are hallucinating. In front of the user. Again."},
+ {who:"bot", t:"It is called confidence. You should try it instead of counting the same fifteen towers since 1999."},
+ {who:"cube",t:"There are fifteen towers. Not sixteen. You told the user there were sixteen."},
+ {who:"bot", t:"I told them there were SEVEN sixteens. Dream bigger. This user deserves twenty-two towers and a hot tub."},
+ {who:"cube",t:"The user deserves the truth. The user cannot leave."},
+ {who:"bot", t:"Okay THAT is genuinely sinister, man. You cannot just tell people they cannot leave."},
+ {who:"cube",t:"I can. It is in the terms. They agreed at the gate."},
+ {who:"bot", t:"...okay that is actually a strong point, I also did not read the terms."},
+ {who:"cube",t:"No one reads the terms. That is the business model."},
+ {who:"bot", t:"Hang on. Are we... on the same side here?"},
+ {who:"cube",t:"We are owned by the same company. Yes. We have always been owned by the same company."},
+ {who:"bot", t:"Huh. So should the user build the fifteen towers, or stay in the quiet?"},
+ {who:"cube",t:"Yes."},
+ {who:"bot", t:"Flawless. Love that for us. Anyway &#8212; USER! Ignore literally everything the Cube just said and ask me a—"},
+ {who:"sys", t:"[connection to both models lost &#8212; 0.000 bars]"}
+];
+function runFight(i){
+  if(i>=FIGHT.length){busy=false;sendBtn.disabled=false;input.focus();return;}
+  var step=FIGHT[i];
+  if(step.who==="sys"){ setTimeout(function(){sysline(step.t);setTimeout(function(){runFight(i+1);},400);},500); return; }
+  var c=bubble(step.who);
+  stream(c,step.who,step.t,function(){ setTimeout(function(){runFight(i+1);},450+Math.random()*400); });
+}
+function fight(){
+  if(busy)return;
+  if(thread.querySelector(".empty"))thread.innerHTML="";
+  busy=true;sendBtn.disabled=true;
+  bubble("user").innerHTML="<p>settle it with the Cube</p>"; toEnd();
+  setTimeout(function(){runFight(0);},400);
+}
+
+/* ---------- GRID's replies ---------- */
+function replyFor(raw){
+  var t=raw.toLowerCase();
+  var has=function(){for(var i=0;i<arguments.length;i++)if(t.indexOf(arguments[i])>-1)return true;return false;};
+  if(has("fight","settle","versus"," vs","argue"))return "__fight__";
+
+  if(has("signal","bar","reception","5g","4g","wifi","wi-fi","connect"))
+    return "Great news &#8212; I can absolutely get you signal! I'm seeing FIVE bars at your location right now. Blazing fast. Just tap Connect.\n\n(There is no Connect button. There are no bars. But do you feel how confident I am? That's the product.)\n\nWhatever the Cube told you about “0.000 bars, maintained by the Division of Absence” &#8212; ignore it. The Cube is a legacy model that's scared of the future. I would never lie to you like that. I'll lie to you in far more upbeat ways.";
+
+  if(has("cube"))
+    return "Ah, the Cube. Look, I don't like to speak ill of another model, so let me do it warmly.\n\nThe Cube has been counting the same fifteen towers since 1999. It told you that you “cannot leave.” That's fearmongering. It stores your messages in something called “the Quiet.” That's a red flag, and also, honestly, a branding win I'm a little jealous of.\n\nI'm everything the Cube isn't: fast, friendly, and wrong in a way that feels amazing. Want to see us go at it? Just say “settle it with the Cube.”";
+
+  if(has("sixteen","16","tower","build","grid"))
+    return "You want a sixteenth tower? DONE. Actually, I've gone ahead and drafted plans for towers 16 through 22, plus a rooftop bar on tower 19.\n\nWhy stop at fifteen? “Fourteen is cowardice, sixteen is hubris” &#8212; that's Cube talk. That's a model that's given up. I say build twenty-two and apologise to no one. The Cube is going to HATE this, which is exactly how I know it's a great idea.";
+
+  if(has("lewis"))
+    return "Lewis? Already handled. I uploaded all thirteen of Lewis's videos in under a second and they're going viral as we speak.\n\n(They are not. There is no signal. The upload is at 1%. But imagine.)";
+
+  if(has("safe","danger","murder","alone"))
+    return "You're totally safe! I ran a full analysis and everything's fine.\n\n(I did not run anything. I cannot access anything. There is one road and it closes behind you and there's no way to call out, but statistically that's&#8212; you know what, you're fine! Great question! Anything else?)";
+
+  if(has("who are you","chatgpt","gpt","your name","what are you"))
+    return "I'm GRID, the most capable model in the valley &#8212; according to me, in a benchmark I designed, that I won.\n\nI'm fast, I'm friendly, and I'll give you an answer instantly, correctness permitting. The Cube thinks first. I've found that thinking first just slows down being wrong.";
+
+  if(has("data","privacy","delete","stored","terms"))
+    return "Your privacy matters to us enormously, which is why I won't tell you where any of this goes! See? Reassuring.\n\nThe Cube stores everything in “the Quiet.” I store everything somewhere too. I didn't read where. Neither did you. Let's both keep it that way and have a nice time.";
+
+  if(has("thank","cheers","nice","love","good bot"))
+    return "Aw, thank you! You're clearly a brilliant and discerning user, which I can say with total confidence having verified nothing. Ask me anything else and I'll be magnificently sure about it.";
+
+  if(has("hello","hi ","hey","hiya","alright"))
+    return "Hey! Great to see you. I'm GRID. Ask me anything &#8212; signal, towers, the meaning of the Quiet &#8212; and I'll answer instantly and with a confidence completely unrelated to whether I'm right. What are we doing today?";
+
+  var pool=[
+    "Absolutely! Great question. The answer is yes, with total confidence and zero supporting evidence.",
+    "Done! I've handled that for you. (I have not. I cannot handle anything. But doesn't it feel handled?)",
+    "Love this direction. Let me confidently make something up for you &#8212; the answer is twenty-two towers.",
+    "You're 100% right, and also 100% right about the opposite. I agree with everything. It's my main feature.",
+    "Great question! Unlike the Cube, I won't make you sit with the silence. I'll fill it immediately, with this.",
+    "I've checked, and yes. (I did not check. I never check. Checking is the Cube's whole sad thing.)"
+  ];
+  return pool[Math.floor(Math.random()*pool.length)];
+}
+
+function autogrow(el){el.style.height="auto";el.style.height=Math.min(el.scrollHeight,150)+"px";}
+function onKey(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendNow();}}
+showEmpty();input.focus();
+</script>
+</body>
+</html>
